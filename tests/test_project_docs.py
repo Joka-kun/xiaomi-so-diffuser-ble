@@ -59,6 +59,25 @@ def test_images_are_valid_editable_svg_not_external_tracking():
         assert "https://" not in raw
 
 
+def test_premium_artwork_is_consistent_and_honest():
+    graphics = {
+        "hero.svg": ("SO DIFFUSER", "BLE"),
+        "connection-flow.svg": ("DISCOVER", "AUTHORIZE", "VERIFY", "CONTROL"),
+        "control-preview.svg": ("Вкл/Выкл", "Подсветка", "NOT A SCREENSHOT"),
+        "migration.svg": ("BACK UP", "REMOVE OLD", "INSTALL NEW", "VERIFY"),
+        "model-family.svg": ("FIELD-REPORTED", "EXPERIMENTAL"),
+        "brand-logo.svg": ("SO DIFFUSER", "BLE"),
+    }
+    for name, words in graphics.items():
+        content = (ROOT / "docs/assets" / name).read_text(encoding="utf-8")
+        assert 'role="img"' in content and 'aria-label="' in content, name
+        assert "<title>" in content, name
+        assert all(word in content for word in words), (name, words)
+    icons = (ROOT / "docs/assets/brand-icon.svg").read_text(encoding="utf-8")
+    assert 'viewBox="0 0 512 512"' in icons
+    assert "http://" not in icons.replace('xmlns="http://www.w3.org/2000/svg"', "")
+
+
 def test_migration_documents_credential_retention():
     document = (ROOT / "docs/MIGRATION.md").read_text()
     assert "so_diffuser_ble" in document
