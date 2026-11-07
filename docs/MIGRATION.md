@@ -2,7 +2,7 @@
 
 ![Visual migration checklist](assets/migration.svg)
 
-**Applies to development 0.5.0 and later.** This is a **breaking integration-domain rename**, not a cosmetic label change. The former `so_s5` configuration entry will **not** automatically become `so_diffuser_ble`; Home Assistant does not provide a public integration API for changing an existing entry's domain. This repository continues to ship **one** HACS-managed integration.
+**Applies to public release 1.0.0 and later.** This is a **breaking integration-domain rename**, not a cosmetic label change. The former `so_s5` configuration entry will **not** automatically become `so_diffuser_ble`; Home Assistant does not provide a public integration API for changing an existing entry's domain. This repository continues to ship **one** HACS-managed integration.
 
 ## Why
 

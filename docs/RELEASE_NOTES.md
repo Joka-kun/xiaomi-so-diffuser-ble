@@ -8,7 +8,7 @@ A new, cleaned-up publication of the SO/BWJ aroma diffuser integration for Home 
 - Xiaomi OAuth provisioning with local device GATT token verification; normal commands run via Bluetooth rather than recurring cloud calls.
 - RGB Backlight: steady color, device-native Automatic Gradient (user-confirmed on S5), and optional Home Assistant Color Cycle / Sunset software palettes.
 - The primary switch is named **«Вкл/Выкл»** in the Russian UI; Backlight remains a separate control.
-- A refreshed graphical identity, README/compatibility diagrams, Home Assistant brand icons and nine-language documentation.
+- A refreshed graphical identity, README/compatibility diagrams, Home Assistant brand icons and six current README languages.
 - Explicit, opt-in experimental catalog profiles for SO S1, S1 Pro, S2, S6, S7, S8, S9 and S19.
 
 ## Compatibility

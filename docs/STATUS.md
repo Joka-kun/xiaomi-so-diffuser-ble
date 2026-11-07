@@ -12,7 +12,7 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof, private old storage retained | Hardware acceptance of cloud-token retrieval on relatives |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder and written backup/manual migration steps; old credential store remains readable | Actual HA entry/entity-ID migration and S5 reconnect under 1.0.0 |
-| Publication | Automated test suite and Hassfest available via GitHub Actions | Owner-approved MIT LICENSE added to main; hardware acceptance for a stable release remains pending |
+| Publication | MIT license and GitHub Actions Tests, Hassfest and HACS validation (10/10) pass on `main` | Catalog listing and hardware acceptance for a stable release remain pending |
 
 ## Language and experiment update
 
@@ -41,14 +41,14 @@ S5 has a user-reported earlier success. **No non-S5 device has passed level 4** 
 
 ## Breaking domain change
 
-Former domain `so_s5` was model-specific. Development 1.0.0 uses `so_diffuser_ble` to support a family while maintaining one HACS integration per repository. Home Assistant does **not** automatically reassign existing config entries to a different domain; you must use the [migration guide](MIGRATION.md). The old private GATT token filenames remain intentionally unchanged so credentials can be reused; **do not delete them to migrate**.
+Former domain `so_s5` was model-specific. Public release 1.0.0 uses `so_diffuser_ble` to support a family while maintaining one HACS integration per repository. Home Assistant does **not** automatically reassign existing config entries to a different domain; you must use the [migration guide](MIGRATION.md). The old private GATT token filenames remain intentionally unchanged so credentials can be reused; **do not delete them to migrate**.
 
 ## Release blockers
 
 - Validate domain migration on a real S5 installation (including HA entity IDs and automation effects).
 - Verify restart + WAN-off BLE operation.
 - Confirm emitted BLE names and physical controls on one relative before declaring it supported.
-- MIT License selected by the owner and added to the repository; re-run HACS validation to confirm publication checks.
+- MIT License and repository topics are in place; all 10 HACS validation checks pass on `main`. Catalog admission is separate from CI success.
 - Keep secrets, MACs and one-time OAuth callbacks out of public issues and docs.
 
 [Quick start](../README.md) · [Russian guide](../README_RU.md) · [Model matrix](COMPATIBILITY.md) · [Roadmap](../ROADMAP.md) · [Historical protocol evidence](research/HCI_CAPTURE_ANALYSIS.md)

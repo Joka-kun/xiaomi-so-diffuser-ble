@@ -18,11 +18,11 @@ The runtime token file must be a regular file with owner-only permissions (`0600
 
 ## Credential acquisition
 
-Xiaomi account login is performed by the separately downloaded upstream extractor. This project does not handle account passwords or cloud sessions. Run the extractor on a trusted machine and protect its JSON export.
+The built-in Home Assistant setup flow redirects users to Xiaomi's own OAuth login page, then temporarily exchanges the one-time authorization code and queries Xiaomi's device list through the HA-managed HTTP session. It does **not** collect Xiaomi passwords or persist OAuth access/refresh tokens. Only the device-specific 12-byte GATT token is saved in private HA storage after a real BLE authentication proof. An external Xiaomi Cloud Tokens Extractor remains an optional legacy fallback; its JSON output is sensitive and must never be published.
 
 ## Runtime boundary
 
-The HA component communicates over BLE and does not call Xiaomi Cloud APIs. It uses the token to authenticate the S5's FE95 GATT session and AES-CCM data channel. The token itself remains sensitive and must not be logged or published.
+After provisioning, normal device control and status updates use local BLE, not repeated Xiaomi Cloud calls. Explicit setup or reconfiguration can contact Xiaomi Cloud. The device token authenticates the S5-compatible FE95 GATT session and AES-CCM data channel; it must not be logged or published.
 
 ## Diagnostics
 
