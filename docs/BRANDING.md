@@ -11,13 +11,13 @@ This project ships Home Assistant brand assets generated from its own editable S
 
 Regenerate deterministically with `python -m pip install cairosvg pillow` and `python tools/build_brand_assets.py`.
 
-## Premium visual system (November 2026)
+## Noir visual system (November 2026)
 
-The seven illustrations and four installed integration images have been redesigned together in a cinematic midnight / sapphire / amethyst style. They are original vector artwork, not official Xiaomi or Home Assistant logos.
+Seven editable SVG illustrations and four Home Assistant PNG assets share one restrained cinematic-noir identity: charcoal surfaces, brushed ceramic, atmospheric vapour, graphite shadows, subdued ice-blue secondary light and a narrow amber base glow. These are original conceptual illustrations, not photographs or official Xiaomi/Home Assistant logos.
 
 | Artwork | Intended purpose | Visual contract |
 | --- | --- | --- |
-| `hero.svg` | GitHub README banner across all six languages | Distinctive diffuser, mist and luminous RGB ring, readable branding |
+| `hero.svg` | GitHub README banner across all six languages | Atmospheric ceramic diffuser with amber-lit base; readable product identity, no fabricated UI |
 | `brand-icon.svg` | Source for installed HA square icon | Recognizable diffuser silhouette at small sizes |
 | `brand-logo.svg` | Source for installed HA landscape wordmark | Stable English product name and visual identity |
 | `connection-flow.svg` | Setup guide | Exact four-step sequence, Xiaomi Cloud only during provisioning |
@@ -25,7 +25,7 @@ The seven illustrations and four installed integration images have been redesign
 | `migration.svg` | Safe domain transition | Backup, remove old entry through HA UI, install, verify |
 | `model-family.svg` | Compatibility overview | SO S5 is field-reported; eight other profiles remain **experimental** |
 
-Base colors: midnight `#070A16`, indigo `#101931`, sapphire `#548EFF`, cyan `#4DE6F6`, violet `#A077FA`, rose `#FF8ABC`, warm metallic highlight `#FFE8BB`. Background artwork stays embedded in the SVG; no external fonts, images, scripts or network requests are used.
+Noir palette: near-black `#06090C`, dark graphite `#10151A`, silver ceramic `#E6E8E4`, muted blue-grey `#98A4A7`, amber `#D6B17D`. There are no rainbow gradients, cartoon steam strokes or brightly colored cards. Mist is softly blurred and lighting is intentionally restrained. SVG visuals are fully self-contained: no external fonts, images, scripts, tracking or network requests.
 
 **Rendering discipline:** Keep SVGs as the editable source of truth. If either vector changes, rebuild and commit all affected PNG sizes in the same PR. Do not rename brand filenames, relocate documentation graphics or silently replace a released tag. Automated checks cover XML integrity, image sizes, and project links, while visual inspection at 256 px and 512 px remains part of review.
 
