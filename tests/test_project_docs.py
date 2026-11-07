@@ -78,6 +78,19 @@ def test_premium_artwork_is_consistent_and_honest():
     assert "http://" not in icons.replace('xmlns="http://www.w3.org/2000/svg"', "")
 
 
+def test_noir_artwork_uses_a_consistent_restrained_palette():
+    for name in (
+        "hero.svg", "connection-flow.svg", "model-family.svg",
+        "migration.svg", "control-preview.svg", "brand-icon.svg", "brand-logo.svg",
+    ):
+        content = (ROOT / "docs/assets" / name).read_text(encoding="utf-8")
+        assert "#06090C" in content, name
+        assert "#FFE2A6" in content, name
+        assert 'id="ceramic"' in content, name
+        assert 'id="edge"' in content, name
+        assert "#A077FA" not in content and "#FF8ABC" not in content, name
+
+
 def test_migration_documents_credential_retention():
     document = (ROOT / "docs/MIGRATION.md").read_text()
     assert "so_diffuser_ble" in document
