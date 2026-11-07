@@ -23,11 +23,11 @@ The suite covers:
 - Built-in OAuth2 authorization URL, region selection, cloud device-list parsing and pagination using fake HTTPS responses.
 - Rejected wrong models / wrong-length tokens, one-time callback with CSRF state check and replay rejection.
 - Private per-address credential storage, 0600 permissions, legacy fallback, malformed-file handling and in-place reconfigure flow structure.
-- 0.4.0 explicit SO model catalog: known model filtering, unknown-model fail-closed behaviour, experimental opt-in, light/no-light capabilities, S1 Pro temperature, and shared experimental zero-pause controls plus BLE connection diagnostics.
+- Explicit SO model catalog: known model filtering, unknown-model fail-closed behaviour, experimental opt-in, light/no-light capabilities, S1 Pro temperature, and shared experimental zero-pause controls plus BLE connection diagnostics.
 
 ## Experimental SO-family hardware acceptance (not yet performed)
 
-The 0.6.0 source presents additional **known SO-family model candidates** from Xiaomi Cloud and requires an affirmative experimental step for every non-S5 model. The operator has **not installed this version** and no relative model has passed physical BLE testing. The expected outcomes for each candidate are:
+The current 1.0.0 source lists **known SO-family model candidates** from Xiaomi Cloud and requires affirmative experimental consent for every non-S5 model. No non-S5 model has passed physical BLE testing. The expected outcomes for each candidate are:
 
 1. Cloud inventory returns an *exact catalog model*, not just a friendly name. Unknown Xiaomi models, malformed/incorrect-size tokens and generic FE95 advertisements are rejected.
 2. Before a non-S5 token is written, the wizard requires deliberate opt-in. Declining cannot create an integration entry or write any BLE properties.
@@ -63,13 +63,13 @@ Before testing new OAuth provisioning, the operator checked the HA Docker deploy
 
 This validates **clean disk/entry state only**, not new-software deployment or live Xiaomi authentication. Use a **fresh Add integration** after installing the new code (not Reconfigure). If OAuth fails, the old token is no longer present for fallback. Do not record an OAuth provisioning success until a real account and S5 have passed the criteria below.
 
-The privacy-sanitized field report and follow-up checklist are in [deployment audit](DEPLOYMENT_AUDIT_2026-11-07.md).
+The privacy-sanitized field report and follow-up checklist are in [historical deployment audit](history/DEPLOYMENT_AUDIT_2026-11-07.md).
 
 ## First user-reported live acceptance — 2026-11-07
 
 **Confirmed by operator report:** fresh installation after removing both token files; SO S5 discovered; Xiaomi browser OAuth authentication and setup completed, and the diffuser works. An unreachable `homeassistant.local:8123` final callback destination was resolved by replacing **only the browser hostname** with the HA server's LAN host, without modifying the callback path, `code` or `state`. **Not yet verified:** the private token's existence/permissions after reboot, WAN-off control, precise LongSpray duty cycle or other models. The manual pasted-redirect form was not the successful field-tested path.
 
-See [spray-mode experiment](SPRAY_MODES_AND_COMPATIBILITY.md) and [deployment audit](DEPLOYMENT_AUDIT_2026-11-07.md). The user-shared OAuth URL contains one-time credentials and must never be copied into tests, fixtures or public documentation.
+See [spray-mode experiment](SPRAY_MODES_AND_COMPATIBILITY.md) and [historical deployment audit](history/DEPLOYMENT_AUDIT_2026-11-07.md). The user-shared OAuth URL contains one-time credentials and must never be copied into tests, fixtures or public documentation.
 
 ## New token-provisioning hardware acceptance (remaining tests after first reported OAuth success)
 
@@ -86,7 +86,7 @@ No actual Xiaomi credentials or Bluetooth HCI capture have been used to validate
 
 ## Hardware acceptance still required
 
-Automated tests and captured protocol frames do not prove the diffuser's physical behaviour. Before calling 0.3.0 stable, test:
+Automated tests and captured protocol frames do not prove the diffuser's physical behaviour. Before describing a future release as hardware-stable, test:
 
 1. Spray duration at 3, a middle value and 30 seconds.
 2. Pause at 3, a middle value and 30 minutes.

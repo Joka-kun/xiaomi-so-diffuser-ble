@@ -16,7 +16,7 @@ Published Xiaomi **MIoT property descriptions** can suggest which entities to cr
 | S1 | `bwj.diffuser.k09` | Spec matches | **No** | — | Experimental |
 | S19 | `bwj.diffuser.s19` | Spec matches | **No** | — | Experimental |
 
-**Experimental 0.6.0:** All nine published SO models provide the bounded MIoT idle-time property `3.4` with special value `0`. Non-S5 models now expose a clearly labeled **zero-pause experiment**, not a promise of physically uninterrupted spraying. Other features remain based on their published capabilities: spray time, ordinary pause, battery/charging, RGB/gradient for RGB models and optional S1 Pro temperature. A **BLE connection** diagnostic reports disconnected/connected even while other entities are unavailable. Native timer and repeat-register writes remain disabled.
+**Experimental profiles in 1.0.0:** All nine published SO models provide the bounded MIoT idle-time property `3.4` with special value `0`. Non-S5 models now expose a clearly labeled **zero-pause experiment**, not a promise of physically uninterrupted spraying. Other features remain based on their published capabilities: spray time, ordinary pause, battery/charging, RGB/gradient for RGB models and optional S1 Pro temperature. A **BLE connection** diagnostic reports disconnected/connected even while other entities are unavailable. Native timer and repeat-register writes remain disabled.
 
 Only exact registered Bluetooth names can trigger automatic discovery. A missing name is **not proof that the device is unsupported**; enter its MAC manually if you know it. Never match all devices with Xiaomi FE95 service data.
 

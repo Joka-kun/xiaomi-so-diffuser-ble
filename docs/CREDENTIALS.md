@@ -1,6 +1,6 @@
 # Credential acquisition
 
-## Which models can fetch a token in 0.4.0?
+## Which models can obtain a token?
 
 The OAuth wizard now lists **exact SO model IDs** from a nine-model catalog. S5 remains the only device with field-reported control. S6, S2, S7, S8, S9, S1 Pro, S1 and S19 are **experimental** and require explicit acknowledgement plus a successful *real* BLE Standard Auth proof before the selected 12-byte token is saved. Xiaomi Cloud displaying a device is **not** evidence of local controllability. The legacy file `/config/so_s5_token` is for earlier S5 entries; for a discovered non-S5 model the wizard requires Xiaomi account selection rather than silently treating a saved S5 file as its credential.
 
@@ -8,11 +8,11 @@ The authorization access token is temporary and never replaces the locally store
 
 
 
-## New: built-in Xiaomi OAuth2 setup (unreleased, hardware acceptance pending)
+## Built-in Xiaomi OAuth2 setup (S5 field-reported, further acceptance pending)
 
 After updating the integration, use **Add integration** or **Reconfigure** on an existing SO S5 entry. Select **Sign in with Xiaomi**, choose your Mi Home account region, follow the OAuth link, select the exact-model SO S5 device, and let Home Assistant verify the 12-byte GATT token directly over BLE. **No Xiaomi password or OAuth refresh token is stored.**
 
-The private per-device credential path is `/config/.storage/so_s5_ble_tokens.json` (0600, keyed by BLE address). Existing `/config/so_s5_token` files remain readable until users complete and verify migration; they are **not auto-deleted**. The operator has now reported a successful *real* Xiaomi browser OAuth setup and working S5, following an unreachable `homeassistant.local` callback workaround. Post-restart token persistence and WAN-off control remain untested. For expected errors, callback host requirements and verification criteria, see [Onboarding](ONBOARDING.md).
+The private per-device credential path is `/config/.storage/so_s5_ble_tokens.json` (0600, keyed by BLE address). Existing `/config/so_s5_token` files remain readable until users complete and verify migration; they are **not auto-deleted**. The operator has now reported a successful *real* Xiaomi browser OAuth setup and working S5, following an unreachable `homeassistant.local` callback workaround. Post-restart token persistence and WAN-off control remain untested. For expected errors, callback host requirements and verification criteria, see [installation and OAuth guidance](INSTALLATION.md).
 
 ## Legacy standalone extractor (fallback)
 

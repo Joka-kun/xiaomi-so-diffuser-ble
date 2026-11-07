@@ -8,28 +8,16 @@ from urllib.parse import unquote
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = [
-    ROOT / "README.md",
-    ROOT / "README_RU.md",
-    ROOT / "README_DE.md",
-    ROOT / "README_ES.md",
-    ROOT / "README_FR.md",
-    ROOT / "README_ZH_CN.md",
-    ROOT / "docs/ru/README.md",
-    ROOT / "docs/ru/INSTALLATION.md",
-    ROOT / "docs/ru/COMPATIBILITY.md",
-    ROOT / "docs/ru/MIGRATION.md",
-    ROOT / "docs/research/README.md",
-    ROOT / "docs/research/HCI_CAPTURE_ANALYSIS.md",
-    ROOT / "docs/LANGUAGE_POLICY.md",
+PAGES = sorted({
+    ROOT / "CHANGELOG.md",
     ROOT / "ROADMAP.md",
-    ROOT / "docs/README.md",
-    ROOT / "docs/STATUS.md",
-    ROOT / "docs/INSTALLATION.md",
-    ROOT / "docs/MIGRATION.md",
-    ROOT / "docs/COMPATIBILITY.md",
-    ROOT / "docs/MULTI_MODEL_ARCHITECTURE.md",
-]
+    ROOT / "SECURITY.md",
+    *ROOT.glob("README*.md"),
+    *(ROOT / "docs").glob("*.md"),
+    *(ROOT / "docs" / "ru").glob("*.md"),
+    *(ROOT / "docs" / "research").glob("*.md"),
+    *(ROOT / "docs" / "ru" / "research").glob("*.md"),
+})
 
 
 def test_general_domain_and_exactly_one_hacs_component():
@@ -134,6 +122,14 @@ def test_ci_workflows_never_push_as_a_bot():
         assert "github-actions[bot]" not in text, workflow
         assert "git push" not in text and "git commit" not in text, workflow
         assert "contents: write" not in text, workflow
+        assert "  contents: read" in text, workflow
+        assert "    branches: [main]" in text, workflow
+        assert "  pull_request:" in text, workflow
+        assert "  timeout-minutes: 20" in text, workflow
+        assert "concurrency:" in text and "cancel-in-progress: true" in text, workflow
+    weekly = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
+    assert '    - cron: "17 4 * * 1"' in weekly
+
 
 
 def test_docs_have_consistent_language_boundaries():

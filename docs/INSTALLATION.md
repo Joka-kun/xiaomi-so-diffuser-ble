@@ -2,7 +2,7 @@
 
 ![Xiaomi SO Diffuser BLE setup](assets/connection-flow.svg)
 
-**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · development 1.0.0.  
+**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release 1.0.0 (physical regression pending).  
 ## Install
 
 1. In HACS, open **Custom repositories**, paste `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` and select **Integration**. Install **Xiaomi SO Diffuser BLE**. If HACS does not offer this repository, manually copy **only** `custom_components/so_diffuser_ble` into your Home Assistant configuration.
@@ -44,7 +44,7 @@ No for normal BLE commands: cloud access is used during optional onboarding and 
 - **On/Off:** controls scent diffusion with MIoT property `2.1004`, independent of LED lighting. The default Russian label sorts above the Backlight entity in HA's device-page control list; user-renamed entities may sort differently.
 - Spray duration: 3–30 s; ordinary pause: 3–30 min.
 - **Zero-pause mode:** the S5 continuous-mode switch and its experimental equivalent on other SO models both write `3.4 = 0`. Physical spray cadence must be measured separately.
-- **Backlight:** steady color, the device's native **Automatic Gradient** (`3.8 = 238`), plus two optional HA-driven color palettes (**Color Cycle** and **Sunset**) changing RGB through the already allowed `3.9` property at most once every 8 seconds. Software palettes stop on power-off, disconnect or entity unload, whereas the native gradient continues without HA. Only on RGB-capable models; **not on S1/S19**.
+- **Backlight:** steady color, the device's native **Automatic Gradient** (`3.8 = 238`), plus two optional HA-driven color palettes (**Color Cycle** and **Sunset**) changing RGB through the already allowed `3.9` property at most once every 8 seconds. Software palettes stop when the backlight is switched off, BLE disconnects or the entity is unloaded, whereas the native gradient continues without HA. Only on RGB-capable models; **not on S1/S19**.
 - Battery/charging readings when received; S1 Pro temperature when reported.
 - **BLE connection:** read-only connectivity diagnostic that remains visible while disconnected.
 - Schedule the diffuser through standard Home Assistant automations. Native timer registers remain intentionally unsupported.
