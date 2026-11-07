@@ -85,7 +85,7 @@ def test_noir_artwork_uses_a_consistent_restrained_palette():
     ):
         content = (ROOT / "docs/assets" / name).read_text(encoding="utf-8")
         assert "#06090C" in content, name
-        assert "#D6B17D" in content or "#D6B17D".lower() in content.lower(), name
+        assert "#FFE2A6" in content, name
         assert 'id="ceramic"' in content, name
         assert 'id="edge"' in content, name
         assert "#A077FA" not in content and "#FF8ABC" not in content, name
