@@ -21,6 +21,16 @@ The old S5-only roadmap is preserved as [dated research history](docs/history/RO
 - [x] Rename the primary control **On/Off** so it alphabetically precedes the Backlight control in Russian HA. Preserve the same unique ID and command mapping.
 - [x] Add two optional, slow HA-driven RGB palettes on the existing fixed-property channel, with single-task lifetime, cancellation, and disconnect handling.
 
+## Source audit and release readiness (2026-11-07)
+
+- [x] Audit local BLE session, fixed-property command/read-back, OAuth state checks, entity lifecycle, private token storage and CI workflows against source files and tests.
+- [x] Prevent a non-regular FIFO token store from blocking HA executor threads. Add an offline regression test for both read and save paths.
+- [x] Align the Xiaomi OAuth request's public User-Agent version with `manifest.json`, verified by a synthetic HTTP test.
+- [x] Record evidence, severity and reproducible acceptance checks in [the technical audit](docs/AUDIT_2026-11-07.md).
+- [ ] Verify this source revision on physical S5 before expanding the field-confirmed compatibility claims.
+- [ ] Publish a **new release from a licensed and tested commit** before expecting HACS to distribute post-`v1.0.0` fixes. Do not move or overwrite the published `v1.0.0` tag.
+- [ ] Independently verify reported BLE state transitions, reconnect/restart, WAN-off and the two HA-driven lighting effects; no synthetic test substitutes for hardware.
+
 ## Must verify before inviting general upgrades
 
 - [ ] Install the **1.0.0 general-domain release** on a test Home Assistant instance, following the [migration guide](docs/MIGRATION.md). Confirm old tokens are reused without loss and the old entry does not compete for BLE.

@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import asyncio
+import json
+from pathlib import Path
 import unittest
 from urllib.parse import parse_qs, urlparse
 
@@ -132,6 +134,14 @@ class XiaomiOAuthRequestTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([d["did"] for d in devices], ["blt.aaa", "blt.bbb"])
         self.assertEqual(len(session.calls), 3)
         self.assertIn("/app/v2/ha/oauth/get_token", session.calls[0][1])
+        manifest = json.loads(
+            (Path(__file__).resolve().parents[1]
+             / "custom_components" / "so_diffuser_ble" / "manifest.json").read_text()
+        )
+        self.assertEqual(
+            session.calls[0][2]["headers"]["User-Agent"],
+            f"xiaomi-so-diffuser-ble/{manifest['version']} client/ha.test",
+        )
         self.assertIn("/app/v2/home/device_list_page", session.calls[1][1])
         self.assertEqual(session.calls[1][2]["headers"]["Authorization"], "BearerACCESS")
         self.assertEqual(session.calls[2][2]["json"]["start_did"], "next")

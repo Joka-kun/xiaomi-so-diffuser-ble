@@ -11,6 +11,7 @@ This is the **single entry point** for project documentation. For guides with il
 | Diagnose a token or spray problem | [Credentials](CREDENTIALS.md) · [Protocol](PROTOCOL.md) |
 | Run tests / contribute | [Testing](TESTING.md) |
 | See current unverified items | [Project status](STATUS.md) · [Roadmap](../ROADMAP.md) |
+| Review the current source-level audit and release blockers | [Technical audit](AUDIT_2026-11-07.md) |
 | Review source-level cryptographic research | [English HCI analysis](research/HCI_CAPTURE_ANALYSIS.md) · [Original Russian research](ru/research/HCI_CAPTURE_ANALYSIS.md) |
 | Prepare HACS publication | [Release checklist](PUBLISHING.md) |
 | Understand reuse and redistribution terms | [MIT License](../LICENSE) |

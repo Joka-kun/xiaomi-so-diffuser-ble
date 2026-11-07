@@ -31,12 +31,14 @@ def _address_key(address: str) -> str:
 def _read_tokens(config_dir: str | Path) -> dict[str, str]:
     path = _private_path(config_dir)
     try:
-        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK)
     except FileNotFoundError:
         return {}
     with os.fdopen(fd, "r", encoding="ascii") as handle:
         info = os.fstat(handle.fileno())
-        if not stat.S_ISREG(info.st_mode) or stat.S_IMODE(info.st_mode) & 0o077:
+        if not stat.S_ISREG(info.st_mode):
+            raise TokenFileError("type")
+        if stat.S_IMODE(info.st_mode) & 0o077:
             raise TokenFileError("permissions")
         if info.st_size > 100_000:
             raise TokenFileError("format")

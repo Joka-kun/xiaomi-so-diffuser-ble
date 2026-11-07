@@ -152,7 +152,7 @@ class XiaomiOAuth:
             "timeout": 20,
             "allow_redirects": False,
             "headers": {
-                "User-Agent": f"xiaomi-so-diffuser-ble/0.5.0 client/{self._device_id}",
+                "User-Agent": f"xiaomi-so-diffuser-ble/1.0.0 client/{self._device_id}",
                 **(headers or {}),
             },
         }

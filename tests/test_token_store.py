@@ -64,6 +64,19 @@ class TokenStoreTests(unittest.TestCase):
         with self.assertRaises(TokenFileError):
             save_device_token(self.base, ADDRESS2, TOKEN2)
 
+    @unittest.skipUnless(hasattr(os, "mkfifo") and hasattr(os, "O_NONBLOCK"), "POSIX FIFO required")
+    def test_fifo_store_does_not_block_token_reads_or_writes(self):
+        # O_RDONLY without O_NONBLOCK blocks indefinitely waiting for a writer.
+        self.file.parent.mkdir()
+        os.mkfifo(self.file, 0o600)
+        with self.assertRaises(TokenFileError) as read:
+            load_device_token(self.base, ADDRESS1)
+        self.assertEqual(read.exception.reason, "type")
+        with self.assertRaises(TokenFileError) as write:
+            save_device_token(self.base, ADDRESS1, TOKEN1)
+        self.assertEqual(write.exception.reason, "type")
+        self.assertTrue(self.file.is_fifo())
+
     @unittest.skipUnless(hasattr(os, "O_NOFOLLOW"), "O_NOFOLLOW required")
     def test_symlinked_store_is_rejected(self):
         target = self.base / "outside.json"
