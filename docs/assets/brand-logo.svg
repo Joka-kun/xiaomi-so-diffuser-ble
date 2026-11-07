@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320" role="img" aria-label="SO Diffuser BLE">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#04C5D2"/><stop offset="1" stop-color="#8A65ED"/></linearGradient></defs>
+<g transform="translate(20,-3) scale(.61)">
+<title id="title">SO Diffuser BLE — aroma diffuser with RGB light and mist</title>
+<defs><linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF"/><stop offset="1" stop-color="#B7D7DD"/></linearGradient><linearGradient id="ring" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1BF0D7"/><stop offset=".4" stop-color="#37A7F8"/><stop offset=".7" stop-color="#A45FFF"/><stop offset="1" stop-color="#F76BBB"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter></defs>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M212 158c-34-37 27-47 8-80m48 79c-33-32 23-50 7-80m49 80c-25-34 26-53 7-81" stroke="#29C9D4" stroke-width="17"/><path d="M212 158c-34-37 27-47 8-80m48 79c-33-32 23-50 7-80m49 80c-25-34 26-53 7-81" stroke="#E8FFFF" stroke-width="5" opacity=".9"/></g>
+<ellipse cx="256" cy="396" rx="163" ry="35" fill="#1D8FBE" opacity=".3" filter="url(#shadow)"/>
+<rect x="105" y="170" width="302" height="228" rx="83" fill="#223E50" stroke="#1B617D" stroke-width="9"/><rect x="115" y="172" width="282" height="209" rx="77" fill="url(#body)"/><ellipse cx="256" cy="177" rx="114" ry="19" fill="#E6F9FA" stroke="#6D9AA9" stroke-width="5"/><ellipse cx="256" cy="181" rx="48" ry="7" fill="#75B9C8" opacity=".7"/>
+<path d="M121 356Q256 379 391 356V377Q388 390 361 394H151Q124 392 121 378Z" fill="url(#ring)"/><path d="M145 364Q256 381 366 364" stroke="#FFF" opacity=".7" stroke-width="5" fill="none"/>
+<circle cx="256" cy="298" r="7" fill="#548895" opacity=".8"/><path d="M202 332h108" stroke="#799FAB" stroke-width="3" opacity=".4"/>
+</g>
+<text x="335" y="143" font-family="DejaVu Sans, sans-serif" font-size="61" font-weight="750" fill="#123B4C">SO DIFFUSER</text>
+<text x="339" y="205" font-family="DejaVu Sans, sans-serif" font-size="41" font-weight="700" fill="#087C9C">BLUETOOTH</text>
+<path d="M340 227h470" stroke="url(#g)" stroke-width="8" stroke-linecap="round"/><text x="340" y="274" font-family="DejaVu Sans, sans-serif" font-size="22" fill="#486B79">LOCAL CONTROL • SMART LIGHTING</text>
+</svg>

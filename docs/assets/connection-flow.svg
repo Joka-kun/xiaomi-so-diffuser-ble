@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 315" role="img" aria-label="Setup flow: BLE discovery, Xiaomi sign-in, GATT token proof and local control">
+<defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#0C2535"/><stop offset="1" stop-color="#192B44"/></linearGradient></defs><rect width="1300" height="315" rx="24" fill="url(#bg)"/>
+<g fill="#1A4556" stroke="#39869A" stroke-width="2"><rect x="42" y="72" width="261" height="158" rx="22"/><rect x="357" y="72" width="261" height="158" rx="22"/><rect x="671" y="72" width="261" height="158" rx="22"/><rect x="985" y="72" width="270" height="158" rx="22"/></g>
+<g fill="#E8FBFD" font-family="DejaVu Sans,sans-serif" font-weight="700"><text x="72" y="132" font-size="36">01  BLE</text><text x="385" y="132" font-size="36">02  MI</text><text x="700" y="132" font-size="36">03  GATT</text><text x="1017" y="132" font-size="36">04  HA</text></g>
+<g fill="#9DC9D8" font-family="DejaVu Sans,sans-serif" font-size="18"><text x="72" y="177">DISCOVERY</text><text x="385" y="177">ACCOUNT TOKEN</text><text x="700" y="177">DEVICE PROOF</text><text x="1017" y="177">LOCAL CONTROL</text></g>
+<g stroke="#24D5D7" stroke-width="6" fill="none" stroke-linecap="round"><path d="M315 151h27m-10-11 10 11-10 11"/><path d="M630 151h27m-10-11 10 11-10 11"/><path d="M945 151h27m-10-11 10 11-10 11"/></g>
+<text x="56" y="275" font-family="DejaVu Sans,sans-serif" font-size="17" fill="#B4D9E1">Cloud credentials are used for setup only. Routine commands use authenticated local Bluetooth.</text>
+</svg>

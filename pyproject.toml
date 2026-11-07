@@ -1,0 +1,14 @@
+[project]
+name = "xiaomi-so-diffuser-ble"
+version = "1.0.0"
+description = "Local Bluetooth integration for SO/BWJ aroma diffuser family in Home Assistant"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

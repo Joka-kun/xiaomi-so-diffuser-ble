@@ -1,0 +1,106 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select a nearby SO diffuser",
+        "description": "Select a nearby SO diffuser or enter its Bluetooth address manually.",
+        "data": {
+          "device": "Bluetooth device"
+        }
+      },
+      "manual": {
+        "title": "Enter the SO diffuser Bluetooth address",
+        "description": "Enter your SO diffuser's Bluetooth address.",
+        "data": {
+          "address": "Bluetooth address"
+        }
+      },
+      "bluetooth_confirm": {
+        "title": "Confirm the SO diffuser",
+        "description": "Confirm that this is your diffuser and continue setup."
+      },
+      "credentials": {
+        "title": "Diffuser credentials",
+        "description": "Sign in with Xiaomi to obtain the device's BLE token, or use an existing saved token.",
+        "data": {
+          "method": "Connection method",
+          "region": "Xiaomi account region"
+        }
+      },
+      "oauth_error": {
+        "title": "Authorization did not complete",
+        "description": "Authorization did not complete. Retry Xiaomi sign-in. Previously saved credentials are unchanged."
+      },
+      "cloud_device": {
+        "title": "Choose an SO diffuser from Xiaomi",
+        "description": "Turn on the diffuser. Close Mi Home on your phone and, if necessary, temporarily disable your phone's Bluetooth. Then select your device.",
+        "data": {
+          "device": "Xiaomi device"
+        }
+      },
+      "oauth_manual": {
+        "title": "Xiaomi sign-in without local callback",
+        "description": "{link_left}Sign in with Xiaomi{link_right}. If homeassistant.local fails to open after login, copy the **entire URL from your browser** and paste it below. Never share this URL.",
+        "data": {
+          "callback_url": "Browser redirect URL"
+        }
+      },
+      "experimental_confirm": {
+        "title": "Experimental compatibility — {model}",
+        "description": "BLE control for {model} is experimental. Setup verifies the token, but some functions may behave differently. Test them manually before adding automations.",
+        "data": {
+          "acknowledge": "I understand this model is experimental and want to try it"
+        }
+      }
+    },
+    "error": {
+      "invalid_address": "Enter a six-byte Bluetooth address in XX:XX:XX:XX:XX:XX form.",
+      "token_missing": "No saved token found. Choose Sign in with Xiaomi to acquire the token automatically.",
+      "token_permissions": "The token file must be owner-readable without group/world or execute permissions (0600 or stricter).",
+      "token_type": "The token path must be a regular file, not a symlink or directory.",
+      "token_format": "The token file must contain exactly 24 hexadecimal characters with no newline.",
+      "cloud_request_failed": "Could not contact Xiaomi. Check your network and retry.",
+      "cloud_http_error": "Xiaomi rejected the request or is unavailable.",
+      "cloud_rejected": "Xiaomi rejected the authorization or device-list request.",
+      "invalid_cloud_response": "Unexpected Xiaomi server response.",
+      "invalid_device_list": "Xiaomi returned an invalid device list.",
+      "invalid_region": "Invalid Xiaomi account region.",
+      "invalid_oauth_code": "Invalid authorization code.",
+      "invalid_cloud_token": "Invalid Xiaomi OAuth token.",
+      "too_many_s5_devices": "Too many S5 devices returned.",
+      "too_many_device_pages": "Too many Xiaomi device-list pages.",
+      "invalid_device_pagination": "Invalid Xiaomi device-list pagination.",
+      "no_s5_in_account": "No recognized SO model with a valid GATT token was found in this Xiaomi account.",
+      "oauth_expired": "Authorization expired. Please retry.",
+      "invalid_cloud_device": "The selected device is no longer available.",
+      "ble_not_available": "The diffuser is not visible over Bluetooth. Turn it on and check your Home Assistant Bluetooth adapter or active Bluetooth proxy.",
+      "ble_auth_failed": "Could not connect to the diffuser or verify its BLE token. Turn it on, close Mi Home, and temporarily disable Bluetooth on your phone, then retry.",
+      "credential_storage_failed": "The token could not be saved securely. The previous token was retained.",
+      "invalid_redirect": "Invalid OAuth callback URL.",
+      "invalid_oauth_callback": "The redirect URL or authorization state is invalid. Copy the full URL after a fresh Xiaomi login.",
+      "experimental_confirmation_required": "You must explicitly acknowledge experimental compatibility.",
+      "experimental_cloud_required": "This SO model needs Xiaomi account selection and explicit experimental confirmation. The legacy S5 token-file path is not valid for this device.",
+      "model_mismatch": "The Xiaomi Cloud model does not match the discovered Bluetooth model. Select the correct device.",
+      "legacy_entry_exists": "A legacy so_s5 entry already controls this Bluetooth address; duplicate connections are not allowed.",
+      "ble_connection_failed": "Could not connect to the diffuser over Bluetooth. Turn it on, close Mi Home, and temporarily disable Bluetooth on your phone. Then retry."
+    },
+    "abort": {
+      "already_configured": "This Bluetooth address is already configured.",
+      "not_supported": "This Bluetooth advertisement does not match an exact registered SO candidate model.",
+      "credential_storage_failed": "Could not save the device token. Existing settings were not removed.",
+      "legacy_entry_exists": "This diffuser still has a config entry under the old so_s5 domain. Back up HA and remove the old config entry through Home Assistant before setting up the new domain. Do not delete its token. See docs/MIGRATION.md."
+    },
+    "progress": {
+      "oauth": "{link_left}Open Xiaomi sign-in{link_right}. After login, if `{default_host}` cannot be opened, **in the browser address bar** replace only that address with your HA server address (for example `{example_host}`). Keep the rest of the URL unchanged, then press Enter. Never share this link."
+    }
+  },
+  "selector": {
+    "credential_method": {
+      "options": {
+        "oauth": "Sign in with Xiaomi",
+        "existing": "Use a previously saved S5 token",
+        "oauth_manual": "Xiaomi sign-in — paste redirect URL"
+      }
+    }
+  }
+}

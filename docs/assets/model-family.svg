@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 405" role="img" aria-label="Model profiles: S5 field-tested and eight experimental models">
+<defs><linearGradient id="a" x1="0" x2="1"><stop stop-color="#0A2434"/><stop offset="1" stop-color="#142B45"/></linearGradient><linearGradient id="l" x1="0" x2="1"><stop stop-color="#1FDED2"/><stop offset="1" stop-color="#A66EF6"/></linearGradient></defs>
+<rect width="1400" height="405" rx="24" fill="url(#a)"/><text x="51" y="62" fill="#F3FDFF" font-family="DejaVu Sans,sans-serif" font-size="37" font-weight="700">SO / BWJ    9  MODELS</text>
+<g font-family="DejaVu Sans,sans-serif">
+<rect x="45" y="100" width="290" height="242" rx="22" fill="#16464E" stroke="#20E8D8" stroke-width="3"/><circle cx="190" cy="182" r="47" fill="#265D67"/><g transform="translate(136 124) scale(.211)">
+<title id="title">SO Diffuser BLE — aroma diffuser with RGB light and mist</title>
+<defs><linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF"/><stop offset="1" stop-color="#B7D7DD"/></linearGradient><linearGradient id="ring" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1BF0D7"/><stop offset=".4" stop-color="#37A7F8"/><stop offset=".7" stop-color="#A45FFF"/><stop offset="1" stop-color="#F76BBB"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter></defs>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M212 158c-34-37 27-47 8-80m48 79c-33-32 23-50 7-80m49 80c-25-34 26-53 7-81" stroke="#29C9D4" stroke-width="17"/><path d="M212 158c-34-37 27-47 8-80m48 79c-33-32 23-50 7-80m49 80c-25-34 26-53 7-81" stroke="#E8FFFF" stroke-width="5" opacity=".9"/></g>
+<ellipse cx="256" cy="396" rx="163" ry="35" fill="#1D8FBE" opacity=".3" filter="url(#shadow)"/>
+<rect x="105" y="170" width="302" height="228" rx="83" fill="#223E50" stroke="#1B617D" stroke-width="9"/><rect x="115" y="172" width="282" height="209" rx="77" fill="url(#body)"/><ellipse cx="256" cy="177" rx="114" ry="19" fill="#E6F9FA" stroke="#6D9AA9" stroke-width="5"/><ellipse cx="256" cy="181" rx="48" ry="7" fill="#75B9C8" opacity=".7"/>
+<path d="M121 356Q256 379 391 356V377Q388 390 361 394H151Q124 392 121 378Z" fill="url(#ring)"/><path d="M145 364Q256 381 366 364" stroke="#FFF" opacity=".7" stroke-width="5" fill="none"/>
+<circle cx="256" cy="298" r="7" fill="#548895" opacity=".8"/><path d="M202 332h108" stroke="#799FAB" stroke-width="3" opacity=".4"/>
+</g><text x="76" y="275" fill="#F9FFFF" font-size="33" font-weight="700">S5</text><text x="76" y="309" fill="#53F7D7" font-size="18">✓</text>
+<g fill="#1D3A52" stroke="#355C70" stroke-width="2">
+<rect x="365" y="100" width="225" height="108" rx="20"/><rect x="605" y="100" width="225" height="108" rx="20"/><rect x="845" y="100" width="225" height="108" rx="20"/><rect x="1085" y="100" width="270" height="108" rx="20"/>
+<rect x="365" y="234" width="225" height="108" rx="20"/><rect x="605" y="234" width="225" height="108" rx="20"/><rect x="845" y="234" width="225" height="108" rx="20"/><rect x="1085" y="234" width="270" height="108" rx="20"/>
+</g>
+<g fill="#F3FCFF" font-size="29" font-weight="700"><text x="400" y="153">S1</text><text x="641" y="153">S1 PRO</text><text x="881" y="153">S2</text><text x="1123" y="153">S6</text><text x="400" y="289">S7</text><text x="641" y="289">S8</text><text x="881" y="289">S9</text><text x="1123" y="289">S19</text></g>
+<g fill="#DEB9F9" font-size="14"><text x="402" y="181">◇</text><text x="643" y="181">◇</text><text x="884" y="181">◇</text><text x="1126" y="181">◇</text><text x="402" y="317">◇</text><text x="643" y="317">◇</text><text x="884" y="317">◇</text><text x="1126" y="317">◇</text></g>
+</g><rect x="48" y="366" width="1302" height="4" rx="2" fill="url(#l)"/>
+</svg>

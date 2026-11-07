@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 315" role="img" aria-label="Four steps for safe legacy migration">
+<rect width="1300" height="315" rx="24" fill="#0B2232"/><g font-family="DejaVu Sans,sans-serif">
+<text x="45" y="64" font-size="36" font-weight="700" fill="#F8FFFF">SAFE MIGRATION</text>
+<g fill="#1C4254" stroke="#3D8194" stroke-width="2"><rect x="42" y="97" width="272" height="154" rx="20"/><rect x="357" y="97" width="272" height="154" rx="20"/><rect x="672" y="97" width="272" height="154" rx="20"/><rect x="987" y="97" width="272" height="154" rx="20"/></g>
+<g fill="#5FF4DC" font-size="30" font-weight="700"><text x="63" y="157">01</text><text x="380" y="157">02</text><text x="696" y="157">03</text><text x="1010" y="157">04</text></g>
+<g fill="#F0FDFF" font-size="22" font-weight="700"><text x="64" y="196">BACKUP</text><text x="379" y="196">OLD ENTRY</text><text x="695" y="196">NEW DOMAIN</text><text x="1010" y="196">VERIFY</text></g>
+<text x="45" y="287" fill="#B2D4DF" font-size="16">Keep private BLE tokens. Remove old entries via the Home Assistant UI — never edit its registry by hand.</text>
+</g></svg>
