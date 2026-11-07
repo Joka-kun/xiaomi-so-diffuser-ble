@@ -34,7 +34,7 @@ The old S5-only roadmap is preserved as [dated research history](docs/history/RO
 - [ ] On S1 Pro, verify whether temperature property 3.10 arrives and which unit the firmware uses; otherwise hide it.
 - [ ] Measure actual `3.4=0` spray duty cycle **per model**, and preserve the last positive pause through restart without unverified writes.
 - [ ] Expand Home Assistant integration-dialog and entity translations beyond the existing EN/RU; the GitHub guides are already in six languages.
-- [ ] Select a project **LICENSE** with the repository owner. HACS publication checks currently fail because no license is present.
+- [x] Adopt the owner-approved [MIT License](LICENSE). Verify HACS publication checks after the licensing commit.
 - [ ] Before any future functional release, complete S5 regression and migration testing. Keep unverified non-S5 models clearly marked experimental.
 
 ## Product policy

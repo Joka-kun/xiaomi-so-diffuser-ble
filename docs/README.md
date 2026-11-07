@@ -13,6 +13,7 @@ This is the **single entry point** for project documentation. For guides with il
 | See current unverified items | [Project status](STATUS.md) · [Roadmap](../ROADMAP.md) |
 | Review source-level cryptographic research | [English HCI analysis](research/HCI_CAPTURE_ANALYSIS.md) · [Original Russian research](ru/research/HCI_CAPTURE_ANALYSIS.md) |
 | Prepare HACS publication | [Release checklist](PUBLISHING.md) |
+| Understand reuse and redistribution terms | [MIT License](../LICENSE) |
 | Contribute translations or fix language consistency | [Language and terminology policy](LANGUAGE_POLICY.md) |
 | View brand icons and catalog status | [Branding](BRANDING.md) |
 | Read first public release notes | [Release notes](RELEASE_NOTES.md) |

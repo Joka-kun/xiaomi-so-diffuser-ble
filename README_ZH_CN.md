@@ -49,4 +49,6 @@
 
 ---
 
+[MIT](LICENSE)
+
 *独立社区项目，与小米或 Home Assistant 官方无关联。*

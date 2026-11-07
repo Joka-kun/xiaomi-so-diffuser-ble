@@ -49,4 +49,6 @@ Lichtmodi: **Dauerlicht**, **Automatischer Farbverlauf** (im Gerät), **Farbwech
 
 ---
 
+[MIT](LICENSE)
+
 *Unabhängiges Community-Projekt, nicht von Xiaomi oder Home Assistant betrieben.*
