@@ -49,4 +49,6 @@ Si Xiaomi renvoie vers une adresse `homeassistant.local` inaccessible, remplacez
 
 ---
 
+[MIT](LICENSE)
+
 *Projet communautaire indépendant, sans affiliation à Xiaomi ni Home Assistant.*

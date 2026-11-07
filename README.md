@@ -49,4 +49,6 @@ Lighting: **Steady**, **Automatic Gradient** (native), **Color Cycle (HA)** and 
 
 ---
 
+[MIT](LICENSE)
+
 *An independent community integration. Not affiliated with Xiaomi or the Home Assistant project.*

@@ -49,4 +49,6 @@ Iluminación: **Luz fija**, **Gradiente automático** (nativo), **Cambio de colo
 
 ---
 
+[MIT](LICENSE)
+
 *Proyecto independiente de la comunidad; no afiliado a Xiaomi ni a Home Assistant.*

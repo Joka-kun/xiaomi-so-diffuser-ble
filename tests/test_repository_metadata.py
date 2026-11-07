@@ -26,6 +26,16 @@ class RepositoryMetadataTests(unittest.TestCase):
         self.assertEqual(manifest["issue_tracker"], "https://github.com/Joka-kun/xiaomi-so-diffuser-ble/issues")
         self.assertEqual(manifest["codeowners"], ["@Joka-kun"])
 
+    def test_mit_license_and_public_readme_links(self):
+        license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+        self.assertEqual(license_text.splitlines()[0], "MIT License")
+        self.assertIn("Copyright (c) 2026 Joka-kun", license_text)
+        self.assertIn("Permission is hereby granted, free of charge", license_text)
+        self.assertIn('THE SOFTWARE IS PROVIDED "AS IS"', license_text)
+        for name in ("README.md", "README_RU.md", "README_DE.md",
+                     "README_FR.md", "README_ES.md", "README_ZH_CN.md"):
+            self.assertIn("[MIT](LICENSE)", (ROOT / name).read_text(encoding="utf-8"))
+
     def test_hacs_manifest_renders_readme(self):
         hacs = json.loads((ROOT / "hacs.json").read_text())
         self.assertEqual(hacs["name"], "Xiaomi SO Diffuser BLE")
