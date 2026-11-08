@@ -2,7 +2,7 @@
 
 Date: 2026-11-08. Scope: BLE connection lifecycle only.
 Status: **proposed and synthetic-tested; NOT field-proven on physical S5**.
-Deployment: **GitHub review branch only**. Home Assistant production is unchanged.
+Deployment: **merged to `main` and installed as a live Home Assistant canary on 2026-11-08**. Long-idle physical S5 recovery is not verified; no versioned release published.
 
 ## User-observed failure
 
@@ -108,3 +108,24 @@ With a stable, documented BLE receiver and independent scan observation:
 Release criteria: deterministic tests and GitHub checks pass **and**
 physical S5 recovers without manual interaction under its actual BLE radio
 behaviour. Do not merge or advertise a long-idle fix based solely on CI.
+
+## Live Home Assistant canary installation (2026-11-08)
+
+The coordinator, power-switch entity and Bluetooth manifest dependency change
+were applied to the existing Home Assistant installation using
+SHA-256-guarded one-occurrence edits and automatic per-change backups.
+Only the Home Assistant container was restarted. Docker subsequently
+reported the Home Assistant container as running.
+
+**Evidence boundary:** the installation completed and Home Assistant remained
+running after restart. Available Docker logs did not independently show a
+fresh authenticated S5 session, successful BLE power command or physical
+ON/OFF result. Neither CI nor container uptime proves the 8–24-hour
+standby-radio behaviour.
+
+The locally installed integration still declares version `1.0.4`;
+no versioned GitHub release has been published. The manual canary files
+could be replaced by a subsequent HACS update.
+
+The hardware acceptance gate remains open until an actual S5 power
+command has been verified physically after a lost BLE session.
