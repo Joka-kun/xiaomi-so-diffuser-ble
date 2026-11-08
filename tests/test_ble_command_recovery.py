@@ -64,7 +64,7 @@ class FakeS5Session:
 
 
 class FakeBluetooth:
-    BluetoothScanningMode = SimpleNamespace(PASSIVE="passive")
+    BluetoothScanningMode = SimpleNamespace(ACTIVE="active")
 
     def __init__(self):
         self.connectable = False
@@ -72,6 +72,7 @@ class FakeBluetooth:
         self.callback = None
         self.unsubscribed = 0
         self.connection_count = 0
+        self.cleared_history = 0
         self.clients = []
 
     def async_ble_device_from_address(self, _hass, address, connectable):
@@ -81,7 +82,7 @@ class FakeBluetooth:
 
     def async_register_callback(self, _hass, callback, matcher, mode):
         assert matcher == {"address": "AA:BB:CC:DD:EE:FF", "connectable": True}
-        assert mode == "passive"
+        assert mode == "active"
         self.callback = callback
 
         def unsubscribe():
@@ -89,6 +90,10 @@ class FakeBluetooth:
             self.callback = None
 
         return unsubscribe
+
+    def async_clear_advertisement_history(self, _hass, address):
+        assert address == "AA:BB:CC:DD:EE:FF"
+        self.cleared_history += 1
 
     async def establish(self, _cls, _device, _name, *, disconnected_callback, pair):
         assert pair is False
@@ -116,6 +121,7 @@ def load_real_coordinator(bluetooth):
                if isinstance(node, ast.ClassDef) and node.name == "S5Coordinator")
     namespace = {
         "asyncio": asyncio,
+        "callback": lambda function: function,
         "suppress": suppress,
         "_LOGGER": logging.getLogger(__name__),
         "bluetooth": bluetooth,
@@ -173,6 +179,7 @@ class BLERecoveryTests(unittest.IsolatedAsyncioTestCase):
         first = FakeS5Session.sessions[0]
         await asyncio.wait_for(first.client.disconnected.wait(), timeout=2)
         self.assertEqual(first.writes, [True])
+        self.assertEqual(self.bt.cleared_history, 1)
         await asyncio.wait_for(self.coordinator.async_set_power(False), timeout=2)
         self.assertEqual([write for s in FakeS5Session.sessions for write in s.writes],
                          [True, False])
