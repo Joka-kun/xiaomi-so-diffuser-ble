@@ -165,18 +165,22 @@ class S5Coordinator:
                 raise HomeAssistantError("SO Bluetooth session ended before the command")
             try:
                 await getattr(session, method)(value)
+            except asyncio.CancelledError:
+                # A cancelled service call may already have written to S5.
+                self._retire_uncertain_session()
+                raise
             except S5ClientError as err:
-                # An unanswered write may already have reached the diffuser.
-                # Retire this session, but NEVER automatically resend it.
-                self._connected_event.clear()
-                self._abort_session.set()
-                self._reconnect_event.set()
+                self._retire_uncertain_session()
                 raise HomeAssistantError(str(err)) from err
             except Exception as err:
-                self._connected_event.clear()
-                self._abort_session.set()
-                self._reconnect_event.set()
+                self._retire_uncertain_session()
                 raise HomeAssistantError("SO Bluetooth command failed") from err
+
+    def _retire_uncertain_session(self) -> None:
+        """Do not let another command reuse a link with ambiguous write state."""
+        self._connected_event.clear()
+        self._abort_session.set()
+        self._reconnect_event.set()
 
     async def _run(self) -> None:
         while True:
