@@ -39,6 +39,9 @@ class FakeBleakClient:
 class FakeS5Session:
     sessions = []
     fail_next_write = False
+    block_next_write = False
+    write_started = None
+    write_resume = None
 
     def __init__(self, client, token):
         assert token == b"synthetic-only"
@@ -58,6 +61,10 @@ class FakeS5Session:
 
     async def set_power(self, enabled):
         self.writes.append(enabled)
+        if FakeS5Session.block_next_write:
+            FakeS5Session.block_next_write = False
+            FakeS5Session.write_started.set()
+            await FakeS5Session.write_resume.wait()
         if FakeS5Session.fail_next_write:
             FakeS5Session.fail_next_write = False
             raise FakeClientError("synthetic lost acknowledgement")
@@ -145,6 +152,9 @@ class BLERecoveryTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         FakeS5Session.sessions = []
         FakeS5Session.fail_next_write = False
+        FakeS5Session.block_next_write = False
+        FakeS5Session.write_started = asyncio.Event()
+        FakeS5Session.write_resume = asyncio.Event()
         self.bt = FakeBluetooth()
         self.cls = load_real_coordinator(self.bt)
         self.coordinator = self.cls(FakeHass(), "AA:BB:CC:DD:EE:FF")
@@ -197,6 +207,21 @@ class BLERecoveryTests(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(results[1])
         self.assertGreaterEqual(len(FakeS5Session.sessions), 2)
         self.assertEqual(FakeS5Session.sessions[0].writes, [True])
+        self.assertEqual([write for session in FakeS5Session.sessions
+                          for write in session.writes], [True, False])
+
+    async def test_cancelled_inflight_write_is_not_replayed(self):
+        self.bt.connectable = True
+        FakeS5Session.block_next_write = True
+        pending = asyncio.create_task(self.coordinator.async_set_power(True))
+        await asyncio.wait_for(FakeS5Session.write_started.wait(), timeout=2)
+        first = FakeS5Session.sessions[0]
+        pending.cancel()
+        with self.assertRaises(asyncio.CancelledError):
+            await pending
+        await asyncio.wait_for(first.client.disconnected.wait(), timeout=2)
+        self.assertEqual(first.writes, [True])
+        await asyncio.wait_for(self.coordinator.async_set_power(False), timeout=2)
         self.assertEqual([write for session in FakeS5Session.sessions
                           for write in session.writes], [True, False])
 
