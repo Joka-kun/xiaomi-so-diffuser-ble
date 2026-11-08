@@ -185,6 +185,21 @@ class BLERecoveryTests(unittest.IsolatedAsyncioTestCase):
                          [True, False])
         self.assertGreaterEqual(self.bt.connection_count, 2)
 
+    async def test_queued_command_cannot_reuse_aborting_session(self):
+        self.bt.connectable = True
+        FakeS5Session.fail_next_write = True
+        results = await asyncio.wait_for(asyncio.gather(
+            self.coordinator.async_set_power(True),
+            self.coordinator.async_set_power(False),
+            return_exceptions=True,
+        ), timeout=2)
+        self.assertIsInstance(results[0], FakeHAError)
+        self.assertIsNone(results[1])
+        self.assertGreaterEqual(len(FakeS5Session.sessions), 2)
+        self.assertEqual(FakeS5Session.sessions[0].writes, [True])
+        self.assertEqual([write for session in FakeS5Session.sessions
+                          for write in session.writes], [True, False])
+
     async def test_advertisement_wakes_retry_and_unsubscribes_at_shutdown(self):
         self.bt.connectable = True
         assert self.bt.callback is not None
