@@ -8,6 +8,7 @@ import logging
 from bleak import BleakClient
 from bleak_retry_connector import establish_connection
 from homeassistant.components import bluetooth
+from homeassistant.core import callback
 from homeassistant.exceptions import HomeAssistantError
 
 from .client import MiotMessage, S5ClientError, S5ControlClient
@@ -37,6 +38,13 @@ class S5Coordinator:
         self._session: S5ControlClient | None = None
         self._task: asyncio.Task | None = None
         self._retry_delay = 2.0
+        self._connected_event = asyncio.Event()
+        self._reconnect_event = asyncio.Event()
+        self._abort_session = asyncio.Event()
+        self._stopping = asyncio.Event()
+        self._command_lock = asyncio.Lock()
+        self._unsub_advertisement = None
+        self._last_advertisement_wake = -60.0
 
     def add_listener(self, callback):
         self._listeners.add(callback)
@@ -47,16 +55,77 @@ class S5Coordinator:
             callback()
 
     def async_start(self) -> None:
-        if self._task is None:
-            self._task = self.hass.async_create_task(self._run())
+        """Start one GATT owner and a passive advertisement wake-up."""
+        if self._task is not None:
+            return
+        self._stopping.clear()
+        self._task = self.hass.async_create_task(self._run())
+        try:
+            self._unsub_advertisement = bluetooth.async_register_callback(
+                self.hass,
+                self._on_advertisement,
+                {"address": self.address.upper(), "connectable": True},
+                bluetooth.BluetoothScanningMode.ACTIVE,
+            )
+        except Exception:
+            self._task.cancel()
+            self._task = None
+            raise
+
+    @callback
+    def _on_advertisement(self, _service_info, _change) -> None:
+        """Wake a disconnected session without launching a second GATT client."""
+        if self.connected or self._stopping.is_set():
+            return
+        now = asyncio.get_running_loop().time()
+        if now - self._last_advertisement_wake < 10.0:
+            return
+        self._last_advertisement_wake = now
+        self._reconnect_event.set()
 
     async def async_shutdown(self) -> None:
+        self._stopping.set()
+        if self._unsub_advertisement is not None:
+            self._unsub_advertisement()
+            self._unsub_advertisement = None
         if self._task is None:
             return
         self._task.cancel()
         with suppress(asyncio.CancelledError):
             await self._task
         self._task = None
+        self._connected_event.clear()
+
+    async def _wait_for_connection(self) -> None:
+        """Give the sole connection task a bounded chance to authenticate."""
+        if self._stopping.is_set() or self._task is None or self._task.done():
+            raise HomeAssistantError("SO Bluetooth connection manager is not running")
+        if (
+            self.connected and self._session is not None
+            and self._connected_event.is_set()
+            and not self._abort_session.is_set()
+        ):
+            return
+        self._reconnect_event.set()
+        ready = asyncio.create_task(self._connected_event.wait())
+        stopped = asyncio.create_task(self._stopping.wait())
+        try:
+            done, _pending = await asyncio.wait(
+                (ready, stopped), timeout=35.0,
+                return_when=asyncio.FIRST_COMPLETED,
+            )
+            if (
+                not done or self._stopping.is_set()
+                or self._abort_session.is_set()
+                or not self.connected or self._session is None
+            ):
+                raise HomeAssistantError(
+                    "SO diffuser did not establish an authenticated Bluetooth session"
+                )
+        finally:
+            ready.cancel()
+            stopped.cancel()
+            await asyncio.gather(ready, stopped, return_exceptions=True)
 
     async def async_set_power(self, enabled: bool) -> None:
         await self._async_command("set_power", enabled)
@@ -82,23 +151,36 @@ class S5Coordinator:
         await self._async_command("set_color", value)
 
     async def _async_command(self, method: str, value) -> None:
-        session = self._session
-        if not self.connected or session is None:
-            raise HomeAssistantError("SO diffuser is not connected over local Bluetooth")
-        methods = {
-            "set_power": session.set_power,
-            "set_fragrance_out_time": session.set_fragrance_out_time,
-            "set_idle_time": session.set_idle_time,
-            "set_light": session.set_light,
-            "set_color": session.set_color,
-        }
-        command = methods.get(method)
-        if command is None:
+        if method not in (
+            "set_power", "set_fragrance_out_time", "set_idle_time",
+            "set_light", "set_color",
+        ):
             raise ValueError("SO command is outside the fixed property allowlist")
-        try:
-            await command(value)
-        except S5ClientError as err:
-            raise HomeAssistantError(str(err)) from err
+        # A single waiter/command owner: do not race a reconnect or replay a
+        # possibly executed MIoT write after a lost read-back.
+        async with self._command_lock:
+            await self._wait_for_connection()
+            session = self._session
+            if not self.connected or session is None:
+                raise HomeAssistantError("SO Bluetooth session ended before the command")
+            try:
+                await getattr(session, method)(value)
+            except asyncio.CancelledError:
+                # A cancelled service call may already have written to S5.
+                self._retire_uncertain_session()
+                raise
+            except S5ClientError as err:
+                self._retire_uncertain_session()
+                raise HomeAssistantError(str(err)) from err
+            except Exception as err:
+                self._retire_uncertain_session()
+                raise HomeAssistantError("SO Bluetooth command failed") from err
+
+    def _retire_uncertain_session(self) -> None:
+        """Do not let another command reuse a link with ambiguous write state."""
+        self._connected_event.clear()
+        self._abort_session.set()
+        self._reconnect_event.set()
 
     async def _run(self) -> None:
         while True:
@@ -108,10 +190,18 @@ class S5Coordinator:
                 raise
             except Exception as err:
                 _LOGGER.debug("SO local BLE session unavailable (%s)", type(err).__name__)
-            await asyncio.sleep(self._retry_delay)
+            try:
+                await asyncio.wait_for(
+                    self._reconnect_event.wait(), timeout=self._retry_delay
+                )
+            except TimeoutError:
+                pass
+            finally:
+                self._reconnect_event.clear()
             self._retry_delay = min(self._retry_delay * 2, 30.0)
 
     async def _run_session(self) -> None:
+        self._abort_session.clear()
         ble_device = bluetooth.async_ble_device_from_address(
             self.hass, self.address.upper(), connectable=True
         )
@@ -134,16 +224,21 @@ class S5Coordinator:
             del token
             await session.authenticate()
             self._retry_delay = 2.0
-            self._session = session
-            self.connected = True
-            self._clear_properties()
-            self._notify()
 
+            # iter_messages activates the command read-back listener before
+            # signalling that commands may proceed.
             reader = session.iter_messages()
             listener_task = self.hass.async_create_task(self._consume(reader))
             disconnect_task = self.hass.async_create_task(disconnected.wait())
-            tasks = (listener_task, disconnect_task)
+            abort_task = self.hass.async_create_task(self._abort_session.wait())
+            tasks = (listener_task, disconnect_task, abort_task)
+
             try:
+                self._session = session
+                self.connected = True
+                self._clear_properties()
+                self._connected_event.set()
+                self._notify()
                 done, _pending = await asyncio.wait(
                     tasks, return_when=asyncio.FIRST_COMPLETED
                 )
@@ -156,12 +251,19 @@ class S5Coordinator:
                         task.cancel()
                 await asyncio.gather(*tasks, return_exceptions=True)
         finally:
+            self._connected_event.clear()
             self._session = None
             self.connected = False
             self._clear_properties()
             self._notify()
             with suppress(Exception):
                 await ble_client.disconnect()
+            # Since S5 may publish an identical advertisement after its
+            # previous GATT session, allow the next packet to wake our callback.
+            # This HA API is optional for older Core versions.
+            clear_history = getattr(bluetooth, "async_clear_advertisement_history", None)
+            if clear_history is not None:
+                clear_history(self.hass, self.address.upper())
 
     async def _consume(self, reader) -> None:
         async for message in reader:

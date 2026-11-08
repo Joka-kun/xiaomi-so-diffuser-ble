@@ -99,3 +99,17 @@ Automated tests and captured protocol frames do not prove the diffuser's physica
 9. Operation with WAN disconnected after credentials have already been installed.
 
 Also re-test the user-reported `switch/turn_off` false error after updating: the device may briefly report its old state before the final state; no false mismatch error should occur, while true no-read-back failures must still time out. Record the device firmware, exact values, HA state/read-back and independent physical observation for each test.
+
+## S5 BLE command recovery (review branch, 2026-11-08)
+
+See [source audit and field acceptance](BLE_RECOVERY_AUDIT_2026-11-08.md).
+The offline `tests/test_ble_command_recovery.py` suite exercises the actual
+S5Coordinator class with fake BLE and Home Assistant objects: a power command
+waking a missing session, concurrent commands using one connection, an
+ambiguous write not being replayed, advertisement-triggered recovery, orderly
+unload and rejecting unknown commands. These are synthetic transport tests,
+not confirmation of the S5's 24-hour standby radio behaviour.
+
+Command-only power availability is intentional: when disconnected its value
+may be unknown, but users can still request a new connection. Failed physical
+reachability or authentication must cause an explicit command error.

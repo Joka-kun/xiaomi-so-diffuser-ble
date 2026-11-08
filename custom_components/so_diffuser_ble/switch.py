@@ -13,6 +13,13 @@ class S5PowerSwitch(S5Entity, SwitchEntity):
         super().__init__(coordinator, "power", "Вкл/Выкл", "mdi:power")
 
     @property
+    def available(self) -> bool:
+        # A disconnected GATT session is not proof of an unreachable S5.
+        # Keep the power command callable; the coordinator connects on demand
+        # and reports a real error if no authenticated link can be established.
+        return True
+
+    @property
     def is_on(self):
         return self.coordinator.power
 
