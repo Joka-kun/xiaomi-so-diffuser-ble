@@ -8,6 +8,7 @@ import logging
 from bleak import BleakClient
 from bleak_retry_connector import establish_connection
 from homeassistant.components import bluetooth
+from homeassistant.core import callback
 from homeassistant.exceptions import HomeAssistantError
 
 from .client import MiotMessage, S5ClientError, S5ControlClient
@@ -64,13 +65,14 @@ class S5Coordinator:
                 self.hass,
                 self._on_advertisement,
                 {"address": self.address.upper(), "connectable": True},
-                bluetooth.BluetoothScanningMode.PASSIVE,
+                bluetooth.BluetoothScanningMode.ACTIVE,
             )
         except Exception:
             self._task.cancel()
             self._task = None
             raise
 
+    @callback
     def _on_advertisement(self, _service_info, _change) -> None:
         """Wake a disconnected session without launching a second GATT client."""
         if self.connected or self._stopping.is_set():
@@ -220,12 +222,12 @@ class S5Coordinator:
             abort_task = self.hass.async_create_task(self._abort_session.wait())
             tasks = (listener_task, disconnect_task, abort_task)
 
-            self._session = session
-            self.connected = True
-            self._clear_properties()
-            self._connected_event.set()
-            self._notify()
             try:
+                self._session = session
+                self.connected = True
+                self._clear_properties()
+                self._connected_event.set()
+                self._notify()
                 done, _pending = await asyncio.wait(
                     tasks, return_when=asyncio.FIRST_COMPLETED
                 )
@@ -245,6 +247,12 @@ class S5Coordinator:
             self._notify()
             with suppress(Exception):
                 await ble_client.disconnect()
+            # Since S5 may publish an identical advertisement after its
+            # previous GATT session, allow the next packet to wake our callback.
+            # This HA API is optional for older Core versions.
+            clear_history = getattr(bluetooth, "async_clear_advertisement_history", None)
+            if clear_history is not None:
+                clear_history(self.hass, self.address.upper())
 
     async def _consume(self, reader) -> None:
         async for message in reader:
