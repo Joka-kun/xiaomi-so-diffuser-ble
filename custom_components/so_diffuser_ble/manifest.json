@@ -51,6 +51,7 @@
   ],
   "config_flow": true,
   "dependencies": [
+    "bluetooth",
     "bluetooth_adapters"
   ],
   "documentation": "https://github.com/Joka-kun/xiaomi-so-diffuser-ble",
