@@ -100,7 +100,11 @@ class S5Coordinator:
         """Give the sole connection task a bounded chance to authenticate."""
         if self._stopping.is_set() or self._task is None or self._task.done():
             raise HomeAssistantError("SO Bluetooth connection manager is not running")
-        if self.connected and self._session is not None:
+        if (
+            self.connected and self._session is not None
+            and self._connected_event.is_set()
+            and not self._abort_session.is_set()
+        ):
             return
         self._reconnect_event.set()
         ready = asyncio.create_task(self._connected_event.wait())
@@ -112,6 +116,7 @@ class S5Coordinator:
             )
             if (
                 not done or self._stopping.is_set()
+                or self._abort_session.is_set()
                 or not self.connected or self._session is None
             ):
                 raise HomeAssistantError(
@@ -163,10 +168,12 @@ class S5Coordinator:
             except S5ClientError as err:
                 # An unanswered write may already have reached the diffuser.
                 # Retire this session, but NEVER automatically resend it.
+                self._connected_event.clear()
                 self._abort_session.set()
                 self._reconnect_event.set()
                 raise HomeAssistantError(str(err)) from err
             except Exception as err:
+                self._connected_event.clear()
                 self._abort_session.set()
                 self._reconnect_event.set()
                 raise HomeAssistantError("SO Bluetooth command failed") from err
