@@ -50,9 +50,12 @@ It does not establish advertisement behaviour or radio availability after
    state. Other entities keep their previous disconnected/unavailable policy.
    `available=True` for the power command is **not** a claim of physical
    radio reachability: a command still fails explicitly if S5 is unreachable.
-3. Use a Home Assistant Bluetooth advertisement callback to wake reconnection
-   promptly. Limit advertisement-triggered wake events to once per 10 seconds,
-   and retain a 2–30 second fallback timer.
+3. Use a Home Assistant Bluetooth advertisement callback with an exact
+   address matcher and ACTIVE scan mode to wake reconnection promptly. Limit
+   advertisement-triggered wake events to once per 10 seconds, retain a 2–30
+   second fallback timer and clear changed-advertisement history after closing
+   a GATT session where the HA API supports it (static payloads may otherwise
+   fail to trigger callbacks).
 4. Serialize whole command lifetimes with one asyncio lock, including the
    initial wait for reconnection. Preserve S5's existing MIoT GATT token,
    authenticated read-back and property allowlist.
