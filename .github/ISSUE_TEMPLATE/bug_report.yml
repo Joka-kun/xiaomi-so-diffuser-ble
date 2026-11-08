@@ -1,0 +1,66 @@
+name: Bug report
+description: Report a problem with installation, pairing, BLE control or device entities
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the installation and compatibility guides first.
+        **Privacy:** do not paste tokens, OAuth callback links, device addresses, account IDs, private network addresses or raw captures.
+  - type: input
+    id: environment
+    attributes:
+      label: Home Assistant and integration versions
+      placeholder: "Home Assistant 2026.x; integration release or commit"
+    validations:
+      required: true
+  - type: dropdown
+    id: model
+    attributes:
+      label: SO diffuser model
+      options:
+        - SO S5
+        - SO S1
+        - SO S1 Pro
+        - SO S2
+        - SO S6
+        - SO S7
+        - SO S8
+        - SO S9
+        - SO S19
+        - Other / unknown
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where does it fail?
+      options:
+        - Installation / discovery
+        - Xiaomi sign-in / device selection
+        - Authenticated BLE pairing
+        - Local power / spray control
+        - Lighting / effects
+        - Restart / reconnection
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps and observed behavior
+      description: Explain what you expected and what happened; include redacted logs only.
+      placeholder: |
+        1. ...
+        2. ...
+        Expected: ...
+        Actual: ...
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I have removed tokens, callback URLs, Bluetooth addresses, account data, and private captures.
+          required: true

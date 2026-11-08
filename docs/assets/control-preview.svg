@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="580" viewBox="0 0 1320 580" role="img" aria-label="Motion-led abstract BLE scent and lighting control artwork with English-only labels">
+<title>Light in Motion — Scent and Color</title><desc>Dynamic conceptual control map, not a Home Assistant screenshot. No device photograph is shown.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06090C"/><stop offset=".55" stop-color="#0A1920"/><stop offset="1" stop-color="#221528"/></linearGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#38E2E6"/><stop offset=".36" stop-color="#659BFF"/><stop offset=".68" stop-color="#BF81FC"/><stop offset="1" stop-color="#FFE2A6"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#346DAD" stop-opacity=".42"/><stop offset="1" stop-color="#0B1428" stop-opacity="0"/></radialGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="1320" height="580" rx="13" fill="url(#bg)"/><ellipse cx="994" cy="318" rx="620" ry="348" fill="url(#glow)"/>
+<path d="M-71 504C245 571 442 298 681 395S1018 586 1390 150" fill="none" stroke="#6D4CFF" opacity=".20" stroke-width="47" filter="url(#blur)"/>
+<path d="M-71 504C245 571 442 298 681 395S1018 586 1390 150" fill="none" stroke="url(#beam)" opacity=".83" stroke-width="4.5"/>
+<path d="M-68 532C179 420 404 504 649 467S1027 351 1388 479" fill="none" stroke="#F6C085" opacity=".55" stroke-width="2.9"/>
+<path d="M-67 449C268 535 455 205 678 280S1070 306 1390 -18" fill="none" stroke="#63DCEA" opacity=".50" stroke-width="2.3"/>
+<text x="61" y="58" font-family="DejaVu Sans Mono,monospace" font-size="14" fill="#A1D1D9" letter-spacing=".75" >CONTROL / BLE / TWO INDEPENDENT CHANNELS</text>
+<text x="57" y="127" font-family="DejaVu Sans,Arial,sans-serif" font-size="56" font-weight="790" fill="#F0F5F3" >LIGHT IN MOTION</text>
+<text x="59" y="162" font-family="DejaVu Sans,Arial,sans-serif" font-size="19" font-weight="500" fill="#ADBDC6" >Scent timing meets color — without cloud dependency.</text>
+<path d="M60 188H1256" stroke="#7DA4B3" stroke-opacity=".3"/>
+<g transform="translate(80 252) rotate(-8 220 95)">
+<path d="M16 62L428 0" stroke="#86DFE7" stroke-width="2.6" stroke-opacity=".75"/>
+<circle cx="47" cy="57" r="28" fill="#0A1A24" stroke="#74E8ED" stroke-width="2"/>
+<path d="M47 37V57M33 44A19 19 0 1 0 60 44" stroke="#9CF0F0" stroke-width="3" stroke-linecap="round" fill="none"/>
+<circle cx="223" cy="30" r="28" fill="#0B1E26" stroke="#7BD5E2" stroke-width="2"/>
+<path d="M205 38Q223 11 241 38M210 43L205 52M223 43V56M236 43L241 52" fill="none" stroke="#95E4F1" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="398" cy="4" r="28" fill="#0B1E26" stroke="#7BD5E2" stroke-width="2"/>
+<path d="M388 -10V16M406 -10V16" stroke="#95E4F1" stroke-width="3.5" stroke-linecap="round"/>
+<text x="-4" y="115" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#E0F8F9" letter-spacing=".75" >POWER</text><text x="167" y="85" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#E0F8F9" letter-spacing=".75" >SPRAY</text><text x="349" y="55" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#E0F8F9" letter-spacing=".75" >PAUSE</text>
+</g>
+<path d="M568 226L524 493" stroke="#A0B3C7" stroke-opacity=".28"/>
+<text x="603" y="258" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#D8B9FA" letter-spacing=".75" >RGB / AMBIENCE / EFFECTS</text>
+<g fill="none" stroke-linecap="round">
+<circle cx="758" cy="398" r="70" stroke="#7AE1E8" stroke-width="19" opacity=".16" filter="url(#blur)"/>
+<circle cx="758" cy="398" r="64" stroke="#73DDEE" stroke-width="2.2" stroke-dasharray="7 12" opacity=".75"/>
+<path d="M755 306Q881 247 1002 326T1238 268" stroke="#E4A9FE" stroke-width="26" opacity=".24" filter="url(#blur)"/>
+<path d="M755 306Q881 247 1002 326T1238 268" stroke="#C9A0FA" stroke-width="4"/>
+<path d="M765 488Q898 423 1007 477T1280 369" stroke="#FCBE84" stroke-width="27" opacity=".21" filter="url(#blur)"/>
+<path d="M765 488Q898 423 1007 477T1280 369" stroke="#FFD8A4" stroke-width="3.4"/>
+</g>
+<circle cx="758" cy="398" r="20" fill="#152938" stroke="#B9F3F5" stroke-width="3"/>
+<path d="M758 372V384M758 414V427M732 398H744M771 398H786M740 380L748 389M768 408L776 416" stroke="#B9F3F5" stroke-width="3.2" stroke-linecap="round"/>
+<text x="683" y="515" font-family="DejaVu Sans Mono,monospace" font-size="14" fill="#A4ECF1" letter-spacing=".75" >BACKLIGHT</text>
+<text x="976" y="347" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#E7BFFF" letter-spacing=".75" >GRADIENT</text>
+<text x="1077" y="491" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#FFE2A6" letter-spacing=".75" >RGB COLOR</text>
+<text x="60" y="550" font-family="DejaVu Sans Mono,monospace" font-size="12" fill="#9CB0B9" letter-spacing=".75" >STATIC VISUALIZATION  /  NOT A SCREENSHOT</text>
+</svg>

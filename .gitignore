@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Local credentials and Xiaomi exports
+private/
+**/xiaomi-devices.json
+**/xiaomi-cloud-export*.json
+**/token_extractor*.json
+so_s5_token
+*_token
+*.token
+.env
+.env.*
+
+# Private BLE captures and vendor application bundles
+*.btsnoop
+*.curf
+*.cfa
+*.pcap
+*.pcapng
+main.bundle
+SO_S5.zip
+
+# Local build artifacts
+build/
+dist/
+*.egg-info/

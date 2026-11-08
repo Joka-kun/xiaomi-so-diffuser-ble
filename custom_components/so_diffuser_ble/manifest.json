@@ -1,0 +1,62 @@
+{
+  "domain": "so_diffuser_ble",
+  "name": "Xiaomi SO Diffuser BLE",
+  "bluetooth": [
+    {
+      "local_name": "bwj.diffuser.s5",
+      "connectable": true
+    },
+    {
+      "local_name": "SO Smart Aroma Diffuser S5",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.s6",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.h10",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.bw11",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.s8",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.s9",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.s1pro",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.k09",
+      "connectable": true
+    },
+    {
+      "local_name": "bwj.diffuser.s19",
+      "connectable": true
+    }
+  ],
+  "categories": [
+    "appliances_cleaning"
+  ],
+  "codeowners": [
+    "@Joka-kun"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth_adapters"
+  ],
+  "documentation": "https://github.com/Joka-kun/xiaomi-so-diffuser-ble",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Joka-kun/xiaomi-so-diffuser-ble/issues",
+  "requirements": [],
+  "version": "1.0.4"
+}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="480" viewBox="0 0 1440 480" role="img" aria-label="Cinematic S5 product artwork with angled diffuser, light ribbons and English typography">
+<title>SO Diffuser BLE — Noir in Motion</title>
+<desc>Original conceptual illustration based on the SO S5 device reference, not a photograph. The product has an off-white rounded-square body, black circular front display and lower-right button; light trails are decorative.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2=".9"><stop stop-color="#06090C"/><stop offset=".47" stop-color="#08141B"/><stop offset=".8" stop-color="#111522"/><stop offset="1" stop-color="#21150F"/></linearGradient>
+<linearGradient id="ceramic" x1="0" y1="0" x2=".86" y2="1"><stop stop-color="#FEFAF3"/><stop offset=".42" stop-color="#E7E8E5"/><stop offset=".79" stop-color="#BCC5C8"/><stop offset="1" stop-color="#7B858B"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5E412D"/><stop offset=".28" stop-color="#FFE2A6"/><stop offset=".72" stop-color="#AE714A"/><stop offset="1" stop-color="#50301F"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#28353F"/><stop offset=".36" stop-color="#0B131C"/><stop offset="1" stop-color="#010306"/></linearGradient>
+<linearGradient id="trail" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#18A8D0" stop-opacity="0"/><stop offset=".35" stop-color="#3CE5EE"/><stop offset=".67" stop-color="#B693F0"/><stop offset="1" stop-color="#FFE2A6"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#27C6D3" stop-opacity=".30"/><stop offset="1" stop-color="#0F2D36" stop-opacity="0"/></radialGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+<filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="13" flood-color="#000" flood-opacity=".8"/></filter>
+<pattern id="grit" width="70" height="70" patternUnits="userSpaceOnUse"><path d="M70 0H0V70" fill="none" stroke="#95AEBC" stroke-opacity=".026"/></pattern>
+</defs>
+<rect width="1440" height="480" fill="url(#bg)"/><rect width="1440" height="480" fill="url(#grit)"/>
+<ellipse cx="1121" cy="236" rx="405" ry="290" fill="url(#halo)"/>
+<path d="M-40 388C277 505 599 432 866 240C1127 52 1234 84 1490 65" fill="none" stroke="#1FCADB" stroke-width="33" opacity=".21" filter="url(#blur)"/>
+<path d="M-40 388C277 505 599 432 866 240C1127 52 1234 84 1490 65" fill="none" stroke="url(#trail)" stroke-width="3.6" opacity=".75"/>
+<path d="M591 533C810 310 1086 452 1452 188" fill="none" stroke="#FBC58A" stroke-width="28" opacity=".22" filter="url(#blur)"/>
+<path d="M591 533C810 310 1086 452 1452 188" fill="none" stroke="#FFE2A6" stroke-width="2.8" opacity=".72"/>
+<path d="M852 -55C1009 72 1084 179 1306 185" fill="none" stroke="#8763DD" stroke-width="3" opacity=".47"/>
+<g opacity=".85"><circle cx="868" cy="237" r="6" fill="#7AEAF0"/><circle cx="1047" cy="143" r="4.5" fill="#E7B67D"/><circle cx="1411" cy="75" r="4" fill="#B3A2FF"/><path d="M868 210v-34M855 223h-32" stroke="#81E1E5" stroke-opacity=".45" stroke-width="2"/></g>
+<path d="M70 79H694" stroke="#7E98A4" stroke-opacity=".37"/>
+<text x="76" y="104" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#A1D4DF" letter-spacing=".75" >SO / BWJ     •     HOME ASSISTANT</text>
+<text x="64" y="211" font-family="DejaVu Sans,Arial,sans-serif" font-size="79" font-weight="760" fill="#F1F3F1" >SO DIFFUSER</text>
+<text x="69" y="308" font-family="DejaVu Sans,Arial,sans-serif" font-size="92" font-weight="780" fill="#77DCE9" letter-spacing="3">BLE</text>
+<text x="71" y="357" font-family="DejaVu Sans,Arial,sans-serif" font-size="21" font-weight="570" fill="#E1E6E6" >SCENT  ×  LIGHT  ×  LOCAL CONTROL</text>
+<text x="73" y="401" font-family="DejaVu Sans Mono,monospace" font-size="13" fill="#ADBFC5" letter-spacing=".75" >AUTHENTICATE ONCE  /  CONTROL LOCALLY</text>
+<path d="M73 421H648" stroke="#8FB5BF" stroke-opacity=".33"/>
+<text x="74" y="453" font-family="DejaVu Sans Mono,monospace" font-size="12" fill="#E9C99E" letter-spacing=".75" >SO S5   •   DEVICE-REPORTED RESULTS</text>
+<g transform="translate(1049 91) rotate(-10 144 153) scale(1.13)" aria-label="S5 tilted product silhouette with black face and lower right round button">
+<ellipse cx="146" cy="312" rx="166" ry="28" fill="#000" opacity=".54" filter="url(#blur)"/>
+<g filter="url(#shadow)">
+<path id="s5-body" d="M74 2C27 2 3 33 3 78V227C3 273 29 303 76 303H229C278 303 303 270 303 226V79C303 29 275 2 230 2Z" fill="url(#ceramic)" stroke="#76838A" stroke-width="2"/>
+<path d="M23 100Q18 28 94 24H222" stroke="#FFFFFF" stroke-opacity=".50" fill="none" stroke-width="4" stroke-linecap="round"/>
+<circle cx="151" cy="141" r="132" fill="#2A2E32" opacity=".5"/>
+<circle cx="151" cy="141" r="128" fill="url(#edge)" stroke="#A97850" stroke-width="1.5"/>
+<circle id="s5-hero-display" cx="151" cy="141" r="123" fill="url(#glass)" stroke="#12161B" stroke-width="2"/>
+<path d="M68 73Q104 25 184 34" stroke="#E1EFF4" opacity=".13" stroke-width="7" fill="none" stroke-linecap="round"/>
+<text x="140" y="232" font-family="DejaVu Sans Mono,monospace" font-size="12" fill="#A6B9C2" letter-spacing=".75" text-anchor="middle">05</text>
+<circle id="s5-hero-button" cx="265" cy="266" r="20.5" fill="#B5BEC1" stroke="#5B666B" stroke-width="2.7"/>
+<circle cx="265" cy="266" r="15" fill="#E8E9E5" stroke="#89959C"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="479" viewBox="0 0 1400 479" role="img" aria-label="SO S5 field-reported compatibility alongside other SO model profiles in a typographic map">
+<title>SO Diffuser BLE — Model Compatibility</title>
+<desc>Stylized model names, not photographs of other devices. Hardware verification information is in the accompanying compatibility documentation.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06090C"/><stop offset=".54" stop-color="#101B24"/><stop offset="1" stop-color="#1A171B"/></linearGradient>
+<linearGradient id="wave" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5BDEEB"/><stop offset=".5" stop-color="#A68BF9"/><stop offset="1" stop-color="#FFE2A6"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#8A64B4" stop-opacity=".22"/><stop offset="1" stop-color="#172027" stop-opacity="0"/></radialGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+<pattern id="scan" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M54 0H0V54" fill="none" stroke="#AEC1CA" stroke-opacity=".034"/></pattern>
+</defs>
+<rect width="1400" height="479" rx="14" fill="url(#bg)"/><rect width="1400" height="479" rx="14" fill="url(#scan)"/>
+<ellipse cx="890" cy="258" rx="520" ry="300" fill="url(#halo)"/>
+<path d="M-69 421C196 470 437 388 642 242S1097 78 1499 198" fill="none" stroke="#6DD9ED" stroke-width="25" opacity=".24" filter="url(#blur)"/>
+<path d="M-69 421C196 470 437 388 642 242S1097 78 1499 198" fill="none" stroke="url(#wave)" stroke-width="3.8" opacity=".84"/>
+<path d="M500 502C734 358 1080 395 1478 79" fill="none" stroke="#FFD1A1" stroke-width="28" opacity=".18" filter="url(#blur)"/>
+<path d="M500 502C734 358 1080 395 1478 79" fill="none" stroke="#FFE2A6" stroke-width="2.7" opacity=".62"/>
+<path d="M45 68H1347" stroke="#9AADB7" stroke-opacity=".34"/>
+<text x="55" y="57" font-family="DejaVu Sans Mono,monospace" font-size="13" fill="#94CED9" letter-spacing=".75" >SO / BWJ  —  BLE FAMILY</text>
+<text x="54" y="121" font-family="DejaVu Sans,Arial,sans-serif" font-size="46" font-weight="780" fill="#F1F5F4" >MODEL COMPATIBILITY</text>
+<text x="58" y="157" font-family="DejaVu Sans,Arial,sans-serif" font-size="20" font-weight="500" fill="#C1D1D5" >SO family profile map</text>
+<path d="M553 200L524 429" stroke="#79B9C3" stroke-width="2.2" opacity=".55"/>
+<text x="50" y="390" font-family="DejaVu Sans,Arial,sans-serif" font-size="177" font-weight="800" fill="#8BDFE9" opacity=".13">S5</text>
+<text x="63" y="235" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#97DCE9" letter-spacing=".75" >PRIMARY MODEL / SO S5</text>
+<text x="56" y="342" font-family="DejaVu Sans,Arial,sans-serif" font-size="94" font-weight="800" fill="#F4F6F4" >SO S5</text>
+<path d="M61 368H385" stroke="#E4BA86" stroke-width="2.6" opacity=".75"/>
+<text x="63" y="405" font-family="DejaVu Sans Mono,monospace" font-size="14" fill="#E5C297" letter-spacing=".75" >FIELD-REPORTED BLE OPERATION</text>
+<text x="621" y="193" font-family="DejaVu Sans Mono,monospace" font-size="15" fill="#CED9DA" letter-spacing=".75" >OTHER MODEL PROFILES</text>
+<g transform="translate(620 226) rotate(-4 72 29)" aria-label="S1 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#B88858" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S1</text>
+ <circle cx="126" cy="27" r="4" fill="#FFE2A6"/>
+ </g>
+<g transform="translate(805 218) rotate(-2 72 29)" aria-label="S1 Pro model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#618B9B" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S1 Pro</text>
+ <circle cx="126" cy="27" r="4" fill="#79E4EB"/>
+ </g>
+<g transform="translate(990 210) rotate(0 72 29)" aria-label="S2 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#618B9B" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S2</text>
+ <circle cx="126" cy="27" r="4" fill="#79E4EB"/>
+ </g>
+<g transform="translate(1175 202) rotate(-4 72 29)" aria-label="S6 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#B88858" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S6</text>
+ <circle cx="126" cy="27" r="4" fill="#FFE2A6"/>
+ </g>
+<g transform="translate(642 327) rotate(-2 72 29)" aria-label="S7 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#618B9B" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S7</text>
+ <circle cx="126" cy="27" r="4" fill="#79E4EB"/>
+ </g>
+<g transform="translate(827 319) rotate(0 72 29)" aria-label="S8 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#618B9B" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S8</text>
+ <circle cx="126" cy="27" r="4" fill="#79E4EB"/>
+ </g>
+<g transform="translate(1012 311) rotate(-4 72 29)" aria-label="S9 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#B88858" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S9</text>
+ <circle cx="126" cy="27" r="4" fill="#FFE2A6"/>
+ </g>
+<g transform="translate(1197 303) rotate(-2 72 29)" aria-label="S19 model listing">
+ <path d="M6 0H142Q150 0 150 9V48Q150 56 142 56H6Q0 56 0 49V8Q0 0 6 0Z" fill="#17252B" stroke="#618B9B" stroke-width="1.5" stroke-opacity=".82"/>
+ <text x="19" y="37" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" font-weight="720" fill="#E9F2F3" >S19</text>
+ <circle cx="126" cy="27" r="4" fill="#79E4EB"/>
+ </g>
+<text x="620" y="457" font-family="DejaVu Sans Mono,monospace" font-size="12" fill="#98B5BD" letter-spacing=".75" >DETAILS &amp; VALIDATION: SEE COMPATIBILITY GUIDE</text>
+</svg>

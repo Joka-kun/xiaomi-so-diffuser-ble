@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Dynamic overview connecting Xiaomi account setup, secure Bluetooth control, spray timing and color lighting"><title>SO Diffuser BLE — orbital overview</title><desc>Dynamic overview connecting Xiaomi account setup, secure Bluetooth control, spray timing and color lighting. Conceptual vector design, not a photograph or Home Assistant screenshot.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06090C"/><stop offset=".56" stop-color="#0B171F"/><stop offset="1" stop-color="#122028"/></linearGradient>
+ <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8F9F6"/><stop offset=".46" stop-color="#DBE0E1"/><stop offset="1" stop-color="#8B969D"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B67D49"/><stop offset=".3" stop-color="#FFE2A6"/><stop offset=".73" stop-color="#B87941"/><stop offset="1" stop-color="#47311E"/></linearGradient>
+ <linearGradient id="light" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22D9E3"/><stop offset=".5" stop-color="#8C7DFA"/><stop offset="1" stop-color="#F5A560"/></linearGradient>
+ <radialGradient id="spot"><stop stop-color="#1EA9BC" stop-opacity=".37"/><stop offset="1" stop-color="#0D2028" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="13"/></filter>
+ <filter id="shadow" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="15" stdDeviation="13" flood-color="#000" flood-opacity=".75"/></filter>
+ <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#A6BAC5" stroke-opacity=".06"/></pattern>
+ 
+</defs><rect width="1280" height="720" rx="16" fill="url(#bg)"/><rect width="1280" height="720" rx="16" fill="url(#grid)"/><ellipse cx="678" cy="409" rx="508" ry="385" fill="url(#spot)"/>
+<text x="66" y="70" font-family="DejaVu Sans Mono,monospace" font-size="13" letter-spacing="1" fill="#86B6C4">LOCAL-FIRST / FEATURE MAP</text>
+<text x="62" y="133" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="45" font-weight="760" fill="#F1F6F6">ONE DEVICE. A FULL CONTROL LOOP.</text>
+<text x="63" y="168" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="18" font-weight="500" fill="#A7BAC4">Authorize the device. Keep everyday operation on Bluetooth.</text>
+<g fill="none" stroke-linecap="round">
+<circle cx="659" cy="414" r="190" stroke="#33D6E7" stroke-width="20" opacity=".09" filter="url(#glow)"/>
+<circle cx="659" cy="414" r="190" stroke="#5BC8DE" stroke-width="2" stroke-dasharray="3 17" opacity=".6"/>
+<path d="M469 413C469 309 555 224 659 224C763 224 849 309 849 413" stroke="#7BC0EA" stroke-width="4.5" opacity=".63"/>
+<path d="M847 438C820 558 722 614 605 598" stroke="#F7B678" stroke-width="5" opacity=".73"/>
+<path d="M592 594C493 567 459 490 469 413" stroke="#9987F5" stroke-width="4" opacity=".71"/>
+<path d="M96 297C234 213 310 235 465 334" stroke="#48CDE5" stroke-width="2" opacity=".38"/>
+<path d="M853 476C981 513 1042 473 1203 390" stroke="#FFC17C" stroke-width="2.2" opacity=".5"/>
+</g>
+<circle cx="659" cy="414" r="141" fill="#0A1B25" stroke="#4D6773" stroke-width="2"/>
+<circle cx="659" cy="414" r="115" fill="#0F2A30" stroke="#1B93A7" stroke-width="2" opacity=".8"/>
+<text x="613" y="380" font-family="DejaVu Sans Mono,monospace" font-size="14" letter-spacing="1" fill="#8DBDCC">PRIVATE</text>
+<text x="590" y="439" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="65" font-weight="790" fill="#E9F5F5">BLE</text>
+<text x="573" y="474" font-family="DejaVu Sans Mono,monospace" font-size="13" letter-spacing="1" fill="#B4C7C9">DEVICE LINK</text>
+<circle cx="464" cy="416" r="8" fill="#76DFEC"/><circle cx="846" cy="417" r="8" fill="#FFE2A6"/><circle cx="651" cy="603" r="8" fill="#B0A0FF"/>
+<text x="69" y="269" font-family="DejaVu Sans Mono,monospace" font-size="14" letter-spacing="1" fill="#78E2EF">01 / ONBOARD</text>
+<text x="68" y="314" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="680" fill="#EFF3F3">Xiaomi sign-in</text>
+<text x="69" y="340" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="16" font-weight="500" fill="#AFC0C7">One-time device token</text>
+<text x="917" y="282" font-family="DejaVu Sans Mono,monospace" font-size="14" letter-spacing="1" fill="#FFC894">02 / SCENT</text>
+<text x="916" y="327" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="29" font-weight="670" fill="#F1F2F1">Spray &amp; pause</text>
+<text x="916" y="352" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="16" font-weight="500" fill="#B4C4C9">Power  ·  3–30 seconds</text>
+<text x="924" y="551" font-family="DejaVu Sans Mono,monospace" font-size="14" letter-spacing="1" fill="#C1A6FA">03 / AMBIENCE</text>
+<text x="924" y="595" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="28" font-weight="680" fill="#F1F2F1">RGB &amp; gradient</text>
+<text x="925" y="622" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="16" font-weight="500" fill="#AFC1C8">Native and HA-driven effects</text>
+<path d="M70 666H1210" stroke="#8EB5BE" opacity=".21"/>
+<text x="70" y="692" font-family="DejaVu Sans Mono,monospace" font-size="12" letter-spacing="1" fill="#9EB2BD">SCHEMATIC OVERVIEW  •  NOT A HOME ASSISTANT SCREENSHOT</text>
+</svg>

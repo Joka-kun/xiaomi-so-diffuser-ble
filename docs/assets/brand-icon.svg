@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="SO S5 diffuser: off-white rounded body, black circular front with bronze rim and lower-right button">
+<title>SO S5 diffuser — transparent Home Assistant icon</title>
+<defs>
+<linearGradient id="shell" x1="0" y1="0" x2=".94" y2=".82"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".30" stop-color="#FBFBF9"/><stop offset=".65" stop-color="#EDEEF0"/><stop offset="1" stop-color="#BEC8CD"/></linearGradient>
+<linearGradient id="inner-shell" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFF" stop-opacity=".75"/><stop offset=".7" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#76848A" stop-opacity=".18"/></linearGradient>
+<linearGradient id="bronze" x1=".05" y1=".05" x2=".95" y2=".95"><stop stop-color="#7E5C43"/><stop offset=".22" stop-color="#DCC5A4"/><stop offset=".52" stop-color="#B68E69"/><stop offset=".83" stop-color="#F1D8B3"/><stop offset="1" stop-color="#6F5241"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#2D3845"/><stop offset=".35" stop-color="#121A26"/><stop offset=".76" stop-color="#0B1018"/><stop offset="1" stop-color="#04070B"/></linearGradient>
+<linearGradient id="button" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset=".72" stop-color="#E7EAE9"/><stop offset="1" stop-color="#B8BFC4"/></linearGradient>
+<filter id="shadow" x="-20%" y="-40%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+</defs>
+<!-- No colored container: the product itself is the icon. -->
+<ellipse cx="256" cy="473" rx="155" ry="16" fill="#202A34" opacity=".16" filter="url(#shadow)"/>
+<path id="s5-body" d="M148 55C96 58 62 92 55 141C50 178 50 331 54 370C60 425 95 455 150 461C209 468 309 467 366 462C421 457 451 420 457 370C462 330 461 181 457 142C451 90 416 57 365 54C313 49 201 49 148 55Z" fill="url(#shell)" stroke="#778289" stroke-width="4" stroke-linejoin="round"/>
+<path d="M147 69C102 72 72 103 69 148M83 396C100 428 131 441 164 445" fill="none" stroke="#FFFFFF" stroke-opacity=".8" stroke-width="5" stroke-linecap="round"/>
+<path d="M157 62C238 52 321 54 359 62C409 72 438 103 443 147L443 365C437 420 406 446 359 451" fill="none" stroke="url(#inner-shell)" stroke-opacity=".68" stroke-width="8"/>
+<!-- Dark front display follows the real model's size and champagne metal bezel. -->
+<circle id="s5-rim" cx="253" cy="245" r="154" fill="url(#bronze)" stroke="#8E765F" stroke-width="2"/>
+<circle id="s5-display" cx="253" cy="245" r="147.5" fill="url(#glass)" stroke="#10151D" stroke-width="2.3"/>
+<path d="M143 180C168 122 228 100 278 109C242 133 205 175 181 219L115 322C116 262 120 226 143 180Z" fill="#CBD8E1" opacity=".075"/>
+<path d="M151 161Q193 116 264 111" fill="none" stroke="#DDE8EF" stroke-opacity=".14" stroke-width="4" stroke-linecap="round"/>
+<!-- Single recessed physical button in lower-right corner. -->
+<circle id="s5-button-ring" cx="384" cy="400" r="24" fill="#A4ABB0" stroke="#656F79" stroke-width="2.4"/>
+<circle id="s5-button" cx="384" cy="400" r="18.5" fill="url(#button)" stroke="#D5DBDE" stroke-width="2"/>
+<path d="M376 390Q384 384 392 390" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-opacity=".8" stroke-linecap="round"/>
+</svg>

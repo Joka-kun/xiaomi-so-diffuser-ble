@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="398" viewBox="0 0 1320 398" role="img" aria-label="Four-stage one-time setup, OAuth, Bluetooth authentication and subsequent local control"><title>SO Diffuser BLE — pairing journey</title><desc>Four-stage one-time setup, OAuth, Bluetooth authentication and subsequent local control. Conceptual vector design, not a photograph or Home Assistant screenshot.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06090C"/><stop offset=".56" stop-color="#0B171F"/><stop offset="1" stop-color="#122028"/></linearGradient>
+ <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8F9F6"/><stop offset=".46" stop-color="#DBE0E1"/><stop offset="1" stop-color="#8B969D"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B67D49"/><stop offset=".3" stop-color="#FFE2A6"/><stop offset=".73" stop-color="#B87941"/><stop offset="1" stop-color="#47311E"/></linearGradient>
+ <linearGradient id="light" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22D9E3"/><stop offset=".5" stop-color="#8C7DFA"/><stop offset="1" stop-color="#F5A560"/></linearGradient>
+ <radialGradient id="spot"><stop stop-color="#1EA9BC" stop-opacity=".37"/><stop offset="1" stop-color="#0D2028" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="13"/></filter>
+ <filter id="shadow" x="-70%" y="-70%" width="240%" height="240%"><feDropShadow dx="0" dy="15" stdDeviation="13" flood-color="#000" flood-opacity=".75"/></filter>
+ <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#A6BAC5" stroke-opacity=".06"/></pattern>
+ 
+</defs><rect width="1320" height="398" rx="16" fill="url(#bg)"/><rect width="1320" height="398" rx="16" fill="url(#grid)"/><text x="58" y="54" font-family="DejaVu Sans Mono,monospace" font-size="13" letter-spacing="1" fill="#86B6C4">SECURE ONBOARDING  /  FOUR STAGES</text>
+<text x="56" y="105" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="43" font-weight="770" fill="#F2F4F2">SETUP ONCE. STAY LOCAL.</text>
+<text x="57" y="135" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="16" font-weight="500" fill="#A8BBC3">An account session provisions the token; regular control uses Bluetooth.</text>
+<g fill="none" stroke-linecap="round">
+<path d="M133 235C249 161 329 171 427 237S614 311 696 235S895 161 994 235S1144 311 1235 230" stroke="#24DAE5" stroke-width="20" opacity=".23" filter="url(#glow)"/>
+<path d="M133 235C249 161 329 171 427 237S614 311 696 235S895 161 994 235S1144 311 1235 230" stroke="#8CD9E8" stroke-width="2.5" stroke-dasharray="4 9" opacity=".8"/>
+<path d="M842 226C947 171 1000 199 1093 264" stroke="#FFE2A6" stroke-width="4" opacity=".54"/>
+</g>
+<g>
+<circle cx="133" cy="235" r="30" fill="#11272F" stroke="#76CFDD" stroke-width="2.4"/>
+<circle cx="133" cy="235" r="20" fill="#15252D" stroke="#4F8692" stroke-opacity=".45"/>
+<text x="120" y="240" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#AEF4F4">01</text>
+<text x="88" y="315" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#D7F1F1">DISCOVER</text>
+<text x="71" y="344" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="500" fill="#B0C3CB">Find exact SO name</text>
+</g>
+<g>
+<circle cx="427" cy="237" r="30" fill="#11272F" stroke="#76CFDD" stroke-width="2.4"/>
+<circle cx="427" cy="237" r="20" fill="#15252D" stroke="#4F8692" stroke-opacity=".45"/>
+<text x="414" y="242" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#AEF4F4">02</text>
+<text x="382" y="315" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#D7F1F1">AUTHORIZE</text>
+<text x="365" y="344" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="500" fill="#B0C3CB">Xiaomi account</text>
+</g>
+<g>
+<circle cx="696" cy="235" r="30" fill="#11272F" stroke="#76CFDD" stroke-width="2.4"/>
+<circle cx="696" cy="235" r="20" fill="#15252D" stroke="#4F8692" stroke-opacity=".45"/>
+<text x="683" y="240" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#AEF4F4">03</text>
+<text x="651" y="315" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#D7F1F1">VERIFY</text>
+<text x="634" y="344" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="500" fill="#B0C3CB">BLE GATT proof</text>
+</g>
+<g>
+<circle cx="1016" cy="247" r="36" fill="#11272F" stroke="#FFE2A6" stroke-width="2.4"/>
+<circle cx="1016" cy="247" r="20" fill="#15252D" stroke="#4F8692" stroke-opacity=".45"/>
+<text x="1003" y="252" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#FFE2A6">04</text>
+<text x="971" y="315" font-family="DejaVu Sans Mono,monospace" font-size="15" letter-spacing="1" fill="#FFE2A6">CONTROL</text>
+<text x="954" y="344" font-family="Inter,DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="500" fill="#B0C3CB">Local power / RGB</text>
+</g>
+</svg>
