@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-08 · GitHub Release v1.0.4 published · Domain `so_diffuser_ble`**
+**As of 2026-11-09 · Release candidate v1.0.5 · Domain `so_diffuser_ble` · Official HACS catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
