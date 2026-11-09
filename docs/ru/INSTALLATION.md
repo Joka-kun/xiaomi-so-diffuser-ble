@@ -10,7 +10,7 @@
 
 ## Новая установка
 
-1. В HACS откройте **Пользовательские репозитории**, добавьте `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` и выберите тип **Интеграция**. Если HACS не предлагает установку, скопируйте папку `custom_components/so_diffuser_ble` в каталог конфигурации Home Assistant вручную.
+1. В **HACS** найди **Xiaomi SO Diffuser BLE** через поиск и установи интеграцию из официального каталога. Если каталог ещё не обновился, добавь `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` как **Интеграцию** в **Пользовательских репозиториях**. Если HACS недоступен, допустима ручная установка папки `custom_components/so_diffuser_ble`.
 2. Проверьте наличие файла `/config/custom_components/so_diffuser_ble/manifest.json`. Его поле `domain` должно быть равно `so_diffuser_ble`.
 3. Перезапустите Home Assistant. Перейдите в **Настройки → Устройства и службы → Добавить интеграцию → Xiaomi SO Diffuser BLE**.
 4. Выберите обнаруженный диффузор или вручную введите его Bluetooth-адрес. Укажите регион аккаунта Xiaomi.
