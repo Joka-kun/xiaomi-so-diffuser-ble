@@ -187,6 +187,7 @@ def test_ci_workflows_never_push_as_a_bot():
     assert not (ROOT / ".github/workflows/publish-v1.0.3.yml").exists()
     assert not (ROOT / ".github/workflows/generate-s5-icon-pngs.yml").exists()
     assert not (ROOT / ".github/workflows/publish-v1.0.4.yml").exists()
+    assert not (ROOT / ".github/workflows/publish-v105.yml").exists()
     for workflow in (ROOT / ".github/workflows").glob("*.yml"):
         text = workflow.read_text(encoding="utf-8")
         assert "github-actions[bot]" not in text, workflow
