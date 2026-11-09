@@ -2,7 +2,7 @@
 
 Date: 2026-11-08. Scope: BLE connection lifecycle only.
 Status: **proposed and synthetic-tested; NOT field-proven on physical S5**.
-Deployment: **merged to `main` and installed as a live Home Assistant canary on 2026-11-08**. Long-idle physical S5 recovery is not verified; no versioned release published.
+Deployment: **merged to `main`, installed as a live Home Assistant canary on 2026-11-08, and included in the v1.0.5 release candidate on 2026-11-09**. User observations confirm normal S5 operation and a brief BLE reconnect, but not recovery from 8–24-hour radio sleep. Do not describe those long-idle scenarios as field-proven.
 
 ## User-observed failure
 
@@ -123,9 +123,7 @@ fresh authenticated S5 session, successful BLE power command or physical
 ON/OFF result. Neither CI nor container uptime proves the 8–24-hour
 standby-radio behaviour.
 
-The locally installed integration still declares version `1.0.4`;
-no versioned GitHub release has been published. The manual canary files
-could be replaced by a subsequent HACS update.
+The initial canary declared version `1.0.4` and included the three BLE recovery code files. The v1.0.5 candidate now versions these changes for public release; upgrading through HACS will no longer revert the recovery code. The user's subsequent BLE history showed normal S5 operation with a brief reconnection. Extended power-off wakeup remains unverified.
 
 The hardware acceptance gate remains open until an actual S5 power
 command has been verified physically after a lost BLE session.

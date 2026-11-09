@@ -1,6 +1,6 @@
 [project]
 name = "xiaomi-so-diffuser-ble"
-version = "1.0.4"
+version = "1.0.5"
 description = "Local Bluetooth integration for SO/BWJ aroma diffuser family in Home Assistant"
 requires-python = ">=3.12"
 

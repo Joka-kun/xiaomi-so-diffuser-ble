@@ -4,7 +4,7 @@
 
 ![Four stages: discover, Xiaomi sign-in, BLE verification and local control](assets/connection-four-steps.png)
 
-**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release 1.0.0 (physical regression pending).  
+**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release 1.0.5 (short-session S5 behavior reported working; long-idle recovery not field-certified).  
 ## Install
 
 1. In HACS, open **Custom repositories**, paste `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` and select **Integration**. Install **Xiaomi SO Diffuser BLE**. If HACS does not offer this repository, manually copy **only** `custom_components/so_diffuser_ble` into your Home Assistant configuration.
