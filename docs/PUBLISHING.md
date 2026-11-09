@@ -9,7 +9,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 - **Brand assets:** [BRANDING.md](BRANDING.md) documents the 256/512 px icon and logo images.
 - **Release state:** [v1.0.1](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.1) was published on 2026-11-07 from commit `523e6fb51bbce0b36445df7607fe711fe8c7dd61`. The [publication workflow](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/runs/42412328738) successfully ran Python tests, Hassfest and HACS validation before creating the tag and release. Its temporary workflow file is now removed. No CI job pushed source commits to `main`.
 - **Release provenance:** the old `v1.0.0` snapshot predates the MIT license; the new immutable `v1.0.1` tag includes MIT licensing and the latest source fixes. Neither tag should be moved. Catalog admission and physical hardware verification are independent tasks.
-- **Catalog index:** a separate contribution to `hacs/default` is required for all users to discover this integration without adding its URL manually. The catalog review can take time.
+- **Catalog index:** [hacs/default#13656](https://github.com/hacs/default/pull/13656) was approved and merged on 2026-11-09. The official HACS search is now the primary installation method; indexing may take several hours. The repository URL remains a fallback.
 
 ## Historical source / release mismatch — resolved 2026-11-07
 
