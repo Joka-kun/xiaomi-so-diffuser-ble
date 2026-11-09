@@ -4,7 +4,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 ## Published release and source state
 
-- **Version:** [v1.0.4](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.4) is published from verified commit `8866f11bb3b6a139d9dadea57284e26ca846d9f8`; manifest and pyproject both report `1.0.4`. Earlier tags remain immutable.
+- **Release target:** v1.0.5 contains the S5 BLE recovery work previously merged on main; manifest, pyproject and Xiaomi OAuth User-Agent all report `1.0.5`. Publish only after the exact merge commit passes Tests and Validate; earlier release tags remain immutable. The v1.0.4 release remains available for rollback.
 - **Release notes:** [RELEASE_NOTES.md](RELEASE_NOTES.md) describe the release without provisional wording.
 - **Brand assets:** [BRANDING.md](BRANDING.md) documents the 256/512 px icon and logo images.
 - **Release state:** [v1.0.1](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.1) was published on 2026-11-07 from commit `523e6fb51bbce0b36445df7607fe711fe8c7dd61`. The [publication workflow](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/runs/42412328738) successfully ran Python tests, Hassfest and HACS validation before creating the tag and release. Its temporary workflow file is now removed. No CI job pushed source commits to `main`.
