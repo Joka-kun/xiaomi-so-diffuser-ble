@@ -2,7 +2,7 @@
 
 Date: 2026-11-08. Scope: BLE connection lifecycle only.
 Status: **proposed and synthetic-tested; NOT field-proven on physical S5**.
-Deployment: **merged to `main` and installed as a live Home Assistant canary on 2026-11-08**. Long-idle physical S5 recovery is not verified; no versioned release published.
+Deployment: **merged to `main`, installed as a live Home Assistant canary on 2026-11-08, and included in the v1.0.5 release candidate on 2026-11-09**. User observations confirm normal S5 operation and a brief BLE reconnect, but not recovery from 8–24-hour radio sleep. Do not describe those long-idle scenarios as field-proven.
 
 ## User-observed failure
 
