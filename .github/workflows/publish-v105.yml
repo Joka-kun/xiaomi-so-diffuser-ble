@@ -1,0 +1,68 @@
+name: Publish verified v1.0.5
+
+on:
+  workflow_run:
+    workflows: [Tests, Validate]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    # Release only from a successful *push* check on the exact current main.
+    if: ${{ github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: one-time-so-diffuser-v1.0.5
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Verify both current-main gates before publishing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/${REPO}/commits/main" --jq '.sha')
+          if [[ "$current" != "$SHA" ]]; then
+            echo "Not current main; skip obsolete run"
+            exit 0
+          fi
+          python - <<'PY'
+          import json, pathlib, tomllib
+          manifest = json.loads(pathlib.Path('custom_components/so_diffuser_ble/manifest.json').read_text())
+          project = tomllib.loads(pathlib.Path('pyproject.toml').read_text())
+          oauth = pathlib.Path('custom_components/so_diffuser_ble/xiaomi_oauth.py').read_text()
+          assert manifest['version'] == '1.0.5'
+          assert project['project']['version'] == '1.0.5'
+          assert 'xiaomi-so-diffuser-ble/1.0.5 client/' in oauth
+          assert pathlib.Path('LICENSE').is_file()
+          assert pathlib.Path('custom_components/so_diffuser_ble/brand/icon.png').is_file()
+          print('S5 v1.0.5 manifest, metadata, UA and license aligned')
+          PY
+          gh api "repos/${REPO}/actions/runs?head_sha=${SHA}&per_page=100" > "$RUNNER_TEMP/runs.json"
+          for required in "Tests" "Validate"; do
+            if ! jq -e --arg name "$required"               '[.workflow_runs[] | select(.event == "push" and .name == $name and .conclusion == "success")] | length >= 1'               "$RUNNER_TEMP/runs.json" >/dev/null; then
+              echo "Awaiting successful push workflow: $required"
+              exit 0
+            fi
+          done
+          if gh release view v1.0.5 --repo "$REPO" >/dev/null 2>&1; then
+            echo "v1.0.5 already exists; verify its SHA"
+          else
+            gh release create v1.0.5 --repo "$REPO" --target "$SHA"               --title "Xiaomi SO Diffuser BLE v1.0.5"               --notes-file docs/RELEASE_NOTES.md --latest ||               gh release view v1.0.5 --repo "$REPO" >/dev/null
+          fi
+          actual=$(gh api "repos/${REPO}/git/ref/tags/v1.0.5" --jq '.object.sha')
+          if [[ "$actual" != "$SHA" ]]; then
+            echo "v1.0.5 tag points at $actual, not $SHA" >&2
+            exit 1
+          fi
+          echo "Release v1.0.5 verified against exact tested commit $SHA"
