@@ -12,7 +12,7 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof, private old storage retained | Hardware acceptance of cloud-token retrieval on relatives |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder and written backup/manual migration steps; old credential store remains readable | Actual HA entry/entity-ID migration and S5 reconnect under 1.0.0 |
-| Publication | MIT license and GitHub Actions Tests, Hassfest and HACS validation (10/10) pass on `main` | Catalog listing and hardware acceptance for a stable release remain pending |
+| Publication | Both Tests and Validate are required for v1.0.5; the official HACS catalog PR #13656 was approved and merged on 2026-11-09 | Physical long-idle S5 and non-S5 hardware acceptance still pending |
 
 ## Repository audit — 2026-11-07
 
