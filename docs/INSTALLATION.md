@@ -7,7 +7,7 @@
 **Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release 1.0.5 (short-session S5 behavior reported working; long-idle recovery not field-certified).  
 ## Install
 
-1. Open **HACS / Marketplace**, search for **Xiaomi SO Diffuser BLE** in the official catalog, and install it. If the listing has not propagated yet, use **Custom repositories** to add `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` as an **Integration**. As a last resort, manually copy only `custom_components/so_diffuser_ble` into your Home Assistant configuration.
+1. Open **Settings → Marketplace** (formerly **HACS**), search for **Xiaomi SO Diffuser BLE** in the community integration catalog, and install it.
 2. Confirm that `/config/custom_components/so_diffuser_ble/manifest.json` exists and declares `"domain": "so_diffuser_ble"`. There must be **no second installed SO integration for the same physical device**.
 3. **Restart Home Assistant**.
 4. Open **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**.

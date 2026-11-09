@@ -23,7 +23,7 @@
 
 ## Démarrage rapide
 
-**Installation :** dans **HACS / Marketplace → Dépôts personnalisés**, ajoutez `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` en tant qu'**Intégration** et installez-la. Redémarrez Home Assistant si demandé.
+**Installation :** dans **Paramètres → Marketplace** (anciennement **HACS**), recherchez **Xiaomi SO Diffuser BLE** et installez l'intégration depuis le catalogue.
 
 **Avant l'association :** utilisez un adaptateur Bluetooth capable d'établir des connexions ou un proxy Bluetooth actif de Home Assistant. Allumez le diffuseur.
 
