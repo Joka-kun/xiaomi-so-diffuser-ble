@@ -155,9 +155,14 @@ def test_public_readmes_match_centered_github_reference_header():
         assert lines[0].endswith('width="100%"></p>'), filename
         assert lines[2] == expected_nav, filename
         assert lines[4] == '<p align="center">', filename
-        assert lines[5].strip().startswith('<a href="https://github.com/Joka-kun/'), filename
-        assert lines[8] == '</p>', filename
-        assert lines[10] == '# Xiaomi SO Diffuser BLE', filename
+        assert all(lines[i].strip().startswith('<a href="') for i in range(5, 9)), filename
+        assert 'github/actions/workflow/status/Joka-kun/xiaomi-so-diffuser-ble/tests.yml' in lines[5], filename
+        assert 'github/v/release/Joka-kun/xiaomi-so-diffuser-ble' in lines[6], filename
+        assert 'Marketplace-listed' in lines[7], filename
+        assert 'control-local%20BLE' in lines[8], filename
+        assert all('style=flat-square' in lines[i] for i in range(5, 9)), filename
+        assert lines[9] == '</p>', filename
+        assert lines[11] == '# Xiaomi SO Diffuser BLE', filename
         assert (ROOT / 'docs/assets/hero.svg').is_file(), filename
         assert '<details>' not in content and '<summary>' not in content, filename
         assert '<script' not in content.lower(), filename
