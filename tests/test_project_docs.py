@@ -264,6 +264,9 @@ def test_published_brand_assets_are_correct_dimensions():
             assert image.format == "PNG"
             assert image.size == size
             assert image.mode == "RGBA"
+        assert (brand / filename).stat().st_size <= 2 * 1024 * 1024, (
+            "Marketplace brands service rejects images larger than 2 MiB"
+        )
 
 
 def test_s5_brand_is_transparent_and_uses_logo_fallback():
