@@ -1,18 +1,18 @@
 # Project status
 
-**As of 2026-11-09 · Release candidate v1.0.5 · Domain `so_diffuser_ble` · Official HACS catalog merged**
+**As of 2026-11-09 · GitHub Release v1.0.5 published · Domain `so_diffuser_ble` · Official HACS catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
 | Area | Confirmed | Not yet confirmed |
 | --- | --- | --- |
-| S5 OAuth / BLE | The operator reported a successful real Xiaomi OAuth setup and working S5 on a previous source version. | New `so_diffuser_ble` version on that HA; token persistence after restart and WAN-off use |
+| S5 OAuth / BLE | User-reported working S5 control in the live HA canary with the BLE recovery code and a brief observed disconnect/reconnect; the same recovery code ships in v1.0.5. | 8–24-hour sleep/reconnect, BLE radio silence, and WAN-off control have not been independently certified |
 | Other SO models | Published MIoT IDs and capability descriptions; experimental onboarding implemented | Their real advertisement names, GATT authentication and physical commands |
 | Device detection | Exact registered SO BLE name matching; never a general FE95 catch-all | Whether every candidate uses its model ID as advertised BLE name |
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof, private old storage retained | Hardware acceptance of cloud-token retrieval on relatives |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder and written backup/manual migration steps; old credential store remains readable | Actual HA entry/entity-ID migration and S5 reconnect under 1.0.0 |
-| Publication | Both Tests and Validate are required for v1.0.5; the official HACS catalog PR #13656 was approved and merged on 2026-11-09 | Physical long-idle S5 and non-S5 hardware acceptance still pending |
+| Publication | [v1.0.5](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) published from tested commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30`; Tests/Validate passed and HACS PR #13656 merged | Physical long-idle S5 and non-S5 hardware acceptance still pending |
 
 ## Repository audit — 2026-11-07
 
