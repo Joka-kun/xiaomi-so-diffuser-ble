@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.5 — BLE reconnect responsiveness and official HACS listing (2026-11-09)
+
+- Ship the already-merged, synthetic-tested S5 BLE session recovery changes: power commands wait for a reconnect through the **single existing GATT connection owner**, rather than failing immediately after link loss.
+- Wake reconnect attempts through exact-address Bluetooth advertisements and a bounded retry timer. Keep the diagnostic BLE-connection indicator truthful; never automatically replay an uncertain MIoT write.
+- Preserve existing device tokens, entities, spray/RGB behavior and experimental warnings for non-S5 models.
+- Update English and Russian installation instructions for official HACS catalog inclusion.
+- Scope of validation: Home Assistant live canary successfully installed; S5 real operation and a brief BLE reconnect have been user-observed, but **8–24-hour radio-sleep recovery and WAN-off tests are not physically certified**.
+
+
 ## 1.0.4 — Transparent, readable S5 icon (2026-11-08)
 
 - Replaced the pale blue tile with a large, close-cropped S5 product mark on transparent PNG, following Xiaomi's official white body/black circular face design.
