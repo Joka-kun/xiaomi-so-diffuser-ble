@@ -23,7 +23,7 @@
 
 ## 快速安装
 
-**安装：**在 **HACS / Marketplace → 自定义仓库** 中，将 `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` 添加为**集成**并安装。如有提示，请重启 Home Assistant。
+**安装：**打开 **设置 → Marketplace**（原 **HACS**），搜索 **Xiaomi SO Diffuser BLE**，并从目录中安装此集成。
 
 **连接前：**请确保有支持主动连接的蓝牙适配器或已启用的 Home Assistant 蓝牙代理，并打开香薰机。
 
