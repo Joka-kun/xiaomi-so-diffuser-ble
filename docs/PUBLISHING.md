@@ -4,7 +4,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 ## Published release and source state
 
-- **Release target:** v1.0.5 contains the S5 BLE recovery work previously merged on main; manifest, pyproject and Xiaomi OAuth User-Agent all report `1.0.5`. Publish only after the exact merge commit passes Tests and Validate; earlier release tags remain immutable. The v1.0.4 release remains available for rollback.
+- **Published v1.0.5:** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) points to tested main commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30`. Manifest, pyproject and Xiaomi OAuth User-Agent all report `1.0.5`. Both required main Tests and Validate passed. The prior v1.0.4 remains available for rollback; no earlier tag was moved.
 - **Release notes:** [RELEASE_NOTES.md](RELEASE_NOTES.md) describe the release without provisional wording.
 - **Brand assets:** [BRANDING.md](BRANDING.md) documents the 256/512 px icon and logo images.
 - **Release state:** [v1.0.1](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.1) was published on 2026-11-07 from commit `523e6fb51bbce0b36445df7607fe711fe8c7dd61`. The [publication workflow](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/runs/42412328738) successfully ran Python tests, Hassfest and HACS validation before creating the tag and release. Its temporary workflow file is now removed. No CI job pushed source commits to `main`.
@@ -15,7 +15,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For the **next feature or maintenance release after v1.0.4**:
+For the **next feature or maintenance release after v1.0.5**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
 2. Create a **new** version (higher than `1.0.4`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.

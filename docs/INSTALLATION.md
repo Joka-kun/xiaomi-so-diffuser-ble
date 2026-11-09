@@ -7,7 +7,7 @@
 **Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release 1.0.5 (short-session S5 behavior reported working; long-idle recovery not field-certified).  
 ## Install
 
-1. In HACS, open **Custom repositories**, paste `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` and select **Integration**. Install **Xiaomi SO Diffuser BLE**. If HACS does not offer this repository, manually copy **only** `custom_components/so_diffuser_ble` into your Home Assistant configuration.
+1. Open **HACS / Marketplace**, search for **Xiaomi SO Diffuser BLE** in the official catalog, and install it. If the listing has not propagated yet, use **Custom repositories** to add `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` as an **Integration**. As a last resort, manually copy only `custom_components/so_diffuser_ble` into your Home Assistant configuration.
 2. Confirm that `/config/custom_components/so_diffuser_ble/manifest.json` exists and declares `"domain": "so_diffuser_ble"`. There must be **no second installed SO integration for the same physical device**.
 3. **Restart Home Assistant**.
 4. Open **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**.
@@ -15,7 +15,7 @@
 6. Sign in on Xiaomi's website and choose the *same physical device* from the cloud list. All non-S5 models require explicit experimental confirmation.
 7. The wizard uses the selected **device GATT token** to authenticate against the actual BLE device. A token is saved only after this proof. Confirm physical on/off before using automations.
 
-The original SO S5 was user-reported working with a previous integration build. **The new domain and the eight other model profiles have not been physically tested in the user's HA installation yet.**
+The SO S5 has user-reported working controls on the current Home Assistant canary and a brief BLE disconnection/reconnection. **Recovery after 8–24 hours of standby and every non-S5 model remain physically unverified.**
 
 ## Common questions
 
