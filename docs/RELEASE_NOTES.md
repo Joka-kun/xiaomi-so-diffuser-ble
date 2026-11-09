@@ -1,4 +1,4 @@
-# Xiaomi SO Diffuser BLE — v1.0.4
+# Xiaomi SO Diffuser BLE — v1.0.5
 
 Home Assistant icon legibility and product fidelity update.
 
