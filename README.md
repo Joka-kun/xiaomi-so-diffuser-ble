@@ -10,7 +10,7 @@
 
 # Xiaomi SO Diffuser BLE
 
-**Local Bluetooth control of SO / BWJ aroma diffusers for Home Assistant.**
+**Community-maintained Home Assistant Marketplace integration for local Bluetooth control of SO / BWJ aroma diffusers.**
 
 > **SO S5** has user-reported working controls and native color cycling. Other SO models remain **experimental**, not certified.
 
@@ -23,7 +23,7 @@
 
 ## Quick start
 
-**Install:** In **HACS / Marketplace**, search for **Xiaomi SO Diffuser BLE** and install it from the official catalog. Restart Home Assistant if prompted. If the catalog has not refreshed yet, add `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` under **Custom repositories** as an **Integration**.
+**Install:** In **Settings → Marketplace** (formerly **HACS**), search for **Xiaomi SO Diffuser BLE** and install this community integration. Restart Home Assistant if prompted. If the catalog has not refreshed yet, add `https://github.com/Joka-kun/xiaomi-so-diffuser-ble` under **Custom repositories** as an **Integration**.
 
 **Before pairing:** Use a Bluetooth adapter capable of active connections or an active Home Assistant Bluetooth proxy. Turn on the diffuser.
 
