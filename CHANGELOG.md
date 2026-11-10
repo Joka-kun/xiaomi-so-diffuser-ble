@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — correct AUTO-mode Bluetooth search
+
+- The setup wizard now explicitly requests Home Assistant's bounded active Bluetooth sweep for the 10-second nearby-device search. In v1.0.7, subscribing without a known address listened for advertisements but did not cause an AUTO-mode adapter to scan actively.
+- Retain a single shared Home Assistant Bluetooth scanner, compatibility checks, manual address fallback and per-device GATT token verification.
+- Add regression tests asserting that the active sweep is invoked; this does not change host Bluetooth firmware or fix independent USB/BlueZ faults.
+
 ## 1.0.7 — interactive Bluetooth device search (2026-11-10)
 
 - Add an explicit **Search nearby devices (10 seconds)** option to the integration setup wizard, even when no known SO name is initially discovered.
