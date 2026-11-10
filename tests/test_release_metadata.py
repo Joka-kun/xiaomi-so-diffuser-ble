@@ -11,8 +11,8 @@ def test_manifest_package_and_oauth_user_agent_agree():
     manifest = json.loads((DOMAIN / "manifest.json").read_text(encoding="utf-8"))
     pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     oauth_source = (DOMAIN / "xiaomi_oauth.py").read_text(encoding="utf-8")
-    assert manifest["version"] == pyproject["project"]["version"] == "1.0.6"
-    assert 'xiaomi-so-diffuser-ble/1.0.6 client/' in oauth_source
+    assert manifest["version"] == pyproject["project"]["version"] == "1.0.7"
+    assert 'xiaomi-so-diffuser-ble/1.0.7 client/' in oauth_source
     assert manifest["domain"] == "so_diffuser_ble"
     assert "bluetooth" in manifest["dependencies"]
 
