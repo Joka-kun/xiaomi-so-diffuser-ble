@@ -15,7 +15,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For the **next feature or maintenance release after v1.0.5**:
+For the **v1.0.6 release candidate and subsequent maintenance releases**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
 2. Create a **new** version (higher than `1.0.4`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
