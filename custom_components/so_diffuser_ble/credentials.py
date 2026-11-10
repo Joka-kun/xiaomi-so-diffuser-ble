@@ -1,4 +1,4 @@
-"""Load the S5 token from a private, local Home Assistant config file."""
+"""Validate a standalone 12-byte SO diffuser token file for offline tools."""
 from __future__ import annotations
 
 import errno
@@ -13,10 +13,10 @@ class TokenFileError(ValueError):
     def __init__(self, reason: str) -> None:
         self.reason = reason
         messages = {
-            "missing": "S5 token file is missing",
-            "permissions": "S5 token file must have mode 0600 or stricter",
-            "type": "S5 token file must be a regular file",
-            "format": "S5 token file must contain exactly 24 hexadecimal characters with no newline",
+            "missing": "SO diffuser token file is missing",
+            "permissions": "SO diffuser token file must have mode 0600 or stricter",
+            "type": "SO diffuser token file must be a regular file",
+            "format": "SO diffuser token file must contain exactly 24 hexadecimal characters with no newline",
         }
         super().__init__(messages.get(reason, "S5 token file is invalid"))
 
