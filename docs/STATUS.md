@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-10 · GitHub Release v1.0.5 published · Unreleased source update: universal address-bound token store · Official HACS catalog merged**
+**As of 2026-11-10 · GitHub Release v1.0.5 published · v1.0.6 release candidate: universal address-bound token store · Official HACS catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
