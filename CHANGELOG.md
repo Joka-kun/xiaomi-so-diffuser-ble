@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — universal per-device BLE credentials (breaking change)
+## 1.0.6 — universal per-device BLE credentials (2026-11-10)
 
 - Replace the S5-named credential file with the universal `/config/.storage/so_diffuser_ble_tokens.json` store, keyed by exact Bluetooth MAC address.
 - Remove all runtime fallback to `so_s5_token` and `so_s5_ble_tokens.json`. Previously configured diffusers using those files will need fresh Xiaomi OAuth provisioning; the old files are not read or deleted.
