@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Import the S5 12-byte token from Xiaomi Cloud Tokens Extractor JSON.
+"""Extract a standalone S5 token from Xiaomi Cloud Tokens Extractor JSON.
 
-This utility does not authenticate to Xiaomi Cloud. Run the upstream extractor
-separately, then use this tool to select one bwj.diffuser.s5 device and write
-only its 24-hex-character GATT token to a mode-0600 file.
+Historical offline helper: the SO diffuser HA integration no longer reads
+standalone token files. Normal setup uses per-device verified Xiaomi OAuth.
+This tool does not authenticate to Xiaomi Cloud or alter HA credentials.
 """
 from __future__ import annotations
 
@@ -94,7 +94,7 @@ def write_token(path: Path, token: str, *, replace: bool = False) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="JSON written by Xiaomi Cloud Tokens Extractor")
-    parser.add_argument("--output", required=True, type=Path, help="Destination token file, e.g. /config/so_s5_token")
+    parser.add_argument("--output", required=True, type=Path, help="Standalone 0600 token text output; NOT an integration credential store")
     parser.add_argument("--did", help="Exact device ID when the account contains multiple S5 devices")
     parser.add_argument("--mac", help="Exact Bluetooth MAC when the account contains multiple S5 devices")
     parser.add_argument("--model", default=MODEL, help=argparse.SUPPRESS)
@@ -113,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Selected model: {device['model']}")
     print(f"Device ID: {mask_identifier(str(device.get('did', '')))}")
     print(f"Token file: {args.output} (mode {mode:04o}); secret value not displayed")
-    print("Only the 12-byte S5 GATT token was imported; BLE_DATA.beaconkey was not used.")
+    print("Standalone S5 token extracted; not imported into Home Assistant. BLE_DATA.beaconkey was not used.")
     return 0
 
 
