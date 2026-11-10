@@ -43,14 +43,14 @@ class XiaomiTokenImportTests(unittest.TestCase):
 
     def test_writes_exact_token_without_newline_and_mode_0600(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "so_s5_token"
+            path = Path(directory) / "standalone-device-token.txt"
             module.write_token(path, TOKEN)
             self.assertEqual(path.read_text(encoding="ascii"), TOKEN)
             self.assertEqual(stat.S_IMODE(path.stat().st_mode), 0o600)
 
     def test_refuses_overwrite_without_explicit_flag(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "so_s5_token"
+            path = Path(directory) / "standalone-device-token.txt"
             path.write_text(TOKEN, encoding="ascii")
             with self.assertRaises(FileExistsError):
                 module.write_token(path, "ffeeddccbbaa998877665544")

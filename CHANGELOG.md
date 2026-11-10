@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — universal per-device BLE credentials (breaking change)
+
+- Replace the S5-named credential file with the universal `/config/.storage/so_diffuser_ble_tokens.json` store, keyed by exact Bluetooth MAC address.
+- Remove all runtime fallback to `so_s5_token` and `so_s5_ble_tokens.json`. Previously configured diffusers using those files will need fresh Xiaomi OAuth provisioning; the old files are not read or deleted.
+- Preserve independent Home Assistant config entries and BLE sessions for multiple SO diffusers; loading or replacing one token does not authorize or change any other device.
+- Clarify onboarding copy, document the deliberate credential incompatibility, and add unit/integration regressions. No new model's BLE protocol is certified.
+
 ## 1.0.5 — BLE reconnect responsiveness and official HACS listing (2026-11-09)
 
 - Ship the already-merged, synthetic-tested S5 BLE session recovery changes: power commands wait for a reconnect through the **single existing GATT connection owner**, rather than failing immediately after link loss.

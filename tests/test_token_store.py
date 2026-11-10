@@ -1,4 +1,4 @@
-"""Ensure credential migration cannot leak tokens or overwrite other S5s."""
+"""Protect address-bound tokens for multiple SO diffusers without legacy fallback."""
 from __future__ import annotations
 
 import os
@@ -37,15 +37,45 @@ class TokenStoreTests(unittest.TestCase):
         self.assertTrue(has_device_token(self.base, ADDRESS1))
         self.assertNotIn("oauth", self.file.read_text().lower())
 
-    def test_existing_legacy_token_stays_untouched(self):
+    def test_universal_store_does_not_read_legacy_single_device_token(self):
         legacy = self.base / "so_s5_token"
         legacy.write_text(TOKEN1.hex())
         legacy.chmod(0o600)
-        self.assertEqual(load_device_token(self.base, ADDRESS1), TOKEN1)
+        with self.assertRaises(TokenFileError) as missing:
+            load_device_token(self.base, ADDRESS1)
+        self.assertEqual(missing.exception.reason, "missing")
         save_device_token(self.base, ADDRESS1, TOKEN2)
         self.assertEqual(load_device_token(self.base, ADDRESS1), TOKEN2)
         self.assertEqual(legacy.read_text(), TOKEN1.hex())
-        self.assertEqual(load_device_token(self.base, ADDRESS2), TOKEN1)
+        with self.assertRaises(TokenFileError):
+            load_device_token(self.base, ADDRESS2)
+
+    def test_old_json_store_is_ignored_even_if_address_matches(self):
+        old = self.base / ".storage" / "so_s5_ble_tokens.json"
+        old.parent.mkdir(mode=0o700, parents=True)
+        old.write_text('{"version":1,"devices":{"AA:BB:CC:DD:EE:01":"' + TOKEN1.hex() + '"}}')
+        old.chmod(0o600)
+        with self.assertRaises(TokenFileError) as missing:
+            load_device_token(self.base, ADDRESS1)
+        self.assertEqual(missing.exception.reason, "missing")
+        save_device_token(self.base, ADDRESS1, TOKEN2)
+        self.assertEqual(load_device_token(self.base, ADDRESS1), TOKEN2)
+        self.assertIn(TOKEN1.hex(), old.read_text())
+
+    def test_replacing_one_device_token_does_not_change_another(self):
+        save_device_token(self.base, ADDRESS1, TOKEN1)
+        save_device_token(self.base, ADDRESS2, TOKEN2)
+        save_device_token(self.base, ADDRESS1, TOKEN2)
+        self.assertEqual(load_device_token(self.base, ADDRESS1.lower()), TOKEN2)
+        self.assertEqual(load_device_token(self.base, ADDRESS2), TOKEN2)
+        data = self.file.read_text()
+        self.assertIn(ADDRESS1, data)
+        self.assertIn(ADDRESS2, data)
+        self.assertEqual(stat.S_IMODE(self.file.stat().st_mode), 0o600)
+        self.assertFalse(has_device_token(self.base, "AA:BB:CC:DD:EE:03"))
+        with self.assertRaises(TokenFileError) as missing:
+            load_device_token(self.base, "AA:BB:CC:DD:EE:03")
+        self.assertEqual(missing.exception.reason, "missing")
 
     def test_missing_token_still_fails_closed(self):
         with self.assertRaises(TokenFileError):

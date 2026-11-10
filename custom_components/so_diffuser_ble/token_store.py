@@ -1,7 +1,8 @@
-"""Private, per-Bluetooth-address GATT credential store with legacy fallback.
+"""Private, per-Bluetooth-address SO diffuser GATT credential store.
 
-Never serialize tokens into config entries, user-facing errors or diagnostics.
-The legacy global file remains intact until explicit migration acceptance.
+Each diffuser uses its own address-bound token. There is no fallback to
+single-device S5 files or automatic credential migration.
+Never serialize tokens into config entries, errors or diagnostics.
 """
 from __future__ import annotations
 
@@ -13,10 +14,10 @@ import tempfile
 import threading
 
 from .config import validate_ble_address
-from .credentials import TokenFileError, load_token_file
+from .credentials import TokenFileError
 from .protocol import decode_token_hex
 
-PRIVATE_FILENAME = "so_s5_ble_tokens.json"
+PRIVATE_FILENAME = "so_diffuser_ble_tokens.json"
 _STORE_LOCK = threading.Lock()
 
 
@@ -67,17 +68,17 @@ def has_device_token(config_dir: str | Path, address: str) -> bool:
 
 
 def load_device_token(config_dir: str | Path, address: str) -> bytes:
-    """Per-device token wins; existing installations retain legacy fallback."""
+    """Only return the credential bound to the requested BLE address."""
     token = _read_tokens(config_dir).get(_address_key(address))
-    if token is not None:
-        return decode_token_hex(token)
-    return load_token_file(Path(config_dir) / "so_s5_token")
+    if token is None:
+        raise TokenFileError("missing")
+    return decode_token_hex(token)
 
 
 def save_device_token(config_dir: str | Path, address: str, token: bytes) -> None:
     """Atomically save only the GATT token after a verified live BLE login."""
     if not isinstance(token, bytes) or len(token) != 12:
-        raise ValueError("S5 GATT token must be exactly 12 bytes")
+        raise ValueError("SO diffuser GATT token must be exactly 12 bytes")
     key = _address_key(address)
     with _STORE_LOCK:
         devices = _read_tokens(config_dir)
@@ -91,7 +92,7 @@ def save_device_token(config_dir: str | Path, address: str, token: bytes) -> Non
             raise TokenFileError("type")
         temporary = None
         try:
-            fd, temporary = tempfile.mkstemp(prefix=".so_s5_", dir=parent)
+            fd, temporary = tempfile.mkstemp(prefix=".so_diffuser_ble_", dir=parent)
             os.fchmod(fd, 0o600)
             with os.fdopen(fd, "w", encoding="ascii") as output:
                 json.dump({"version": 1, "devices": devices}, output, sort_keys=True)
