@@ -15,6 +15,8 @@
 6. Sign in on Xiaomi's website and choose the *same physical device* from the cloud list. All non-S5 models require explicit experimental confirmation.
 7. The wizard uses the selected **device GATT token** to authenticate against the actual BLE device. A token is saved only after this proof. Confirm physical on/off before using automations.
 
+In v1.0.7, the search listener could wait without triggering an active scan in Home Assistant Bluetooth **Auto** mode. The next maintenance update explicitly requests an active 10-second sweep through Home Assistant. This is distinct from diagnosing a faulty host USB/BlueZ scanner.
+
 The SO S5 has user-reported working controls on the current Home Assistant canary and a brief BLE disconnection/reconnection. **Recovery after 8–24 hours of standby and every non-S5 model remain physically unverified.**
 
 ## Common questions
