@@ -1,4 +1,4 @@
-"""SO S5 discovery and one-time, passwordless Xiaomi Home token provisioning."""
+"""SO/BWJ diffuser discovery and address-bound Xiaomi Home token provisioning."""
 from __future__ import annotations
 
 import asyncio
@@ -78,7 +78,7 @@ async def _handle_oauth_callback(hass, webhook_id, request):
 
 
 class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Discover S5, obtain a per-device cloud token, verify locally, then save."""
+    """Discover each SO diffuser and save a GATT-verified, device-bound token."""
 
     VERSION = 1
 
@@ -139,7 +139,7 @@ class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_reconfigure(self, user_input: dict | None = None):
-        """Migrate an installed S5 to cloud-provisioned credentials without removal."""
+        """Reauthorize one configured diffuser without changing other entries."""
         entry = self._get_reconfigure_entry()
         self._model = entry.data.get(CONF_MODEL, DEFAULT_MODEL)
         self._experimental_confirmed = entry.data.get(CONF_EXPERIMENTAL, False)
@@ -225,7 +225,7 @@ class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_credentials(self, user_input: dict | None = None):
-        """OAuth is preferred; preserve legacy token-file setup as fallback."""
+        """Use Xiaomi OAuth or the token already saved for this BLE address."""
         if (self._bluetooth_address is not None
                 and self._legacy_entry_conflicts(self._bluetooth_address)):
             return self.async_abort(reason="legacy_entry_exists")
