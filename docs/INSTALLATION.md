@@ -33,9 +33,9 @@ Only exact, known SO Bluetooth advertisement names are auto-detected; generic Xi
 
 Never share the full callback URL or its one-time authorization code.
 
-### Can I keep my previous token?
+### Can I reuse a saved token?
 
-Yes. Private BLE credentials are retained for existing devices and never automatically deleted during an update. For older installations, see [credentials](CREDENTIALS.md) and the [advanced migration reference](MIGRATION.md). Xiaomi account passwords and OAuth refresh tokens are not stored.
+Only a token already saved for **this exact Bluetooth address** in the new `/config/.storage/so_diffuser_ble_tokens.json` store. Legacy S5 token files are not read. A diffuser that previously depended on them needs a new Xiaomi sign-in to provision its device-specific token. See [credentials](CREDENTIALS.md) and the [breaking-change instructions](MIGRATION.md). Xiaomi account passwords and OAuth refresh tokens are not stored.
 
 ### Does it need Xiaomi Cloud every day?
 
