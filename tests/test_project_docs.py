@@ -27,7 +27,7 @@ def test_general_domain_and_exactly_one_hacs_component():
     assert [x.name for x in dirs] == ["so_diffuser_ble"]
     manifest = json.loads((dirs[0] / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["domain"] == dirs[0].name
-    assert manifest["version"] == "1.0.6"
+    assert manifest["version"] == "1.0.7"
     assert len(manifest.get("bluetooth", [])) == 10
     assert all(x.get("local_name") and not any(
         wildcard in x["local_name"] for wildcard in ("*", "?")
@@ -298,9 +298,9 @@ def test_published_release_metadata_is_consistent():
     manifest = json.loads(
         (ROOT / "custom_components/so_diffuser_ble/manifest.json").read_text()
     )
-    assert manifest["version"] == "1.0.6"
+    assert manifest["version"] == "1.0.7"
     notes = (ROOT / "docs/RELEASE_NOTES.md").read_text(encoding="utf-8")
-    assert notes.startswith("# Xiaomi SO Diffuser BLE — v1.0.6")
+    assert notes.startswith("# Xiaomi SO Diffuser BLE — v1.0.7")
     assert "First public release" not in notes
     assert (ROOT / "docs/BRANDING.md").is_file()
 
