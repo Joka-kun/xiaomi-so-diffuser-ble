@@ -4,7 +4,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 ## Published release and source state
 
-- **Published v1.0.6 (latest):** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.6), published 2026-11-10 from tested `main` commit `e35cc1e0732a75dea989efe976512335f6f45636`. Manifest, pyproject and Xiaomi OAuth User-Agent report `1.0.6`; both required `main` push workflows, Tests and Validate, passed before the one-time publisher created the tag. The new runtime uses `so_diffuser_ble_tokens.json` only; prior S5 token files are not read and affected users must reauthorize each diffuser.
+- **Published v1.0.6 (previous):** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.6), published 2026-11-10 from tested `main` commit `e35cc1e0732a75dea989efe976512335f6f45636`. Manifest, pyproject and Xiaomi OAuth User-Agent report `1.0.6`; both required `main` push workflows, Tests and Validate, passed before the one-time publisher created the tag. The new runtime uses `so_diffuser_ble_tokens.json` only; prior S5 token files are not read and affected users must reauthorize each diffuser.
 - **Previous v1.0.5:** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) remains immutable at commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30` for rollback. Earlier tags were not moved.
 - **Release notes:** [RELEASE_NOTES.md](RELEASE_NOTES.md) describe the release without provisional wording.
 - **Brand assets:** [BRANDING.md](BRANDING.md) documents the 256/512 px icon and logo images.
@@ -16,7 +16,7 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For **the v1.0.7 Bluetooth search release candidate and subsequent maintenance releases**:
+For **subsequent releases after v1.0.7**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
 2. Create a **new** version (higher than `1.0.7`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
@@ -26,6 +26,12 @@ For **the v1.0.7 Bluetooth search release candidate and subsequent maintenance r
 6. Separately verify catalog inclusion and Marketplace branding after publication. A passing HACS validation alone does not submit or publish catalog metadata.
 
 GitHub branch protection is currently disabled for `main`; enabling required checks and pull-request reviews needs repository administration permissions and is a separate maintenance task.
+
+## v1.0.7 publication and temporary workflow retirement
+
+- Latest [GitHub Release v1.0.7](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.7) published 2026-11-10 from exact tested `main` commit `0b46537bf22d0192efd23c1ed96fc2c39da2ef9b`. Tests, Hassfest and HACS validation all passed. This release adds the Bluetooth search picker and retains independent per-device token storage.
+- The one-time write-enabled `publish-v107.yml` workflow was used only to create this release and is removed by the cleanup PR; normal CI remains read-only.
+- Actual Bluetooth search on the user's HA adapters/proxies and physical-device pairing remain external acceptance tests.
 
 ## v1.0.6 publication and temporary workflow retirement
 
