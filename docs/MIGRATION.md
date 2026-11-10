@@ -1,40 +1,27 @@
-# Moving from `so_s5` to `so_diffuser_ble`
+# Universal SO diffuser credentials: breaking change
 
-![Visual migration checklist](assets/migration.svg)
+The public integration uses one Home Assistant domain, `so_diffuser_ble`, for all supported SO/BWJ diffuser models. Each physical device has a separate Home Assistant config entry and a device-specific Bluetooth token.
 
-**Applies to public release 1.0.0 and later.** This is a **breaking integration-domain rename**, not a cosmetic label change. The former `so_s5` configuration entry will **not** automatically become `so_diffuser_ble`; Home Assistant does not provide a public integration API for changing an existing entry's domain. This repository continues to ship **one** HACS-managed integration.
+## New storage (no automatic migration)
 
-## Why
+The **only runtime token store** is `/config/.storage/so_diffuser_ble_tokens.json`. Its keys are normalized Bluetooth addresses; the file is written atomically with owner-only permissions (0600). A token is never used for a different address.
 
-The former domain was tied to one model even though the source now contains a registry of SO S1, S1 Pro, S2, S5, S6, S7, S8, S9, S19. The public name stays **Xiaomi SO Diffuser BLE**, repository slug stays `xiaomi-so-diffuser-ble`, new package and manifest domain are `so_diffuser_ble`.
+The former `/config/.storage/so_s5_ble_tokens.json` and `/config/so_s5_token` files are **not read, imported, renamed, overwritten or deleted**. An installation that relied on either one must sign in to Xiaomi again for each diffuser to provision its new address-bound token. A missing new token is a setup error, **not** permission to reuse another device's token.
 
-## For an existing working S5
+This is an intentional loss of legacy credential compatibility. It is not a way to transfer credentials from one diffuser to another. Never copy token values to a public issue or log.
 
-1. **Create a full Home Assistant backup first** (Settings → System → Backups). Record your current entity IDs and the automations that use them. Do not export your token to chat, GitHub or public logs.
-2. **Do not erase the credential files.** The new integration retains read access to the existing private `/config/.storage/so_s5_ble_tokens.json` store, keyed by Bluetooth address, plus the old `/config/so_s5_token` fallback. They are implementation/credential history, *not* the new domain.
-3. In **Settings → Devices & services**, open the old **Xiaomi SO Diffuser BLE** entry under `so_s5` and remove it through **Home Assistant's UI**. This is expected to remove its associated HA device/entity registrations. **It may affect automations referencing those entities**; record their entity IDs before removal.
-4. In HACS, update/reinstall the custom repo. Confirm there is exactly **one** integration directory: `/config/custom_components/so_diffuser_ble/manifest.json`. If the earlier `/config/custom_components/so_s5` code was left behind, remove **only that old code folder** after removing its config entry. **Never edit `core.config_entries` or the entity registry JSON by hand.**
-5. **Restart HA.** Add **Xiaomi SO Diffuser BLE** under the new domain. Select S5 and choose **Use previously saved S5 token** if its credentials still exist, or **Sign in with Xiaomi** to acquire a new token. Complete the wizard.
-6. Confirm the power switch and other entities, restore any changed entity IDs in HA UI, and verify automations. A matching BLE address and entity unique-ID *suffix* are not guarantees that Home Assistant will preserve old registry IDs across an integration-domain change.
-7. Restart HA again and verify local controls and authentication without Xiaomi Cloud. Only consider retiring obsolete credential files after a verified, backed-up migration; this code does **not** delete either token automatically.
+## Existing Home Assistant installations
 
-**Never run both `so_s5` and `so_diffuser_ble` against the same physical device.** The new setup wizard checks for a registered legacy `so_s5` entry with the same address and refuses a duplicate. The old folder is not shipped in this HACS repository because HACS supports one integration per repository.
+1. Create a full **Backups** snapshot in Home Assistant. Record entity IDs and automations before altering a config entry.
+2. If an entry still uses the retired `so_s5` domain, remove that entry using **Settings → Devices & services**, then install the `so_diffuser_ble` integration. The new domain is not automatically migrated by Home Assistant.
+3. If an entry already uses `so_diffuser_ble`, use **Reconfigure → Sign in with Xiaomi** to obtain a fresh device-specific token. If it is unavailable, check that the device is powered on and connectable over BLE.
+4. Repeat the setup for each physical diffuser, selecting its exact Xiaomi model and Bluetooth address. A new config entry is required for every additional diffuser.
+5. Verify on/off operation on each device, restart Home Assistant, and check that every device reconnects independently. Restore entity IDs or automation references through the Home Assistant UI when necessary.
 
-## Fresh installations
+**Never edit `core.config_entries` or entity-registry JSON manually.** Never run old `so_s5` and new `so_diffuser_ble` entries against the same Bluetooth address. Existing old token files remain untouched for a possible rollback, but are not supported for new authentication.
 
-Install `so_diffuser_ble` from this repository, restart HA, select a discoverable SO candidate or enter a Bluetooth address, then use Xiaomi OAuth to select the exact cloud model. **Only S5 is field-confirmed**; the eight other SO profiles require separate experimental consent and a BLE GATT login proof.
+## Multi-device behavior
 
-## Why the secret file still has `so_s5` in its name
+Two S5 diffusers, or different models, can coexist when they have different BLE addresses and independent tokens. The configuration flow deduplicates entries by address. The coordinator opens a separate BLE session for each entry, subject to Bluetooth adapter/proxy connection capacity.
 
-This is intentional backward compatibility: renaming the public integration domain should **not** silently discard or rewrite valid per-device BLE credentials. The secret remains private to Home Assistant and must not be added to backups distributed publicly, tickets or repository files. The storage filename can be transitioned independently after live migration is verified.
-
-## Verification checklist
-
-- `custom_components/so_diffuser_ble/manifest.json` contains `"domain": "so_diffuser_ble"`.
-- `custom_components/so_s5` is absent **after** old entry removal.
-- Home Assistant has only one config entry for a particular physical BLE address across old and new domains.
-- Token is present and owner-only readable (inspect **existence and permissions**, never dump bytes).
-- At least one physical OFF/ON command works; no phantom RGB on S1/S19.
-- Reconnection and automations work after HA restart; WAN-off check is still recommended.
-
-See [installation](INSTALLATION.md), [model compatibility](COMPATIBILITY.md) and [technical architecture](MULTI_MODEL_ARCHITECTURE.md).
+Only the S5 transport is currently field-reported working. Other listed SO models are experimental and need explicit opt-in and a successful live GATT authentication before their token is saved. Xiaomi Cloud listing alone is not evidence of compatibility.
