@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-10 · GitHub Release v1.0.6 published · v1.0.7 search-flow release candidate · Official Marketplace catalog merged**
+**As of 2026-11-10 · GitHub Release v1.0.7 published · Interactive SO Bluetooth search · Official Marketplace catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
@@ -8,11 +8,11 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | --- | --- | --- |
 | S5 OAuth / BLE | User-reported working S5 control in the live HA canary with the BLE recovery code and a brief observed disconnect/reconnect; the same recovery code ships in v1.0.5. | 8–24-hour sleep/reconnect, BLE radio silence, and WAN-off control have not been independently certified |
 | Other SO models | Published MIoT IDs and capability descriptions; experimental onboarding implemented | Their real advertisement names, GATT authentication and physical commands |
-| Device detection | Exact registered SO BLE name matching; never a general FE95 catch-all | Whether every candidate uses its model ID as advertised BLE name |
+| Device detection | v1.0.7 adds a 10-second discovery step and manual fallback using HA's Bluetooth manager; exact-name models appear first and generic candidates are labelled unverified | Live scanning/adapter availability and detection of unnamed S5 devices on the user's hardware |
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof; v1.0.6 uses `so_diffuser_ble_tokens.json` with no legacy fallback | Hardware acceptance of cloud-token retrieval on relatives and physical re-provisioning after the breaking change |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder; new universal address-keyed store intentionally does not read old S5 files | Fresh Xiaomi sign-in, existing HA entity-ID migration and multi-device physical acceptance after this change |
-| Publication | [v1.0.6](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.6) published from tested commit `e35cc1e0732a75dea989efe976512335f6f45636` after Tests/Validate passed; Marketplace listing included | Physical long-idle S5, other-model compatibility and Marketplace pre-install icon cache refresh still pending |
+| Publication | [v1.0.7](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.7) published from tested commit `0b46537bf22d0192efd23c1ed96fc2c39da2ef9b` after Tests/Validate passed. Marketplace icon was observed after deleting stale negative-cache files in the user's HA installation | Actual BLE search on device, physical multi-device setup, long-idle reconnect and non-S5 models still pending |
 
 ## Repository audit — 2026-11-07
 
