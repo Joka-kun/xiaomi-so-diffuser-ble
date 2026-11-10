@@ -222,7 +222,12 @@ class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
         try:
             self._refresh_candidates()
-            await asyncio.sleep(_SEARCH_SECONDS)
+            # A callback without a known address does NOT request an active
+            # scan on AUTO-mode adapters. Ask HA to perform a real, bounded
+            # active sweep, including eligible Bluetooth proxies.
+            await bluetooth.async_request_active_scan(
+                self.hass, _SEARCH_SECONDS
+            )
             self._refresh_candidates()
         finally:
             unsubscribe()

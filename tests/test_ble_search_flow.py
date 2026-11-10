@@ -95,6 +95,13 @@ class FakeBluetooth:
         self.matcher = object()
         self.mode = None
         self.fail = False
+        self.active_requests = []
+        self.sleep = None
+
+    async def async_request_active_scan(self, hass, duration):
+        self.active_requests.append(duration)
+        assert self.sleep is not None
+        await self.sleep(duration)
 
     def async_discovered_service_info(self, hass, connectable=True):
         assert connectable is True
@@ -122,6 +129,7 @@ class FakeBluetooth:
 
 class DiscoveryFlowTests(unittest.IsolatedAsyncioTestCase):
     def make_flow(self, bluetooth, sleep):
+        bluetooth.sleep = sleep
         cls = _load_discovery_methods(bluetooth, sleep)
 
         class Flow(cls):
@@ -195,6 +203,7 @@ class DiscoveryFlowTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(bt.unsubscribed)
         self.assertIsNone(bt.matcher)
         self.assertEqual(bt.mode, bt.BluetoothScanningMode.ACTIVE)
+        self.assertEqual(bt.active_requests, [10], "AUTO scanner must get a real active sweep")
         done = await flow.async_step_search()
         self.assertEqual(done["next_step_id"], "user")
         form = await flow.async_step_user()
@@ -230,6 +239,7 @@ class DiscoveryFlowTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(done["type"], "progress_done")
         form = await flow.async_step_user()
         self.assertEqual(form["errors"], {"base": "scan_unavailable"})
+        self.assertEqual(bt.active_requests, [], "failed subscription must not schedule a scan")
         self.assertIn("__manual__", form["data_schema"]["device"])
         self.assertIn("__search__", form["data_schema"]["device"])
         self.assertEqual((await flow.async_step_user())["errors"], {})
