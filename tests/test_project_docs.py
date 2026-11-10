@@ -122,11 +122,14 @@ def test_noir_artwork_has_motion_and_no_status_or_russian_in_images():
     assert 'id="s5-body"' not in family
 
 
-def test_migration_documents_credential_retention():
+def test_migration_documents_no_legacy_token_fallback():
     document = (ROOT / "docs/MIGRATION.md").read_text()
     assert "so_diffuser_ble" in document
     assert "so_s5" in document
+    assert "so_diffuser_ble_tokens.json" in document
     assert "so_s5_ble_tokens.json" in document
+    assert "not read, imported" in document
+    assert "each physical diffuser" in document.lower()
     assert "Backups" in document
     assert "core.config_entries" in document
 
