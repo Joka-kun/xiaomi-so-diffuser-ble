@@ -35,6 +35,9 @@ from .xiaomi_oauth import (
 
 _CHOOSE_DEVICE = "device"
 _MANUAL = "__manual__"
+_SEARCH = "__search__"
+_SEARCH_SECONDS = 10
+_MAX_SCAN_RESULTS = 60
 _S5_NAMES = frozenset({"bwj.diffuser.s5", "so smart aroma diffuser s5"})
 _AUTH_TIMEOUT = 300
 _OAUTH_CALLBACKS = "oauth_callbacks"
@@ -84,6 +87,9 @@ class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     def __init__(self) -> None:
         self._discovered: dict[str, BluetoothServiceInfoBleak] = {}
+        self._show_all_candidates = False
+        self._search_task: asyncio.Task | None = None
+        self._search_error: str | None = None
         self._bluetooth_address: str | None = None
         self._cloud_region = "cn"
         self._cloud_devices: dict[str, dict[str, str]] = {}
@@ -169,41 +175,130 @@ class S5ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="bluetooth_confirm", data_schema=vol.Schema({})
         )
 
+    def _remember_candidate(
+        self, info: BluetoothServiceInfoBleak, *, include_unrecognized: bool
+    ) -> None:
+        """Keep connectable BLE candidates, but never infer a model from a fuzzy name."""
+        try:
+            address = validate_ble_address(getattr(info, "address", None)).upper()
+        except ValueError:
+            return
+        recognized = is_so_candidate_advertisement(info)
+        if not recognized and not include_unrecognized:
+            return
+        if address not in self._discovered and len(self._discovered) >= _MAX_SCAN_RESULTS:
+            if not recognized:
+                return
+            # A verified exact-name candidate takes priority over a generic entry.
+            for previous, value in self._discovered.items():
+                if not is_so_candidate_advertisement(value):
+                    del self._discovered[previous]
+                    break
+            else:
+                return
+        self._discovered[address] = info
+
+    def _refresh_candidates(self) -> None:
+        """Read connectable advertisements already received by Home Assistant."""
+        for info in bluetooth.async_discovered_service_info(
+            self.hass, connectable=True
+        ):
+            self._remember_candidate(
+                info, include_unrecognized=self._show_all_candidates
+            )
+
+    async def _async_search_nearby(self) -> None:
+        """Listen for new advertisements; never launch a competing BLE scanner."""
+        self._show_all_candidates = True
+
+        def on_advertisement(info: BluetoothServiceInfoBleak, _change) -> None:
+            self._remember_candidate(info, include_unrecognized=True)
+
+        # The HA Bluetooth manager owns the actual scanners and ESPHome proxies.
+        # No address is known yet; registration observes advertisements but
+        # does not force an active scan on a passive-only Bluetooth proxy.
+        unsubscribe = bluetooth.async_register_callback(
+            self.hass, on_advertisement, None, bluetooth.BluetoothScanningMode.ACTIVE
+        )
+        try:
+            self._refresh_candidates()
+            await asyncio.sleep(_SEARCH_SECONDS)
+            self._refresh_candidates()
+        finally:
+            unsubscribe()
+
+    async def async_step_search(self, user_input: dict | None = None):
+        """Bounded discovery progress, then show nearby candidates or retry."""
+        if self._search_task is None:
+            self._search_task = self.hass.async_create_task(
+                self._async_search_nearby()
+            )
+        if self._search_task.done():
+            try:
+                self._search_task.result()
+            except Exception:
+                self._search_error = "scan_unavailable"
+            finally:
+                self._search_task = None
+            return self.async_show_progress_done(next_step_id="user")
+        return self.async_show_progress(
+            step_id="search",
+            progress_action="search",
+            progress_task=self._search_task,
+        )
+
     async def async_step_user(self, user_input: dict | None = None):
+        """Offer explicit search even when no exact SO advertisement is cached."""
         if user_input is not None:
             selected = user_input[_CHOOSE_DEVICE]
+            if selected == _SEARCH:
+                return await self.async_step_search()
             if selected == _MANUAL:
                 return await self.async_step_manual()
             if selected not in self._discovered:
                 return self.async_abort(reason="not_supported")
             self._bluetooth_address = selected
-            self._discovered_model = advertised_model(self._discovered[selected].name)
+            self._discovered_model = advertised_model(
+                getattr(self._discovered[selected], "name", None)
+            )
             self.context["title_placeholders"] = {
-                "name": self._discovered[selected].name or "SO S5"
+                "name": getattr(self._discovered[selected], "name", None)
+                or "Bluetooth device"
             }
             return await self.async_step_bluetooth_confirm()
 
-        self._discovered = {
-            info.address.upper(): info
-            for info in bluetooth.async_discovered_service_info(
-                self.hass, connectable=True
-            )
-            if is_so_candidate_advertisement(info)
-        }
-        if not self._discovered:
-            return await self.async_step_manual()
-        choices = {
-            address: f"{info.name} ({address})"
-            for address, info in sorted(self._discovered.items())
-        }
+        self._refresh_candidates()
         language = str(getattr(self.hass.config, "language", "en")).casefold()
+        ru = language.startswith("ru")
+        choices = {
+            _SEARCH: "🔍 Искать устройства (10 секунд)" if ru
+                     else "🔍 Search nearby devices (10 seconds)",
+        }
+        for address, info in sorted(
+            self._discovered.items(),
+            key=lambda item: (
+                advertised_model(getattr(item[1], "name", None)) is None,
+                (getattr(item[1], "name", None) or "").casefold(),
+                item[0],
+            ),
+        ):
+            name = getattr(info, "name", None) or (
+                "Без имени" if ru else "Unnamed Bluetooth device"
+            )
+            if advertised_model(getattr(info, "name", None)) is None:
+                name += " — не подтверждено" if ru else " — unverified"
+            choices[address] = f"{name} ({address})"
         choices[_MANUAL] = (
-            "Ввести Bluetooth-адрес вручную" if language.startswith("ru")
+            "Ввести Bluetooth-адрес вручную" if ru
             else "Enter Bluetooth address manually"
         )
+        errors = {"base": self._search_error} if self._search_error else {}
+        self._search_error = None
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema({vol.Required(_CHOOSE_DEVICE): vol.In(choices)}),
+            errors=errors,
+            description_placeholders={"count": str(len(self._discovered))},
         )
 
     async def async_step_manual(self, user_input: dict | None = None):
