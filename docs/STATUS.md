@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-10 · GitHub Release v1.0.6 published · Universal address-bound token store · Official Marketplace catalog merged**
+**As of 2026-11-10 · GitHub Release v1.0.6 published · v1.0.7 search-flow release candidate · Official Marketplace catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
