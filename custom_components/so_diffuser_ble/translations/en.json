@@ -2,8 +2,8 @@
   "config": {
     "step": {
       "user": {
-        "title": "Select a nearby SO diffuser",
-        "description": "Select a nearby SO diffuser or enter its Bluetooth address manually.",
+        "title": "Find an SO diffuser via Bluetooth",
+        "description": "Nearby Bluetooth devices found: {count}. Select your SO/BWJ diffuser, search for 10 seconds, or enter the address manually. Unknown devices are marked unverified; Xiaomi sign-in and BLE authentication are still required.",
         "data": {
           "device": "Bluetooth device"
         }
@@ -82,7 +82,8 @@
       "experimental_cloud_required": "This experimental model needs Xiaomi account selection and explicit confirmation. A token from another diffuser cannot be reused.",
       "model_mismatch": "The Xiaomi Cloud model does not match the discovered Bluetooth model. Select the correct device.",
       "legacy_entry_exists": "A legacy so_s5 entry already controls this Bluetooth address; duplicate connections are not allowed.",
-      "ble_connection_failed": "Could not connect to the diffuser over Bluetooth. Turn it on, close Mi Home, and temporarily disable Bluetooth on your phone. Then retry."
+      "ble_connection_failed": "Could not connect to the diffuser over Bluetooth. Turn it on, close Mi Home, and temporarily disable Bluetooth on your phone. Then retry.",
+      "scan_unavailable": "Bluetooth search could not start. Check the Bluetooth integration, an active adapter or an ESPHome Bluetooth proxy, then retry. Manual entry remains available."
     },
     "abort": {
       "already_configured": "This Bluetooth address is already configured.",
@@ -91,7 +92,8 @@
       "legacy_entry_exists": "This diffuser is still registered under the old so_s5 domain. Back up HA, remove the old entry through Home Assistant, then sign in with Xiaomi for a new device-specific token. Old token files are not imported. See docs/MIGRATION.md."
     },
     "progress": {
-      "oauth": "{link_left}Open Xiaomi sign-in{link_right}. After login, if `{default_host}` cannot be opened, **in the browser address bar** replace only that address with your HA server address (for example `{example_host}`). Keep the rest of the URL unchanged, then press Enter. Never share this link."
+      "oauth": "{link_left}Open Xiaomi sign-in{link_right}. After login, if `{default_host}` cannot be opened, **in the browser address bar** replace only that address with your HA server address (for example `{example_host}`). Keep the rest of the URL unchanged, then press Enter. Never share this link.",
+      "search": "Listening for Bluetooth advertisements through Home Assistant for about 10 seconds. Power on the diffuser and move it closer to an adapter or Bluetooth proxy. Close Mi Home if your phone holds the connection."
     }
   },
   "selector": {
