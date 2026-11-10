@@ -1,6 +1,6 @@
 # Universal SO diffuser credentials: breaking change
 
-The public integration uses one Home Assistant domain, `so_diffuser_ble`, for all supported SO/BWJ diffuser models. Each physical device has a separate Home Assistant config entry and a device-specific Bluetooth token.
+The public integration uses one Home Assistant domain, `so_diffuser_ble`, for all supported SO/BWJ diffuser models. Each physical diffuser has a separate Home Assistant config entry and a device-specific Bluetooth token.
 
 ## New storage (no automatic migration)
 
