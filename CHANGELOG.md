@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — interactive Bluetooth device search
+
+- Add an explicit **Search nearby devices (10 seconds)** option to the integration setup wizard, even when no known SO name is initially discovered.
+- Observe new connectable Bluetooth advertisements through the Home Assistant Bluetooth manager and ESPHome proxies, with a progress display, bounded results, repeat search and manual MAC fallback.
+- Display unrecognized Bluetooth candidates as **unverified** instead of silently discarding all devices whose names differ from the manifest. They still require selection of the exact Xiaomi Cloud model and a successful local GATT token proof.
+- Preserve exact-name detection, device-level token isolation, experimental-model consent and existing entities. No parallel Bluetooth scanner is launched and search cannot substitute for a connectable adapter or active proxy.
+
 ## 1.0.6 — universal per-device BLE credentials (2026-11-10)
 
 - Replace the S5-named credential file with the universal `/config/.storage/so_diffuser_ble_tokens.json` store, keyed by exact Bluetooth MAC address.
