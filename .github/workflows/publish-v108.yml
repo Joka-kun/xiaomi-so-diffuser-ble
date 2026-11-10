@@ -1,0 +1,92 @@
+name: Publish verified v1.0.8
+
+on:
+  workflow_run:
+    workflows: [Tests, Validate]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    # Only a successful push workflow on the current, fully validated main.
+    if: ${{ github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: one-time-so-diffuser-v1.0.8
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Verify exact current main, both quality gates, and publish once
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/${REPO}/commits/main" --jq '.sha')
+          if [[ "$current" != "$SHA" ]]; then
+            echo "Not current main; skip obsolete run"
+            exit 0
+          fi
+          python - <<'PY'
+          import json
+          import pathlib
+          import tomllib
+          root = pathlib.Path('.')
+          manifest = json.loads((root / 'custom_components/so_diffuser_ble/manifest.json').read_text())
+          project = tomllib.loads((root / 'pyproject.toml').read_text())
+          oauth = (root / 'custom_components/so_diffuser_ble/xiaomi_oauth.py').read_text()
+          store = (root / 'custom_components/so_diffuser_ble/token_store.py').read_text()
+          notes = (root / 'docs/RELEASE_NOTES.md').read_text()
+          assert manifest['domain'] == 'so_diffuser_ble'
+          assert manifest['version'] == project['project']['version'] == '1.0.8'
+          assert 'xiaomi-so-diffuser-ble/1.0.8 client/' in oauth
+          assert 'PRIVATE_FILENAME = "so_diffuser_ble_tokens.json"' in store
+          flow = (root / 'custom_components/so_diffuser_ble/config_flow.py').read_text()
+          assert 'async def async_step_search(' in flow
+          assert 'bluetooth.async_register_callback(' in flow
+          assert 'await bluetooth.async_request_active_scan(' in flow
+          assert 'self.hass, _SEARCH_SECONDS' in flow
+          assert 'await asyncio.sleep(_SEARCH_SECONDS)' not in flow
+          assert '"__search__"' in flow
+          assert (root / 'tests/test_ble_search_flow.py').is_file()
+          assert '"so_s5_token"' not in store and '"so_s5_ble_tokens.json"' not in store
+          assert notes.startswith('# Xiaomi SO Diffuser BLE — v1.0.8')
+          assert (root / 'LICENSE').is_file()
+          for name in ('icon.png', 'icon@2x.png'):
+              icon = root / 'custom_components/so_diffuser_ble/brand' / name
+              assert icon.is_file() and 0 < icon.stat().st_size < 2 * 1024 * 1024
+          print('v1.0.8 version, per-device token store, release notes, license and icons aligned')
+          PY
+          gh api "repos/${REPO}/actions/runs?head_sha=${SHA}&per_page=100" > "$RUNNER_TEMP/runs.json"
+          for required in "Tests" "Validate"; do
+            if ! jq -e --arg name "$required" \
+              '[.workflow_runs[] | select(.event == "push" and .name == $name and .conclusion == "success")] | length >= 1' \
+              "$RUNNER_TEMP/runs.json" >/dev/null; then
+              echo "Awaiting successful push workflow: $required"
+              exit 0
+            fi
+          done
+          if gh release view v1.0.8 --repo "$REPO" >/dev/null 2>&1; then
+            echo "Release v1.0.8 already exists; verifying tag, no overwrite"
+          else
+            gh release create v1.0.8 --repo "$REPO" --target "$SHA" \
+              --title "Xiaomi SO Diffuser BLE v1.0.8" \
+              --notes-file docs/RELEASE_NOTES.md --latest
+          fi
+          actual=$(gh api "repos/${REPO}/git/ref/tags/v1.0.8" --jq '.object.sha')
+          if [[ "$actual" != "$SHA" ]]; then
+            echo "Release tag does not point to exact validated main commit" >&2
+            exit 1
+          fi
+          gh api "repos/${REPO}/releases/tags/v1.0.8" --jq '{tag: .tag_name, draft: .draft, prerelease: .prerelease, published_at: .published_at}'
+          echo "Verified v1.0.8 release on tested main commit $SHA"
