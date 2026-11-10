@@ -11,7 +11,7 @@
 2. Confirm that `/config/custom_components/so_diffuser_ble/manifest.json` exists and declares `"domain": "so_diffuser_ble"`. There must be **no second installed SO integration for the same physical device**.
 3. **Restart Home Assistant**.
 4. Open **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**.
-5. Select an automatically discovered **exact SO name** or enter the device's Bluetooth address manually. Choose the Xiaomi account region, then select **Sign in with Xiaomi**.
+5. On the device picker, choose **Search nearby devices (10 seconds)** to listen for fresh connectable Bluetooth advertisements using Home Assistant's existing adapter/ESPHome Bluetooth proxy. Select your physical SO/BWJ diffuser from the results, or search again. Unknown devices are labelled **unverified**. If none appear, choose **Enter Bluetooth address manually**. Then select the Xiaomi account region and **Sign in with Xiaomi**.
 6. Sign in on Xiaomi's website and choose the *same physical device* from the cloud list. All non-S5 models require explicit experimental confirmation.
 7. The wizard uses the selected **device GATT token** to authenticate against the actual BLE device. A token is saved only after this proof. Confirm physical on/off before using automations.
 
@@ -25,7 +25,7 @@ The account listing proves only device registration. Other SO models may use a d
 
 ### The device is not automatically offered
 
-Only exact, known SO Bluetooth advertisement names are auto-detected; generic Xiaomi FE95 devices are not offered. Some real SO diffusers advertise different names or use an inactive Bluetooth connection. Use **manual Bluetooth address** and select the exact model from Xiaomi Cloud. The subsequent BLE proof is mandatory.
+Initially the device picker lists only exact, known SO Bluetooth advertisement names. Choose **Search nearby devices (10 seconds)** to see new advertisements and other connectable Bluetooth devices, including unnamed or unrecognized devices labelled **unverified**. This uses Home Assistant's existing scanner rather than starting a competing Bluetooth scan; it cannot detect a sleeping device or work without an active, connectable adapter or proxy. Try again closer to the adapter/proxy, then select the correct physical device or use **Enter Bluetooth address manually**. The Xiaomi Cloud model selection and live BLE GATT proof remain mandatory before any token is stored.
 
 ### Xiaomi returns me to an inaccessible homeassistant.local address
 
