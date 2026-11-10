@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-10 · GitHub Release v1.0.7 published · v1.0.8 active-scan candidate · Interactive SO Bluetooth search · Official Marketplace catalog merged**
+**As of 2026-11-10 · GitHub Release v1.0.8 published · Active Bluetooth search in Auto mode · Interactive SO Bluetooth search · Official Marketplace catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
@@ -8,7 +8,7 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | --- | --- | --- |
 | S5 OAuth / BLE | User-reported working S5 control in the live HA canary with the BLE recovery code and a brief observed disconnect/reconnect; the same recovery code ships in v1.0.5. | 8–24-hour sleep/reconnect, BLE radio silence, and WAN-off control have not been independently certified |
 | Other SO models | Published MIoT IDs and capability descriptions; experimental onboarding implemented | Their real advertisement names, GATT authentication and physical commands |
-| Device detection | v1.0.7 adds a 10-second discovery step and manual fallback using HA's Bluetooth manager; exact-name models appear first and generic candidates are labelled unverified | Live scanning/adapter availability and detection of unnamed S5 devices on the user's hardware |
+| Device detection | v1.0.8 explicitly requests an active HA Bluetooth sweep in Auto mode; manual address fallback, model checks and GATT proof remain | Physical discovery and identification of S5 on the user's Realtek adapter remain unverified |
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof; v1.0.6 uses `so_diffuser_ble_tokens.json` with no legacy fallback | Hardware acceptance of cloud-token retrieval on relatives and physical re-provisioning after the breaking change |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder; new universal address-keyed store intentionally does not read old S5 files | Fresh Xiaomi sign-in, existing HA entity-ID migration and multi-device physical acceptance after this change |

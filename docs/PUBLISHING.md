@@ -1,9 +1,9 @@
 # Publishing and Marketplace visibility
 
-## v1.0.8 active-scan maintenance candidate
+## v1.0.8 active-scan publication
 
 - The current release candidate resolves the v1.0.7 config-flow issue: subscribing to advertisements did not request an active sweep from Home Assistant Bluetooth adapters in AUTO mode. The new flow calls `bluetooth.async_request_active_scan(hass, 10)`.
-- A one-time, exact-commit-gated `publish-v108.yml` workflow is used only to publish v1.0.8 after successful main push Tests + Validate; remove it and restore read-only CI assertions immediately afterward.
+- [GitHub Release v1.0.8](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.8) was published on 2026-11-10 from exact tested main SHA `abd8cac3ebc59a812df8960f10d9c4dd72e10c69` after successful Tests and Validate (including Hassfest/HACS). The one-time `publish-v108.yml` has been removed after publication and read-only workflow assertions restored.
 - Hardware-level BLE discovery remains independently unverified; this change does not claim to fix Realtek RTL8852BU USB watchdog resets.
 
 This repository publishes one Home Assistant custom integration: `so_diffuser_ble`.
@@ -22,10 +22,10 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For **subsequent releases after v1.0.7**:
+For **subsequent releases after v1.0.8**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
-2. Create a **new** version (higher than `1.0.7`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
+2. Create a **new** version (higher than `1.0.8`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
 3. Verify the candidate commit contains `LICENSE`, all intended `brand/` assets, the current token-store fix and matching release notes.
 4. Require successful Python, Hassfest and HACS Actions on that *exact* commit. Record the commit SHA and corresponding `vX.Y.Z` tag.
 5. Create a new GitHub Release without modifying existing tags. Check a clean Home Assistant installation and an upgrade before promoting it.
