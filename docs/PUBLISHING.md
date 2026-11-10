@@ -4,21 +4,22 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 ## Published release and source state
 
-- **Published v1.0.5:** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) points to tested main commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30`. Manifest, pyproject and Xiaomi OAuth User-Agent all report `1.0.5`. Both required main Tests and Validate passed. The prior v1.0.4 remains available for rollback; no earlier tag was moved.
+- **Published v1.0.6 (latest):** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.6), published 2026-11-10 from tested `main` commit `e35cc1e0732a75dea989efe976512335f6f45636`. Manifest, pyproject and Xiaomi OAuth User-Agent report `1.0.6`; both required `main` push workflows, Tests and Validate, passed before the one-time publisher created the tag. The new runtime uses `so_diffuser_ble_tokens.json` only; prior S5 token files are not read and affected users must reauthorize each diffuser.
+- **Previous v1.0.5:** [GitHub Release](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) remains immutable at commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30` for rollback. Earlier tags were not moved.
 - **Release notes:** [RELEASE_NOTES.md](RELEASE_NOTES.md) describe the release without provisional wording.
 - **Brand assets:** [BRANDING.md](BRANDING.md) documents the 256/512 px icon and logo images.
 - **Release state:** [v1.0.1](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.1) was published on 2026-11-07 from commit `523e6fb51bbce0b36445df7607fe711fe8c7dd61`. The [publication workflow](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/runs/42412328738) successfully ran Python tests, Hassfest and HACS validation before creating the tag and release. Its temporary workflow file is now removed. No CI job pushed source commits to `main`.
 - **Release provenance:** the old `v1.0.0` snapshot predates the MIT license; the new immutable `v1.0.1` tag includes MIT licensing and the latest source fixes. Neither tag should be moved. Catalog admission and physical hardware verification are independent tasks.
-- **Catalog index:** [hacs/default#13656](https://github.com/hacs/default/pull/13656) was approved and merged on 2026-11-09. The official HACS search is now the primary installation method; indexing may take several hours. The repository URL remains a fallback.
+- **Catalog index:** [hacs/default#13656](https://github.com/hacs/default/pull/13656) was merged on 2026-11-09. Users find the integration by searching **Xiaomi SO Diffuser BLE** in **Settings → Marketplace** (formerly HACS).
 
 ## Historical source / release mismatch — resolved 2026-11-07
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For the **v1.0.6 release candidate and subsequent maintenance releases**:
+For **subsequent maintenance releases after v1.0.6**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
-2. Create a **new** version (higher than `1.0.4`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
+2. Create a **new** version (higher than `1.0.6`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
 3. Verify the candidate commit contains `LICENSE`, all intended `brand/` assets, the current token-store fix and matching release notes.
 4. Require successful Python, Hassfest and HACS Actions on that *exact* commit. Record the commit SHA and corresponding `vX.Y.Z` tag.
 5. Create a new GitHub Release without modifying existing tags. Check a clean Home Assistant installation and an upgrade before promoting it.
@@ -26,11 +27,17 @@ For the **v1.0.6 release candidate and subsequent maintenance releases**:
 
 GitHub branch protection is currently disabled for `main`; enabling required checks and pull-request reviews needs repository administration permissions and is a separate maintenance task.
 
+## v1.0.6 publication and temporary workflow retirement
+
+- Verified [one-time publication workflow](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/runs/42759159966) completed after successful `main` Tests and Validate. Tag `v1.0.6` matches commit `e35cc1e0732a75dea989efe976512335f6f45636` exactly.
+- The privileged `publish-v106.yml` workflow was used only to create this one release. It is removed in the subsequent cleanup PR, restoring read-only CI restrictions and preserving previous tags.
+- Physical multi-device operation and pre-install Marketplace icon visibility have **not** been independently verified by this publication job.
+
 ## License and catalog validation
 
 This project is distributed under the [MIT License](../LICENSE), approved by the repository owner (copyright 2026 Joka-kun). GitHub Topics now include `home-assistant`, `hacs`, `bluetooth`, `xiaomi` and `diffuser`. HACS validation on the current `main` passes all 10 checks; rerun it for future changes. A passing validation does not automatically add a custom repository to the public catalog; catalog submission and review are separate steps.
 
-The Home Assistant local icon becomes available after installation. An icon displayed **before installation** is resolved by the catalog's brand service, not by a README picture or a GitHub profile image. A public release plus `brand/icon.png` is necessary preparation but does not force an image into a custom-repository dialog.
+The Home Assistant local icon becomes available after installation. Marketplace **pre-install** thumbnails are fetched by the separate Brands service from a catalog integration's latest GitHub Release. Release v1.0.6 includes both `custom_components/so_diffuser_ble/brand/icon.png` and `icon@2x.png`; an external hourly synchronization and CDN/browser caching govern when the thumbnail appears. A README or GitHub profile image does not control this. The icon cannot be claimed visible in Marketplace until directly observed.
 
 ## Quality and testing
 
