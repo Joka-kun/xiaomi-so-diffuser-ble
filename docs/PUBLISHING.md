@@ -16,10 +16,10 @@ This repository publishes one Home Assistant custom integration: `so_diffuser_bl
 
 The existing `v1.0.0` GitHub Release resolves to `22071bacebecf0aeb076d3bc7e21de476481c394`, while validated `main` after PR #15 is `c6f7a140345996f1963e3963a5cc0f808f2ad841` (15 commits later). The release snapshot **does not contain** the current root MIT `LICENSE`, later token-store robustness fix or current GitHub artwork. HACS release selection is independent of successful `main` Actions checks.
 
-For **subsequent maintenance releases after v1.0.6**:
+For **the v1.0.7 Bluetooth search release candidate and subsequent maintenance releases**:
 
 1. Perform the [physical S5 acceptance plan](AUDIT_2026-11-07.md#physical-s5-release-gate) and document the evidence; mark other models experimental.
-2. Create a **new** version (higher than `1.0.6`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
+2. Create a **new** version (higher than `1.0.7`) and synchronize `custom_components/so_diffuser_ble/manifest.json`, `pyproject.toml`, documentation, and source user-agent version. Update version-specific tests.
 3. Verify the candidate commit contains `LICENSE`, all intended `brand/` assets, the current token-store fix and matching release notes.
 4. Require successful Python, Hassfest and HACS Actions on that *exact* commit. Record the commit SHA and corresponding `vX.Y.Z` tag.
 5. Create a new GitHub Release without modifying existing tags. Check a clean Home Assistant installation and an upgrade before promoting it.

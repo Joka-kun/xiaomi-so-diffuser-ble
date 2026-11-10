@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — interactive Bluetooth device search
+## 1.0.7 — interactive Bluetooth device search (2026-11-10)
 
 - Add an explicit **Search nearby devices (10 seconds)** option to the integration setup wizard, even when no known SO name is initially discovered.
 - Observe new connectable Bluetooth advertisements through the Home Assistant Bluetooth manager and ESPHome proxies, with a progress display, bounded results, repeat search and manual MAC fallback.
