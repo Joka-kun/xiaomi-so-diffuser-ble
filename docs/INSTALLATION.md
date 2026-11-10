@@ -4,7 +4,7 @@
 
 ![Four stages: discover, Xiaomi sign-in, BLE verification and local control](assets/connection-four-steps.png)
 
-**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · public release v1.0.6 (per-device token storage; S5 short-session behavior reported working; long-idle recovery not field-certified).  
+**Current package/domain:** `custom_components/so_diffuser_ble` · `so_diffuser_ble` · v1.0.7 release candidate (interactive discovery and per-device token storage; S5 short-session behavior reported working; long-idle recovery not field-certified).  
 ## Install
 
 1. Open **Settings → Marketplace** (formerly **HACS**), search for **Xiaomi SO Diffuser BLE** in the community integration catalog, and install it.
