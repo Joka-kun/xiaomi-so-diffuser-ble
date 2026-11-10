@@ -1,6 +1,6 @@
 # Project status
 
-**As of 2026-11-09 · GitHub Release v1.0.5 published · Domain `so_diffuser_ble` · Official HACS catalog merged**
+**As of 2026-11-10 · GitHub Release v1.0.5 published · Unreleased source update: universal address-bound token store · Official HACS catalog merged**
 
 This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
@@ -9,9 +9,9 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | S5 OAuth / BLE | User-reported working S5 control in the live HA canary with the BLE recovery code and a brief observed disconnect/reconnect; the same recovery code ships in v1.0.5. | 8–24-hour sleep/reconnect, BLE radio silence, and WAN-off control have not been independently certified |
 | Other SO models | Published MIoT IDs and capability descriptions; experimental onboarding implemented | Their real advertisement names, GATT authentication and physical commands |
 | Device detection | Exact registered SO BLE name matching; never a general FE95 catch-all | Whether every candidate uses its model ID as advertised BLE name |
-| Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof, private old storage retained | Hardware acceptance of cloud-token retrieval on relatives |
+| Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof; unreleased source now uses `so_diffuser_ble_tokens.json` with no legacy fallback | Hardware acceptance of cloud-token retrieval on relatives and physical re-provisioning after the breaking change |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
-| Migration | Single generic-domain folder and written backup/manual migration steps; old credential store remains readable | Actual HA entry/entity-ID migration and S5 reconnect under 1.0.0 |
+| Migration | Single generic-domain folder; new universal address-keyed store intentionally does not read old S5 files | Fresh Xiaomi sign-in, existing HA entity-ID migration and multi-device physical acceptance after this change |
 | Publication | [v1.0.5](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.5) published from tested commit `14a1fbe6f7f98c158f2cc39c7ed0140fc455ef30`; Tests/Validate passed and HACS PR #13656 merged | Physical long-idle S5 and non-S5 hardware acceptance still pending |
 
 ## Repository audit — 2026-11-07
@@ -59,7 +59,7 @@ S5 has a user-reported earlier success. **No non-S5 device has passed level 4** 
 
 ## Breaking domain change
 
-Former domain `so_s5` was model-specific. Public release 1.0.0 uses `so_diffuser_ble` to support a family while maintaining one HACS integration per repository. Home Assistant does **not** automatically reassign existing config entries to a different domain; you must use the [migration guide](MIGRATION.md). The old private GATT token filenames remain intentionally unchanged so credentials can be reused; **do not delete them to migrate**.
+Former domain `so_s5` was model-specific. Public release 1.0.0 uses `so_diffuser_ble` to support a family while maintaining one HACS integration per repository. Home Assistant does **not** automatically reassign existing config entries to a different domain; you must use the [migration guide](MIGRATION.md). New development source uses `/config/.storage/so_diffuser_ble_tokens.json`; old S5 token files are no longer read, copied or removed. Re-provision through Xiaomi for each diffuser after updating to a release containing this change.
 
 ## Outstanding hardware and release checks
 
