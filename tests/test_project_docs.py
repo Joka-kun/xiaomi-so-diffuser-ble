@@ -197,10 +197,26 @@ def test_ci_workflows_never_push_as_a_bot():
     assert not (ROOT / ".github/workflows/publish-v1.0.4.yml").exists()
     assert not (ROOT / ".github/workflows/publish-v105.yml").exists()
     assert not (ROOT / ".github/workflows/publish-v106.yml").exists()
+    publisher = ROOT / ".github/workflows/publish-v107.yml"
+    assert publisher.is_file(), "v1.0.7 one-time publisher must exist until release verification"
     for workflow in (ROOT / ".github/workflows").glob("*.yml"):
         text = workflow.read_text(encoding="utf-8")
         assert "github-actions[bot]" not in text, workflow
         assert "git push" not in text and "git commit" not in text, workflow
+        if workflow.name == "publish-v107.yml":
+            assert "contents: write" in text
+            assert "  actions: read" in text
+            assert "workflow_run:" in text
+            assert "github.event.workflow_run.event == 'push'" in text
+            assert "github.event.workflow_run.conclusion == 'success'" in text
+            assert 'repos/${REPO}/commits/main' in text
+            assert 'for required in "Tests" "Validate"' in text
+            assert 'gh release create v1.0.7' in text
+            assert '--target "$SHA"' in text
+            assert "persist-credentials: false" in text
+            assert 'git/ref/tags/v1.0.7' in text
+            assert "timeout-minutes: 20" in text
+            continue
         assert "contents: write" not in text, workflow
         assert "  contents: read" in text, workflow
         assert "    branches: [main]" in text, workflow
