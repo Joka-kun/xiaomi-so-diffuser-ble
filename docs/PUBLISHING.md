@@ -1,5 +1,11 @@
 # Publishing and Marketplace visibility
 
+## v1.0.8 active-scan maintenance candidate
+
+- The current release candidate resolves the v1.0.7 config-flow issue: subscribing to advertisements did not request an active sweep from Home Assistant Bluetooth adapters in AUTO mode. The new flow calls `bluetooth.async_request_active_scan(hass, 10)`.
+- A one-time, exact-commit-gated `publish-v108.yml` workflow is used only to publish v1.0.8 after successful main push Tests + Validate; remove it and restore read-only CI assertions immediately afterward.
+- Hardware-level BLE discovery remains independently unverified; this change does not claim to fix Realtek RTL8852BU USB watchdog resets.
+
 This repository publishes one Home Assistant custom integration: `so_diffuser_ble`.
 
 ## Published release and source state
