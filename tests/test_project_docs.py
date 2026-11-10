@@ -27,7 +27,7 @@ def test_general_domain_and_exactly_one_hacs_component():
     assert [x.name for x in dirs] == ["so_diffuser_ble"]
     manifest = json.loads((dirs[0] / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["domain"] == dirs[0].name
-    assert manifest["version"] == "1.0.5"
+    assert manifest["version"] == "1.0.6"
     assert len(manifest.get("bluetooth", [])) == 10
     assert all(x.get("local_name") and not any(
         wildcard in x["local_name"] for wildcard in ("*", "?")
@@ -196,10 +196,27 @@ def test_ci_workflows_never_push_as_a_bot():
     assert not (ROOT / ".github/workflows/generate-s5-icon-pngs.yml").exists()
     assert not (ROOT / ".github/workflows/publish-v1.0.4.yml").exists()
     assert not (ROOT / ".github/workflows/publish-v105.yml").exists()
+    publisher = ROOT / ".github/workflows/publish-v106.yml"
+    assert publisher.is_file(), "one-time v1.0.6 publisher must exist until release is verified"
     for workflow in (ROOT / ".github/workflows").glob("*.yml"):
         text = workflow.read_text(encoding="utf-8")
         assert "github-actions[bot]" not in text, workflow
         assert "git push" not in text and "git commit" not in text, workflow
+        if workflow.name == "publish-v106.yml":
+            # One-time publisher: may create only v1.0.6 after BOTH exact-main push checks pass.
+            assert "contents: write" in text
+            assert "  actions: read" in text
+            assert "workflow_run:" in text
+            assert "github.event.workflow_run.event == 'push'" in text
+            assert "github.event.workflow_run.conclusion == 'success'" in text
+            assert 'repos/${REPO}/commits/main' in text
+            assert 'for required in "Tests" "Validate"' in text
+            assert 'gh release create v1.0.6' in text
+            assert '--target "$SHA"' in text
+            assert "persist-credentials: false" in text
+            assert 'git/ref/tags/v1.0.6' in text
+            assert "timeout-minutes: 20" in text
+            continue
         assert "contents: write" not in text, workflow
         assert "  contents: read" in text, workflow
         assert "    branches: [main]" in text, workflow
@@ -297,9 +314,9 @@ def test_published_release_metadata_is_consistent():
     manifest = json.loads(
         (ROOT / "custom_components/so_diffuser_ble/manifest.json").read_text()
     )
-    assert manifest["version"] == "1.0.5"
+    assert manifest["version"] == "1.0.6"
     notes = (ROOT / "docs/RELEASE_NOTES.md").read_text(encoding="utf-8")
-    assert notes.startswith("# Xiaomi SO Diffuser BLE — v1.0.5")
+    assert notes.startswith("# Xiaomi SO Diffuser BLE — v1.0.6")
     assert "First public release" not in notes
     assert (ROOT / "docs/BRANDING.md").is_file()
 

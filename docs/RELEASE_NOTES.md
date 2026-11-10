@@ -1,21 +1,31 @@
-# Xiaomi SO Diffuser BLE — v1.0.5
+# Xiaomi SO Diffuser BLE — v1.0.6
 
-Local BLE reconnect improvements and official HACS Marketplace support.
+Universal per-device BLE credential storage, independent setup for multiple SO diffusers, and refreshed Marketplace release metadata.
 
-## What's new
+## What changed
 
-- **S5 power recovery:** Home Assistant's On/Off command can now wait for the single BLE connection owner to reconnect and authenticate when the previous GATT session has dropped. It no longer fails immediately solely because the connection is temporarily unavailable.
-- **Advertisement-assisted recovery:** Exact-address connectable Bluetooth advertisements can wake the existing session owner, with rate limiting and the established bounded retry loop.
-- **Safe write behavior:** Commands remain serialized; an uncertain BLE write is never automatically replayed. The BLE connection diagnostic still reports the actual connection state and does not equate a command being offered with the physical radio being reachable.
-- **No destructive migration:** Existing model selections, BLE tokens, entity IDs, RGB/spray controls and explicit experimental-model opt-ins are unchanged.
-- **Official HACS catalog:** [PR #13656](https://github.com/hacs/default/pull/13656) has been approved and merged. Search for **Xiaomi SO Diffuser BLE** directly in HACS; use the custom repository URL only if a catalog refresh is pending.
+- **Universal token store:** Home Assistant now uses only `/config/.storage/so_diffuser_ble_tokens.json`, with separate 12-byte GATT tokens keyed by each diffuser's Bluetooth address.
+- **Multiple diffusers:** Add the integration once per physical BLE address. Each device gets its own HA config entry, connection coordinator and token. Replacing one token cannot authorize another device.
+- **No global S5 fallback:** The former `/config/so_s5_token` and `/config/.storage/so_s5_ble_tokens.json` are no longer read or imported. A missing credential fails closed rather than silently applying a token from another diffuser.
+- **Updated setup and documentation:** Existing saved-token selection refers to this diffuser's own token; English and Russian docs explain the intentional breaking change and reauthorization flow.
+- **Marketplace branding:** The published release contains `custom_components/so_diffuser_ble/brand/icon.png` (256×256) and `icon@2x.png` (512×512). Marketplace pre-install icons are indexed separately by the Home Assistant brands service and may take time to refresh.
 
-## Evidence and limits
+## Important: breaking change on upgrade
 
-Automated Python tests and HACS/Hassfest validate logic and packaging. A live HA canary received the three BLE recovery changes, and S5 operation was user-reported working, including a brief reconnect. **Physical recovery after 8–24 hours in standby, behavior when the S5 stops advertising, recovery with WAN disconnected, and non-S5 hardware are not certified.** The integration cannot wake a radio that is physically silent.
+**Existing installations that rely on either old S5 token file must sign in to Xiaomi again for each physical diffuser.** The integration does not read, copy, rename or delete old secrets, and it will not use a token belonging to a different Bluetooth address.
 
-## Upgrade
+Before upgrading an existing installation, create a full Home Assistant backup and record any affected entity IDs and automations. After updating, use **Settings → Devices & services → Xiaomi SO Diffuser BLE → Reconfigure → Sign in with Xiaomi**, choose the exact physical device, and complete its BLE authentication. On a clean install, add each diffuser separately from **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**.
 
-Update **Xiaomi SO Diffuser BLE** to **v1.0.5** via HACS, restart Home Assistant if requested and retain your existing device configuration. Do not delete private BLE tokens or re-pair devices merely to update. If the S5 cannot reconnect, observe the BLE diagnostic and the proxy/adapter; do not assume an API acknowledgement proves physical spray operation.
+This release does **not** perform automatic config-entry domain migration from `so_s5`. See [migration guidance](MIGRATION.md).
 
-Independent community project, not affiliated with Xiaomi or Home Assistant.
+## Evidence and limitations
+
+Automated unit and integration tests cover address-keyed tokens, independent two-device coordinator lifecycles, strict private file permissions, refusal to read old files, and prevention of cross-device fallback. GitHub Tests, HACS and Hassfest checks must pass for the published commit. **Synthetic tests are not a substitute for physical acceptance.**
+
+The **SO S5** has user-reported functioning controls and a brief BLE reconnect. Other SO models remain experimental; their cryptographic BLE login and physical control are not certified. Recovery after **8–24 hours** of radio silence and local operation with WAN disconnected are not independently certified. Actual simultaneous connection capacity depends on the Bluetooth adapter or proxy.
+
+## Install
+
+In **Settings → Marketplace** (formerly HACS), search for **Xiaomi SO Diffuser BLE** and install **v1.0.6**. On existing systems review the breaking change above before updating. Normal commands use local Bluetooth after successful one-time Xiaomi OAuth provisioning.
+
+Independent community integration, not affiliated with Xiaomi or Home Assistant.
