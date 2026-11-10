@@ -22,7 +22,7 @@ The suite covers:
 - Credential importer selection, permissions, overwrite protection and secret omission.
 - Built-in OAuth2 authorization URL, region selection, cloud device-list parsing and pagination using fake HTTPS responses.
 - Rejected wrong models / wrong-length tokens, one-time callback with CSRF state check and replay rejection.
-- Private per-address credential storage, 0600 permissions, legacy fallback, malformed-file handling and in-place reconfigure flow structure.
+- Private per-address universal credential storage, 0600 permissions, rejection of legacy files and cross-device fallback, malformed-file handling and in-place reconfigure flow structure.
 - Explicit SO model catalog: known model filtering, unknown-model fail-closed behaviour, experimental opt-in, light/no-light capabilities, S1 Pro temperature, and shared experimental zero-pause controls plus BLE connection diagnostics.
 
 ## Experimental SO-family hardware acceptance (not yet performed)
@@ -76,8 +76,8 @@ See [spray-mode experiment](SPRAY_MODES_AND_COMPATIBILITY.md) and [historical de
 1. **Browser OAuth:** open Add integration or Reconfigure on an existing entry; select region and complete Xiaomi login. Confirm the local `homeassistant.local:8123` callback is reachable and returns to the HA setup dialog. A timeout/cancel must leave previous credentials intact.
 2. **Cloud identity:** the list must include only exact-model SO S5 with a valid 12-byte token. Verify the selected cloud DID using a distinct name where possible; do not match by name alone.
 3. **Cryptographic binding:** try one correct and one deliberately wrong *synthetic* token against a test S5; correct succeeds, wrong fails, and the wrong token is never persisted. Never upload real credentials to an issue.
-4. **Persistence:** inspect privately that `/config/.storage/so_s5_ble_tokens.json` is present with owner-only permissions and no OAuth access/refresh token. Do **not** publish file contents.
-5. **Migration:** use **Reconfigure** on an existing entry with `/config/so_s5_token`. Confirm same entity unique IDs, successful HA reload and a BLE reconnect with the saved per-device token. Preserve the legacy file until after post-restart testing.
+4. **Persistence:** inspect privately that `/config/.storage/so_diffuser_ble_tokens.json` is present with owner-only permissions and no OAuth access/refresh token. Check that it has an entry for each configured BLE address. Do **not** publish file contents.
+5. **Breaking-change acceptance:** start with legacy S5 files but without a token for the target address in the new store. Verify the integration does **not** read those files and requires fresh Xiaomi sign-in; after provisioning, verify the same device survives HA restart. Legacy files must not be changed or deleted.
 6. **Offline test:** disable WAN after setup (not the LAN/BLE network). Verify local power, pause and continuous mode still work and no new Xiaomi OAuth request occurs on reconnection.
 7. **Multiple devices:** acquire separate S5 credentials for two different BLE addresses and prove no token cross-use or lost update after reconnect.
 8. **Failure conditions:** simulate unauthorized cloud API, wrong account/region, missing token, phone BLE takeover, stale callback and API pagination loops. Errors must be redacted and non-destructive.
