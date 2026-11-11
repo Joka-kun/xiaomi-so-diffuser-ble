@@ -1,16 +1,18 @@
 # Roadmap
 
-**Updated 2026-11-08 · Current source: 1.0.4 (`so_diffuser_ble`) · Hardware acceptance pending**
+**Updated 2026-11-11 · Current release: v1.0.8 (`so_diffuser_ble`) · Hardware acceptance pending**
 
 The old S5-only roadmap is preserved as [dated research history](docs/history/ROADMAP_2026-11-07.md). This page lists **current** decisions, validated outcomes and outstanding work only.
 
 ## Delivered in source
 
+- [x] Official HACS/Marketplace catalog entry accepted in [hacs/default#13656](https://github.com/hacs/default/pull/13656); public [v1.0.8](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.8) explicitly requests a 10-second active HA Bluetooth sweep during the nearby-device setup search. Real-hardware acceptance remains separate.
+
 - [x] One-time Xiaomi OAuth, exact cloud model selection, 12-byte device GATT token with real BLE challenge, private local credential store.
 - [x] SO S5 local power, spray timing, RGB lighting, battery, charging and S5-only LongSpray. First real S5 OAuth setup and basic operation **reported by user on the earlier build**.
 - [x] Explicit profiles for S5 and eight related SO models; experimental opt-in, exact-name BLE discovery and per-model entities.
 - [x] New generic integration domain `so_diffuser_ble`, package path and single HACS-managed integration directory.
-- [x] Legacy-token read compatibility: `/config/.storage/so_s5_ble_tokens.json` and `/config/so_s5_token` remain **untouched**.
+- [x] Since v1.0.6, use only `/config/.storage/so_diffuser_ble_tokens.json` for runtime BLE credentials. Legacy `/config/.storage/so_s5_ble_tokens.json` and `/config/so_s5_token` remain **untouched but are not read**; devices relying on them require fresh Xiaomi OAuth provisioning. See [migration guide](docs/MIGRATION.md).
 - [x] Guard against duplicate old `so_s5` config entries for the same BLE address. Model ID in the Xiaomi account must match a known advertisement's model.
 - [x] Reorganize the GitHub README/docs into illustrated instructions in six languages (EN/RU/DE/ES/FR/ZH-CN); archive historical S5-specific implementation reports.
 - [x] Normalize English technical prose, add dedicated Russian installation/compatibility/migration guides, separate the Russian HCI source from its canonical English translation, and enforce language boundaries in CI.
@@ -47,7 +49,7 @@ The old S5-only roadmap is preserved as [dated research history](docs/history/RO
 
 ## Must verify before inviting general upgrades
 
-- [ ] Install the **1.0.1 general-domain update** on a test Home Assistant instance, following the [migration guide](docs/MIGRATION.md). Confirm old tokens are reused without loss and the old entry does not compete for BLE.
+- [ ] Test a clean v1.0.8 installation and upgrades from pre-v1.0.6 with the [migration guide](docs/MIGRATION.md). Confirm the old files remain untouched, fresh Xiaomi OAuth provisions a device-bound token in the new store, and no retired `so_s5` entry competes for the same BLE address.
 - [ ] Check Home Assistant's entity registry after re-adding S5 and restore any changed entity IDs or automations. **A domain change is not an automatic config-entry migration.**
 - [ ] Test S5 OFF/ON, spray timing, RGB, restart/reconnection and operation after WAN is disconnected.
 - [ ] Re-test the Russian/English Xiaomi wizard and manual OAuth callback in Home Assistant UI; verify custom HA address redirect and the new BLE error guidance.
