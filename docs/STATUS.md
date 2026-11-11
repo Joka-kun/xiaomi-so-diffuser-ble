@@ -2,7 +2,7 @@
 
 **As of 2026-11-10 · GitHub Release v1.0.8 published · Active Bluetooth search in Auto mode · Interactive SO Bluetooth search · Official Marketplace catalog merged**
 
-This page distinguishes **source implementation**, **field reports** and **hardware verification**. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
+This page distinguishes **source implementation**, **field reports** and **hardware verification**. Dated audit paragraphs below are historical snapshots and do not override the current v1.0.8/HACS status above. Previous detailed implementation notes are preserved in [the dated snapshot](history/STATUS_2026-11-07.md).
 
 | Area | Confirmed | Not yet confirmed |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ This page distinguishes **source implementation**, **field reports** and **hardw
 | Token security | Temporary Xiaomi OAuth code, per-address 12-byte GATT token saved only after S5-derived BLE proof; v1.0.6 uses `so_diffuser_ble_tokens.json` with no legacy fallback | Hardware acceptance of cloud-token retrieval on relatives and physical re-provisioning after the breaking change |
 | UI features | User-reported native RGB effect working on S5; separate On/Off and Backlight controls; optional HA color palettes, diagnostics and model-gated controls | 1.0.0 software palette acceptance on real S5, effects on other models and disconnect handling on hardware |
 | Migration | Single generic-domain folder; new universal address-keyed store intentionally does not read old S5 files | Fresh Xiaomi sign-in, existing HA entity-ID migration and multi-device physical acceptance after this change |
-| Publication | [v1.0.7](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.7) published from tested commit `0b46537bf22d0192efd23c1ed96fc2c39da2ef9b` after Tests/Validate passed. Marketplace icon was observed after deleting stale negative-cache files in the user's HA installation | Actual BLE search on device, physical multi-device setup, long-idle reconnect and non-S5 models still pending |
+| Publication | [v1.0.8](https://github.com/Joka-kun/xiaomi-so-diffuser-ble/releases/tag/v1.0.8) published from tested commit `abd8cac3ebc59a812df8960f10d9c4dd72e10c69`; Tests and Validate passed. Official HACS/Marketplace catalog [PR #13656](https://github.com/hacs/default/pull/13656) merged on 2026-11-09. Earlier catalog PR #13654 was intentionally closed during repository replacement. | Physical active search on S5, multi-device setup, long-idle reconnect and non-S5 models still pending |
 
 ## Repository audit — 2026-11-07
 
