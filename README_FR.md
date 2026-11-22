@@ -32,7 +32,7 @@
 
 <p align="center"><img src="docs/assets/connection-four-steps.png" alt="Quatre étapes : découverte, autorisation Xiaomi, vérification BLE et contrôle local" width="100%"></p>
 
-1. **Découvrir** — dans Home Assistant, ouvrez **Paramètres → Appareils et services → Ajouter une intégration → Xiaomi SO Diffuser BLE**, puis sélectionnez le diffuseur exact. S'il n'apparaît pas, entrez son adresse Bluetooth manuellement.
+1. **Découvrir** — dans **Paramètres → Appareils et services → Ajouter une intégration → Xiaomi SO Diffuser BLE**, lancez la **recherche des appareils à proximité (10 secondes)**, puis sélectionnez le bon diffuseur. S'il n'apparaît pas, réessayez près d'un adaptateur/proxy Bluetooth actif ou saisissez son adresse Bluetooth manuellement.
 2. **Autoriser** — connectez-vous au compte Xiaomi et choisissez **le même appareil physique**. Pour un modèle autre que S5, prenez connaissance de l'avertissement expérimental.
 3. **Vérifier** — l'intégration authentifie automatiquement le jeton propre à l'appareil par BLE GATT. Le jeton n'est enregistré qu'après vérification réussie.
 4. **Contrôler** — testez **Marche/arrêt** sur le diffuseur avant de créer des automatisations. Ensuite, les commandes ordinaires passent par le Bluetooth local, sans Xiaomi Cloud.
