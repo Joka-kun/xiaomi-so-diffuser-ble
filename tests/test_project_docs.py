@@ -136,12 +136,12 @@ def test_migration_documents_no_legacy_token_fallback():
 def test_public_readmes_match_centered_github_reference_header():
     """Keep the six public README languages aligned with the centered header."""
     featured = (
-        ("README.md", "English"),
-        ("README_RU.md", "Русский"),
-        ("README_DE.md", "Deutsch"),
-        ("README_FR.md", "Français"),
-        ("README_ES.md", "Español"),
-        ("README_ZH_CN.md", "中文"),
+        ("README.md", "English", "en"),
+        ("README_RU.md", "Русский", "ru"),
+        ("README_DE.md", "Deutsch", "de"),
+        ("README_FR.md", "Français", "fr"),
+        ("README_ES.md", "Español", "es"),
+        ("README_ZH_CN.md", "中文", "zh-CN"),
     )
     all_readmes = tuple(path.name for path in ROOT.glob("README*.md"))
     assert set(all_readmes) == {
@@ -149,7 +149,7 @@ def test_public_readmes_match_centered_github_reference_header():
         "README_ES.md", "README_ZH_CN.md",
     }
     expected_nav = '<p align="center">' + ' &nbsp;·&nbsp; '.join(
-        f'<a href="{filename}">{label}</a>' for filename, label in featured
+        f'<a href="{filename}" lang="{lang}">{label}</a>' for filename, label, lang in featured
     ) + '</p>'
     for filename in all_readmes:
         content = (ROOT / filename).read_text(encoding="utf-8")
@@ -239,13 +239,13 @@ def test_docs_have_consistent_language_boundaries():
     for file in english_docs:
         content = file.read_text(encoding="utf-8")
         # Native-spelling language names within the language selector are intentional.
-        content = re.sub(r'(?m)^<p align="center"><a href="README.md">English</a>.*?</p>\n', "", content)
+        content = re.sub(r'(?m)^<p align="center"><a href="README.md" lang="en">English</a>.*?</p>\n', "", content)
         assert not re.search(r"[\u0400-\u04FF]", content), file.relative_to(ROOT)
 
     for filename in ("README_RU.md", "README_DE.md", "README_ES.md",
                      "README_FR.md", "README_ZH_CN.md"):
         content = (ROOT / filename).read_text(encoding="utf-8")
-        content = re.sub(r'(?m)^<p align="center"><a href="README.md">English</a>.*?</p>\n', "", content)
+        content = re.sub(r'(?m)^<p align="center"><a href="README.md" lang="en">English</a>.*?</p>\n', "", content)
         for stale_caption in (
             "[Installation](", "[Compatibility](", "[Research](",
             "[Status](", "[Roadmap](", "[Documentation index](",
