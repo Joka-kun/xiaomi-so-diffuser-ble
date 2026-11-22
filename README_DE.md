@@ -1,6 +1,6 @@
 <p align="center"><img src="docs/assets/hero.svg" alt="Lokale Bluetooth-Steuerung für SO-/BWJ-Aromadiffusoren in Home Assistant." width="100%"></p>
 
-<p align="center"><a href="README.md">English</a> &nbsp;·&nbsp; <a href="README_RU.md">Русский</a> &nbsp;·&nbsp; <a href="README_DE.md">Deutsch</a> &nbsp;·&nbsp; <a href="README_FR.md">Français</a> &nbsp;·&nbsp; <a href="README_ES.md">Español</a> &nbsp;·&nbsp; <a href="README_ZH_CN.md">中文</a></p>
+<p align="center"><a href="README.md" lang="en">English</a> &nbsp;·&nbsp; <a href="README_RU.md" lang="ru">Русский</a> &nbsp;·&nbsp; <a href="README_DE.md" lang="de">Deutsch</a> &nbsp;·&nbsp; <a href="README_FR.md" lang="fr">Français</a> &nbsp;·&nbsp; <a href="README_ES.md" lang="es">Español</a> &nbsp;·&nbsp; <a href="README_ZH_CN.md" lang="zh-CN">中文</a></p>
 
 <p align="center">
   <a href="https://github.com/Joka-kun/xiaomi-so-diffuser-ble/actions/workflows/tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/Joka-kun/xiaomi-so-diffuser-ble/tests.yml?branch=main&amp;label=tests&amp;style=flat-square" alt="Tests"></a>
