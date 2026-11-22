@@ -32,7 +32,7 @@
 
 <p align="center"><img src="docs/assets/connection-four-steps.png" alt="Four stages: discover the diffuser, authorize with Xiaomi, verify the BLE token and control locally" width="100%"></p>
 
-1. **Discover** — In Home Assistant, open **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**. Select the exact diffuser, or use manual Bluetooth address entry if discovery does not find it.
+1. **Discover** — In Home Assistant, open **Settings → Devices & services → Add integration → Xiaomi SO Diffuser BLE**. Use **Search nearby devices (10 seconds)** to find fresh Bluetooth advertisements and select the correct diffuser. If it is not found, search again near an active Bluetooth adapter/proxy or enter its Bluetooth address manually.
 2. **Authorize** — Sign in to your Xiaomi account and select the **same physical diffuser**. For a non-S5 model, accept the experimental-model warning only if you understand its limitations.
 3. **Verify** — The integration automatically uses the device-specific token to authenticate over BLE. A token is saved only after the device passes the GATT authentication check.
 4. **Control** — Test **On/Off** on the actual device before creating automations. Once configured, normal commands use local Bluetooth rather than Xiaomi Cloud.
